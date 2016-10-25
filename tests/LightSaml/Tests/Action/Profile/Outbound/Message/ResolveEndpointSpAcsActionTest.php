@@ -21,7 +21,7 @@ class ResolveEndpointSpAcsActionTest extends AbstractResolveEndpointActionTest
 
         $self = $this;
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) use ($self) {
-            $self->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\AssertionConsumerService');
+            $self->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, 'LightSaml\Model\Metadata\AssertionConsumerService');
 
             return array(TestHelper::getEndpointReferenceMock($self, $endpoint = new AssertionConsumerService()));
         });

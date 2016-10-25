@@ -200,13 +200,13 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
         $actual = $profileContext->debugPrintTree();
 
         $expected = array(
-            'root' => '\LightSaml\Context\Profile\ProfileContext',
+            'root' => 'LightSaml\Context\Profile\ProfileContext',
             'root__children' => array(
-                'own_entity' => '\LightSaml\Context\Profile\EntityContext',
-                'party_entity' => '\LightSaml\Context\Profile\EntityContext',
-                'assertion_01' => '\LightSaml\Context\Profile\AssertionContext',
+                'own_entity' => 'LightSaml\Context\Profile\EntityContext',
+                'party_entity' => 'LightSaml\Context\Profile\EntityContext',
+                'assertion_01' => 'LightSaml\Context\Profile\AssertionContext',
                 'assertion_01__children' => array(
-                    'rs' => '\LightSaml\Context\Profile\RequestStateContext',
+                    'rs' => 'LightSaml\Context\Profile\RequestStateContext',
                 ),
             ),
         );
@@ -246,6 +246,6 @@ EOT;
      */
     private function getContextMock()
     {
-        return $this->getMockForAbstractClass('\LightSaml\Context\AbstractContext');
+        return $this->getMockForAbstractClass('LightSaml\Context\AbstractContext');
     }
 }

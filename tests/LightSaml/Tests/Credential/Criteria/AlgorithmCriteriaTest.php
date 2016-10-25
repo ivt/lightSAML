@@ -10,7 +10,7 @@ class AlgorithmCriteriaTest extends \PHPUnit_Framework_TestCase
 {
     public function test_implements_trust_criteria_interface()
     {
-        $this->assertInstanceOf('\LightSaml\Credential\Criteria\TrustCriteriaInterface', new AlgorithmCriteria(''));
+        $this->assertInstanceOf('LightSaml\Credential\Criteria\TrustCriteriaInterface', new AlgorithmCriteria(''));
     }
 
     public function test_returns_value_given_to_constructor()

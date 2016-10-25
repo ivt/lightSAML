@@ -43,7 +43,7 @@ class DispatchEventActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getContextMock()
     {
-        return $this->getMock('\LightSaml\Context\ContextInterface');
+        return $this->getMock('LightSaml\Context\ContextInterface');
     }
 
     /**

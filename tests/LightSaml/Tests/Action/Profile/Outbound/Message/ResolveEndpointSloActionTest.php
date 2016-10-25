@@ -40,7 +40,7 @@ class ResolveEndpointSloActionTest extends AbstractResolveEndpointActionTest
 
         $self = $this;
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) use ($self) {
-            $self->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\SingleLogoutService');
+            $self->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, 'LightSaml\Model\Metadata\SingleLogoutService');
 
             return array(TestHelper::getEndpointReferenceMock($self, $endpoint = new SingleLogoutService()));
         });
@@ -59,7 +59,7 @@ class ResolveEndpointSloActionTest extends AbstractResolveEndpointActionTest
 
         $self = $this;
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) use ($self) {
-            $self->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\SpSsoDescriptor');
+            $self->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, 'LightSaml\Model\Metadata\SpSsoDescriptor');
 
             return array(TestHelper::getEndpointReferenceMock($self, $endpoint = new SingleLogoutService()));
         });
@@ -78,7 +78,7 @@ class ResolveEndpointSloActionTest extends AbstractResolveEndpointActionTest
 
         $self = $this;
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) use ($self) {
-            $self->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\IdpSsoDescriptor');
+            $self->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, 'LightSaml\Model\Metadata\IdpSsoDescriptor');
 
             return array(TestHelper::getEndpointReferenceMock($self, $endpoint = new SingleLogoutService()));
         });

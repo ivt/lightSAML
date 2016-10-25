@@ -43,7 +43,7 @@ class SignMessageActionTest extends \PHPUnit_Framework_TestCase
     public function does_not_support_message_provider()
     {
         return array(
-            array($this->getMockForAbstractClass('\LightSaml\Model\Protocol\SamlMessage')),
+            array($this->getMockForAbstractClass('LightSaml\Model\Protocol\SamlMessage')),
         );
     }
 

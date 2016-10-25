@@ -102,7 +102,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
 
         /** @var Response $response */
         $response = $context->getInboundMessage();
-        $this->assertInstanceOf('\LightSaml\Model\Protocol\Response', $response);
+        $this->assertInstanceOf('LightSaml\Model\Protocol\Response', $response);
         $this->assertCount(1, $response->getAllAssertions());
         $this->assertEquals('somebody@example.com', $response->getFirstAssertion()->getFirstAttributeStatement()
             ->getFirstAttributeByName(ClaimTypes::EMAIL_ADDRESS)->getFirstAttributeValue());
@@ -150,7 +150,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $pimple->register(new \LightSaml\Bridge\Pimple\Container\Factory\PartyContainerProvider());
         $buildContainer = new BuildContainer($pimple);
 
-        $this->assertInstanceOf('\LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface', $buildContainer->getPartyContainer()->getIdpEntityDescriptorStore());
+        $this->assertInstanceOf('LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface', $buildContainer->getPartyContainer()->getIdpEntityDescriptorStore());
     }
 
     public function test_sp_entity_descriptor()
@@ -159,7 +159,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $pimple->register(new \LightSaml\Bridge\Pimple\Container\Factory\PartyContainerProvider());
         $buildContainer = new BuildContainer($pimple);
 
-        $this->assertInstanceOf('\LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface', $buildContainer->getPartyContainer()->getSpEntityDescriptorStore());
+        $this->assertInstanceOf('LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface', $buildContainer->getPartyContainer()->getSpEntityDescriptorStore());
     }
 
     private function getBuildContainer($inResponseTo = null, TimeProviderInterface $timeProvider = null)

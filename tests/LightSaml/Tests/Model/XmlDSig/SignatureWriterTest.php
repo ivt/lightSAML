@@ -22,7 +22,7 @@ class SignatureWriterTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertNotNull($writer->getSigningOptions());
-        $this->assertInstanceOf('\LightSaml\Meta\SigningOptions', $writer->getSigningOptions());
+        $this->assertInstanceOf('LightSaml\Meta\SigningOptions', $writer->getSigningOptions());
     }
 
     public function test_constructs_with_certificate_and_key()

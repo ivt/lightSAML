@@ -92,13 +92,13 @@ class CompositeActionTest extends \PHPUnit_Framework_TestCase
         $actualTree = $outerComposite->debugPrintTree();
 
         $expectedTree = array(
-            '\LightSaml\Action\CompositeAction' => array(
-                '\LightSaml\Tests\Mock\Action\FooAction' => array(),
-                '\LightSaml\Action\CompositeAction' => array(
-                    '\LightSaml\Tests\Mock\Action\FooAction' => array(),
-                    '\LightSaml\Tests\Mock\Action\BarAction' => array(),
+            'LightSaml\Action\CompositeAction' => array(
+                'LightSaml\Tests\Mock\Action\FooAction' => array(),
+                'LightSaml\Action\CompositeAction' => array(
+                    'LightSaml\Tests\Mock\Action\FooAction' => array(),
+                    'LightSaml\Tests\Mock\Action\BarAction' => array(),
                 ),
-                '\LightSaml\Tests\Mock\Action\BarAction' => array(),
+                'LightSaml\Tests\Mock\Action\BarAction' => array(),
             ),
         );
 

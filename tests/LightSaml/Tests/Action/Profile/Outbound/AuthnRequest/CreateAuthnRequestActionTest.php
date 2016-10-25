@@ -23,6 +23,6 @@ class CreateAuthnRequestActionTest extends \PHPUnit_Framework_TestCase
 
         $action->execute($context);
 
-        $this->assertInstanceOf('\LightSaml\Model\Protocol\AuthnRequest', $context->getOutboundMessage());
+        $this->assertInstanceOf('LightSaml\Model\Protocol\AuthnRequest', $context->getOutboundMessage());
     }
 }

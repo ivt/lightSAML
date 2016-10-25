@@ -141,7 +141,7 @@ class MessageSignatureValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getSignatureValidatorMock()
     {
-        return $this->getMock('\LightSaml\Validator\Model\Signature\SignatureValidatorInterface');
+        return $this->getMock('LightSaml\Validator\Model\Signature\SignatureValidatorInterface');
     }
 
     /**
@@ -149,6 +149,6 @@ class MessageSignatureValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getCredentialMock()
     {
-        return $this->getMock('\LightSaml\Credential\CredentialInterface');
+        return $this->getMock('LightSaml\Credential\CredentialInterface');
     }
 }

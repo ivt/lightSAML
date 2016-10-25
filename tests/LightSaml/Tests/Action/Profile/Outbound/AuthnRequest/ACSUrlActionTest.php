@@ -39,16 +39,16 @@ class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
 
         $endpointResolverMock->expects($this->once())
             ->method('resolve')
-            ->with($this->isInstanceOf('\LightSaml\Criteria\CriteriaSet'), $this->isType('array'))
+            ->with($this->isInstanceOf('LightSaml\Criteria\CriteriaSet'), $this->isType('array'))
             ->willReturnCallback(function (CriteriaSet $criteriaSet, array $candidates) {
-                \PHPUnit_Framework_Assert::assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria'));
-                \PHPUnit_Framework_Assert::assertEquals('\LightSaml\Model\Metadata\SpSsoDescriptor', $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria')->getDescriptorType());
+                \PHPUnit_Framework_Assert::assertTrue($criteriaSet->has('LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria'));
+                \PHPUnit_Framework_Assert::assertEquals('LightSaml\Model\Metadata\SpSsoDescriptor', $criteriaSet->getSingle('LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria')->getDescriptorType());
 
-                \PHPUnit_Framework_Assert::assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria'));
-                \PHPUnit_Framework_Assert::assertEquals('\LightSaml\Model\Metadata\AssertionConsumerService', $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria')->getServiceType());
+                \PHPUnit_Framework_Assert::assertTrue($criteriaSet->has('LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria'));
+                \PHPUnit_Framework_Assert::assertEquals('LightSaml\Model\Metadata\AssertionConsumerService', $criteriaSet->getSingle('LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria')->getServiceType());
 
-                \PHPUnit_Framework_Assert::assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\BindingCriteria'));
-                \PHPUnit_Framework_Assert::assertEquals(array(SamlConstants::BINDING_SAML2_HTTP_POST), $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\BindingCriteria')->getAllBindings());
+                \PHPUnit_Framework_Assert::assertTrue($criteriaSet->has('LightSaml\Resolver\Endpoint\Criteria\BindingCriteria'));
+                \PHPUnit_Framework_Assert::assertEquals(array(SamlConstants::BINDING_SAML2_HTTP_POST), $criteriaSet->getSingle('LightSaml\Resolver\Endpoint\Criteria\BindingCriteria')->getAllBindings());
 
                 return $candidates;
             })
@@ -93,7 +93,7 @@ class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getEntityDescriptorMock()
     {
-        return $this->getMock('\LightSaml\Model\Metadata\EntityDescriptor');
+        return $this->getMock('LightSaml\Model\Metadata\EntityDescriptor');
     }
 
     /**
@@ -101,6 +101,6 @@ class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getEndpointResolverMock()
     {
-        return $this->getMock('\LightSaml\Resolver\Endpoint\EndpointResolverInterface');
+        return $this->getMock('LightSaml\Resolver\Endpoint\EndpointResolverInterface');
     }
 }

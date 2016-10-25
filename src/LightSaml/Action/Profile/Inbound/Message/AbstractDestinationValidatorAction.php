@@ -77,8 +77,8 @@ abstract class AbstractDestinationValidatorAction extends AbstractProfileAction
         $criteriaSet = new CriteriaSet(array(
             new DescriptorTypeCriteria(
                 $context->getOwnRole() === ProfileContext::ROLE_IDP
-                ? '\LightSaml\Model\Metadata\IdpSsoDescriptor'
-                : '\LightSaml\Model\Metadata\SpSsoDescriptor'
+                ? 'LightSaml\Model\Metadata\IdpSsoDescriptor'
+                : 'LightSaml\Model\Metadata\SpSsoDescriptor'
             ),
             new LocationCriteria($location),
         ));

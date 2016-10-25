@@ -12,18 +12,18 @@ class CredentialResolverQueryTest extends \PHPUnit_Framework_TestCase
 {
     public function test__extends_criteria_set()
     {
-        $reflectionClass = new \ReflectionClass('\LightSaml\Resolver\Credential\CredentialResolverQuery');
-        $this->assertEquals('\LightSaml\Criteria\CriteriaSet', $reflectionClass->getParentClass()->name);
+        $reflectionClass = new \ReflectionClass('LightSaml\Resolver\Credential\CredentialResolverQuery');
+        $this->assertEquals('LightSaml\Criteria\CriteriaSet', $reflectionClass->getParentClass()->name);
     }
 
     public function test__instantiates_with_credential_resolver()
     {
-        new CredentialResolverQuery($this->getMock('\LightSaml\Resolver\Credential\CredentialResolverInterface'));
+        new CredentialResolverQuery($this->getMock('LightSaml\Resolver\Credential\CredentialResolverInterface'));
     }
 
     public function test__resolve_calls_credential_resolver_and_stores_returned_credentials()
     {
-        $credentialResolverMock = $this->getMock('\LightSaml\Resolver\Credential\CredentialResolverInterface');
+        $credentialResolverMock = $this->getMock('LightSaml\Resolver\Credential\CredentialResolverInterface');
         $query = new CredentialResolverQuery($credentialResolverMock);
         $credentialResolverMock
             ->expects($this->once())
@@ -38,16 +38,16 @@ class CredentialResolverQueryTest extends \PHPUnit_Framework_TestCase
 
     public function test__first_credential()
     {
-        $credentialResolverMock = $this->getMock('\LightSaml\Resolver\Credential\CredentialResolverInterface');
+        $credentialResolverMock = $this->getMock('LightSaml\Resolver\Credential\CredentialResolverInterface');
         $query = new CredentialResolverQuery($credentialResolverMock);
         $credentialResolverMock
             ->expects($this->once())
             ->method('resolve')
             ->with($query)
             ->willReturn($expectedCredentials = array(
-                $firstCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
-                $secondCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
-                $thirdCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+                $firstCredential = $this->getMock('LightSaml\Credential\CredentialInterface'),
+                $secondCredential = $this->getMock('LightSaml\Credential\CredentialInterface'),
+                $thirdCredential = $this->getMock('LightSaml\Credential\CredentialInterface'),
             ))
         ;
         $query->resolve();
@@ -57,16 +57,16 @@ class CredentialResolverQueryTest extends \PHPUnit_Framework_TestCase
 
     public function test__public_keys()
     {
-        $credentialResolverMock = $this->getMock('\LightSaml\Resolver\Credential\CredentialResolverInterface');
+        $credentialResolverMock = $this->getMock('LightSaml\Resolver\Credential\CredentialResolverInterface');
         $query = new CredentialResolverQuery($credentialResolverMock);
         $credentialResolverMock
             ->expects($this->once())
             ->method('resolve')
             ->with($query)
             ->willReturn($expectedCredentials = array(
-                $firstCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
-                $secondCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
-                $thirdCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+                $firstCredential = $this->getMock('LightSaml\Credential\CredentialInterface'),
+                $secondCredential = $this->getMock('LightSaml\Credential\CredentialInterface'),
+                $thirdCredential = $this->getMock('LightSaml\Credential\CredentialInterface'),
             ))
         ;
 
@@ -89,16 +89,16 @@ class CredentialResolverQueryTest extends \PHPUnit_Framework_TestCase
 
     public function test__private_keys()
     {
-        $credentialResolverMock = $this->getMock('\LightSaml\Resolver\Credential\CredentialResolverInterface');
+        $credentialResolverMock = $this->getMock('LightSaml\Resolver\Credential\CredentialResolverInterface');
         $query = new CredentialResolverQuery($credentialResolverMock);
         $credentialResolverMock
             ->expects($this->once())
             ->method('resolve')
             ->with($query)
             ->willReturn($expectedCredentials = array(
-                $firstCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
-                $secondCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
-                $thirdCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+                $firstCredential = $this->getMock('LightSaml\Credential\CredentialInterface'),
+                $secondCredential = $this->getMock('LightSaml\Credential\CredentialInterface'),
+                $thirdCredential = $this->getMock('LightSaml\Credential\CredentialInterface'),
             ))
         ;
 

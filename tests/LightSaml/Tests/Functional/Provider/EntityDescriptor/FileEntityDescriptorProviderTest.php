@@ -15,7 +15,7 @@ class FileEntityDescriptorProviderTest extends \PHPUnit_Framework_TestCase
 
         $entityDescriptor = $provider->get();
 
-        $this->assertInstanceOf('\LightSaml\Model\Metadata\EntityDescriptor', $entityDescriptor);
+        $this->assertInstanceOf('LightSaml\Model\Metadata\EntityDescriptor', $entityDescriptor);
         $this->assertEquals(
             'https://sts.windows.net/554fadfe-f04f-4975-90cb-ddc8b147aaa2/',
             $entityDescriptor->getEntityID()

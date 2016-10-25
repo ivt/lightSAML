@@ -28,7 +28,7 @@ class DestinationValidatorAuthnRequestAction extends AbstractDestinationValidato
     {
         $result = parent::getCriteriaSet($context, $location);
 
-        $result->add(new ServiceTypeCriteria('\LightSaml\Model\Metadata\SingleSignOnService'));
+        $result->add(new ServiceTypeCriteria('LightSaml\Model\Metadata\SingleSignOnService'));
 
         return $result;
     }

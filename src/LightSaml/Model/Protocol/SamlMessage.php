@@ -81,10 +81,10 @@ abstract class SamlMessage extends AbstractSamlModel
 
         $map = array(
             'AttributeQuery' => null,
-            'AuthnRequest' => '\LightSaml\Model\Protocol\AuthnRequest',
-            'LogoutResponse' => '\LightSaml\Model\Protocol\LogoutResponse',
-            'LogoutRequest' => '\LightSaml\Model\Protocol\LogoutRequest',
-            'Response' => '\LightSaml\Model\Protocol\Response',
+            'AuthnRequest' => 'LightSaml\Model\Protocol\AuthnRequest',
+            'LogoutResponse' => 'LightSaml\Model\Protocol\LogoutResponse',
+            'LogoutRequest' => 'LightSaml\Model\Protocol\LogoutRequest',
+            'Response' => 'LightSaml\Model\Protocol\Response',
             'ArtifactResponse' => null,
             'ArtifactResolve' => null,
         );

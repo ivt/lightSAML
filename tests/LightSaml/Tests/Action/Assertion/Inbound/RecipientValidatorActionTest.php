@@ -95,11 +95,11 @@ class RecipientValidatorActionTest extends \PHPUnit_Framework_TestCase
         $self = $this;
         $endpointResolver->expects($this->once())
             ->method('resolve')
-            ->with($this->isInstanceOf('\LightSaml\Criteria\CriteriaSet'), $this->isType('array'))
+            ->with($this->isInstanceOf('LightSaml\Criteria\CriteriaSet'), $this->isType('array'))
             ->willReturnCallback(function (\LightSaml\Criteria\CriteriaSet $criteriaSet) use ($recipient, $self) {
-                TestHelper::assertCriteria($self, $criteriaSet, '\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria', 'getDescriptorType', '\LightSaml\Model\Metadata\SpSsoDescriptor');
-                TestHelper::assertCriteria($self, $criteriaSet, '\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria', 'getServiceType', '\LightSaml\Model\Metadata\AssertionConsumerService');
-                TestHelper::assertCriteria($self, $criteriaSet, '\LightSaml\Resolver\Endpoint\Criteria\LocationCriteria', 'getLocation', $recipient);
+                TestHelper::assertCriteria($self, $criteriaSet, 'LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria', 'getDescriptorType', 'LightSaml\Model\Metadata\SpSsoDescriptor');
+                TestHelper::assertCriteria($self, $criteriaSet, 'LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria', 'getServiceType', 'LightSaml\Model\Metadata\AssertionConsumerService');
+                TestHelper::assertCriteria($self, $criteriaSet, 'LightSaml\Resolver\Endpoint\Criteria\LocationCriteria', 'getLocation', $recipient);
 
                 return array();
             });

@@ -65,8 +65,8 @@ abstract class Metadata extends AbstractSamlModel
         }
 
         $map = array(
-            'EntityDescriptor' => '\LightSaml\Model\Metadata\EntityDescriptor',
-            'EntitiesDescriptor' => '\LightSaml\Model\Metadata\EntitiesDescriptor',
+            'EntityDescriptor' => 'LightSaml\Model\Metadata\EntityDescriptor',
+            'EntitiesDescriptor' => 'LightSaml\Model\Metadata\EntitiesDescriptor',
         );
 
         $rootElementName = $node->localName;

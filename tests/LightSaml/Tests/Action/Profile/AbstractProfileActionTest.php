@@ -46,7 +46,7 @@ class AbstractProfileActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getAbstractProfileActionMock($loggerMock)
     {
-        return $this->getMockForAbstractClass('\LightSaml\Action\Profile\AbstractProfileAction', array($loggerMock));
+        return $this->getMockForAbstractClass('LightSaml\Action\Profile\AbstractProfileAction', array($loggerMock));
     }
 
     /**
@@ -54,6 +54,6 @@ class AbstractProfileActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getContextMock()
     {
-        return $this->getMock('\LightSaml\Context\ContextInterface');
+        return $this->getMock('LightSaml\Context\ContextInterface');
     }
 }

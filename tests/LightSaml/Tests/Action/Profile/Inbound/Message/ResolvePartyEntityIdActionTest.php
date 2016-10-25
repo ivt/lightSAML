@@ -202,7 +202,7 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getEntityDescriptorStoreMock()
     {
-        return $this->getMock('\LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface');
+        return $this->getMock('LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface');
     }
 
     /**
@@ -210,6 +210,6 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getTrustOptionsStore()
     {
-        return $this->getMock('\LightSaml\Store\TrustOptions\TrustOptionsStoreInterface');
+        return $this->getMock('LightSaml\Store\TrustOptions\TrustOptionsStoreInterface');
     }
 }

@@ -15,9 +15,9 @@ class PrivateKeyResolverTest extends \PHPUnit_Framework_TestCase
         $criteriaSet = new CriteriaSet(array(new PrivateKeyCriteria()));
 
         $startingCredentials = array(
-            $firstCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
-            $secondCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
-            $thirdCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+            $firstCredential = $this->getMock('LightSaml\Credential\CredentialInterface'),
+            $secondCredential = $this->getMock('LightSaml\Credential\CredentialInterface'),
+            $thirdCredential = $this->getMock('LightSaml\Credential\CredentialInterface'),
         );
 
         $secondCredential->expects($this->any())

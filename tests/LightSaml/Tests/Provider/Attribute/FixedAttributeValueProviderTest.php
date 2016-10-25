@@ -11,7 +11,7 @@ class FixedAttributeValueProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function test_implements_attribute_value_provider_interface()
     {
-        $this->assertInstanceOf('\LightSaml\Provider\Attribute\AttributeValueProviderInterface', new FixedAttributeValueProvider());
+        $this->assertInstanceOf('LightSaml\Provider\Attribute\AttributeValueProviderInterface', new FixedAttributeValueProvider());
     }
 
     public function test_returns_added_attributes()

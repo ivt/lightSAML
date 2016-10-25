@@ -37,14 +37,14 @@ class ProfileContextTest extends \PHPUnit_Framework_TestCase
     public function subContextCreationProvider()
     {
         return array(
-            array('getInboundContext', '\LightSaml\Context\Profile\MessageContext'),
-            array('getOutboundContext', '\LightSaml\Context\Profile\MessageContext'),
-            array('getHttpRequestContext', '\LightSaml\Context\Profile\HttpRequestContext'),
-            array('getHttpResponseContext', '\LightSaml\Context\Profile\HttpResponseContext'),
-            array('getOwnEntityContext', '\LightSaml\Context\Profile\EntityContext'),
-            array('getPartyEntityContext', '\LightSaml\Context\Profile\EntityContext'),
-            array('getEndpointContext', '\LightSaml\Context\Profile\EndpointContext'),
-            array('getLogoutContext', '\LightSaml\Context\Profile\LogoutContext'),
+            array('getInboundContext', 'LightSaml\Context\Profile\MessageContext'),
+            array('getOutboundContext', 'LightSaml\Context\Profile\MessageContext'),
+            array('getHttpRequestContext', 'LightSaml\Context\Profile\HttpRequestContext'),
+            array('getHttpResponseContext', 'LightSaml\Context\Profile\HttpResponseContext'),
+            array('getOwnEntityContext', 'LightSaml\Context\Profile\EntityContext'),
+            array('getPartyEntityContext', 'LightSaml\Context\Profile\EntityContext'),
+            array('getEndpointContext', 'LightSaml\Context\Profile\EndpointContext'),
+            array('getLogoutContext', 'LightSaml\Context\Profile\LogoutContext'),
         );
     }
     /**
@@ -87,7 +87,7 @@ class ProfileContextTest extends \PHPUnit_Framework_TestCase
     public function test__get_inbound_message_returns_from_context()
     {
         $profileContext = new ProfileContext(Profiles::METADATA, ProfileContext::ROLE_IDP);
-        $profileContext->getInboundContext()->setMessage($expectedValue = $this->getMockForAbstractClass('\LightSaml\Model\Protocol\SamlMessage'));
+        $profileContext->getInboundContext()->setMessage($expectedValue = $this->getMockForAbstractClass('LightSaml\Model\Protocol\SamlMessage'));
         $this->assertSame($expectedValue, $profileContext->getInboundMessage());
     }
 
@@ -104,7 +104,7 @@ class ProfileContextTest extends \PHPUnit_Framework_TestCase
     public function test__get_outbound_message_returns_from_context()
     {
         $profileContext = new ProfileContext(Profiles::METADATA, ProfileContext::ROLE_IDP);
-        $profileContext->getOutboundContext()->setMessage($expectedValue = $this->getMockForAbstractClass('\LightSaml\Model\Protocol\SamlMessage'));
+        $profileContext->getOutboundContext()->setMessage($expectedValue = $this->getMockForAbstractClass('LightSaml\Model\Protocol\SamlMessage'));
         $this->assertSame($expectedValue, $profileContext->getOutboundMessage());
     }
 
@@ -121,7 +121,7 @@ class ProfileContextTest extends \PHPUnit_Framework_TestCase
     public function test__get_endpoint_returns_from_context()
     {
         $profileContext = new ProfileContext(Profiles::METADATA, ProfileContext::ROLE_IDP);
-        $profileContext->getEndpointContext()->setEndpoint($expectedValue = $this->getMockForAbstractClass('\LightSaml\Model\Metadata\Endpoint'));
+        $profileContext->getEndpointContext()->setEndpoint($expectedValue = $this->getMockForAbstractClass('LightSaml\Model\Metadata\Endpoint'));
         $this->assertSame($expectedValue, $profileContext->getEndpoint());
     }
 

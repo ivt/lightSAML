@@ -16,8 +16,8 @@ class BindingEndpointResolverTest extends \PHPUnit_Framework_TestCase
     public function test__does_not_modify_when_criteria_not_present()
     {
         $candidates = array(
-            $firstEndpoint = $this->getMock('\LightSaml\Model\Metadata\EndpointReference', array(), array(), '', false),
-            $secondEndpoint = $this->getMock('\LightSaml\Model\Metadata\EndpointReference', array(), array(), '', false),
+            $firstEndpoint = $this->getMock('LightSaml\Model\Metadata\EndpointReference', array(), array(), '', false),
+            $secondEndpoint = $this->getMock('LightSaml\Model\Metadata\EndpointReference', array(), array(), '', false),
         );
 
         $resolver = new BindingEndpointResolver();

@@ -46,7 +46,7 @@ class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
         );
 
         /** @var MetadataCredentialContext $metadataContext */
-        $metadataContext = $credential->getCredentialContext()->get('\LightSaml\Credential\Context\MetadataCredentialContext');
+        $metadataContext = $credential->getCredentialContext()->get('LightSaml\Credential\Context\MetadataCredentialContext');
         $this->assertNotNull($metadataContext);
         $this->assertInstanceOf('LightSaml\Model\Metadata\IdpSsoDescriptor', $metadataContext->getRoleDescriptor());
 
@@ -79,7 +79,7 @@ class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
         );
 
         /** @var MetadataCredentialContext $metadataContext */
-        $metadataContext = $credential->getCredentialContext()->get('\LightSaml\Credential\Context\MetadataCredentialContext');
+        $metadataContext = $credential->getCredentialContext()->get('LightSaml\Credential\Context\MetadataCredentialContext');
         $this->assertNotNull($metadataContext);
         $this->assertInstanceOf('LightSaml\Model\Metadata\IdpSsoDescriptor', $metadataContext->getRoleDescriptor());
 
@@ -112,7 +112,7 @@ class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
         );
 
         /** @var MetadataCredentialContext $metadataContext */
-        $metadataContext = $credential->getCredentialContext()->get('\LightSaml\Credential\Context\MetadataCredentialContext');
+        $metadataContext = $credential->getCredentialContext()->get('LightSaml\Credential\Context\MetadataCredentialContext');
         $this->assertNotNull($metadataContext);
         $this->assertInstanceOf('LightSaml\Model\Metadata\SpSsoDescriptor', $metadataContext->getRoleDescriptor());
 

@@ -11,14 +11,14 @@ class MetadataTest extends \PHPUnit_Framework_TestCase
     public function test_loads_from_entity_descriptor()
     {
         $ed = Metadata::fromFile(__DIR__.'/../../../../../../resources/sample/EntityDescriptor/idp2-ed.xml');
-        $this->assertInstanceOf('\LightSaml\Model\Metadata\EntityDescriptor', $ed);
+        $this->assertInstanceOf('LightSaml\Model\Metadata\EntityDescriptor', $ed);
         $this->assertEquals('https://B1.bead.loc/adfs/services/trust', $ed->getEntityID());
     }
 
     public function test_loads_from_entities_descriptor()
     {
         $eds = Metadata::fromFile(__DIR__.'/../../../../../../resources/sample/EntitiesDescriptor/testshib-providers.xml');
-        $this->assertInstanceOf('\LightSaml\Model\Metadata\EntitiesDescriptor', $eds);
+        $this->assertInstanceOf('LightSaml\Model\Metadata\EntitiesDescriptor', $eds);
         $this->assertCount(2, $eds->getAllEntityDescriptors());
     }
 }

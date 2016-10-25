@@ -53,7 +53,7 @@ class InResponseToValidatorActionTest extends \PHPUnit_Framework_TestCase
 
         /** @var RequestStateContext $requestStateContext */
         $requestStateContext = $context->getInboundContext()->getSubContext(ProfileContexts::REQUEST_STATE);
-        $this->assertInstanceOf('\LightSaml\Context\Profile\RequestStateContext', $requestStateContext);
+        $this->assertInstanceOf('LightSaml\Context\Profile\RequestStateContext', $requestStateContext);
         $this->assertSame($requestState, $requestStateContext->getRequestState());
     }
 
@@ -89,7 +89,7 @@ class InResponseToValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getStatusResponseMock($inResponseTo = null)
     {
-        $result = $this->getMockForAbstractClass('\LightSaml\Model\Protocol\StatusResponse');
+        $result = $this->getMockForAbstractClass('LightSaml\Model\Protocol\StatusResponse');
         if ($inResponseTo) {
             $result->expects($this->any())
                 ->method('getInResponseTo')
@@ -104,6 +104,6 @@ class InResponseToValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getRequestStateStoreMock()
     {
-        return $this->getMock('\LightSaml\Store\Request\RequestStateStoreInterface');
+        return $this->getMock('LightSaml\Store\Request\RequestStateStoreInterface');
     }
 }

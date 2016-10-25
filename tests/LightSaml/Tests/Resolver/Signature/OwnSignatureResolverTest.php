@@ -90,10 +90,10 @@ class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
         $credentialResolverMock->method('query')->willReturn($query = new CredentialResolverQuery($credentialResolverMock));
         $credentialResolverMock->method('resolve')
             ->willReturnCallback(function (CriteriaSet $criteriaSet) use ($self, $ownEntityId, $expectedMetadataType) {
-                TestHelper::assertCriteria($self, $criteriaSet, '\LightSaml\Credential\Criteria\EntityIdCriteria', 'getEntityId', $ownEntityId);
-                TestHelper::assertCriteria($self, $criteriaSet, '\LightSaml\Credential\Criteria\UsageCriteria', 'getUsage', UsageType::SIGNING);
-                TestHelper::assertCriteria($self, $criteriaSet, '\LightSaml\Credential\Criteria\X509CredentialCriteria', null, null);
-                TestHelper::assertCriteria($self, $criteriaSet, '\LightSaml\Credential\Criteria\MetadataCriteria', 'getMetadataType', $expectedMetadataType);
+                TestHelper::assertCriteria($self, $criteriaSet, 'LightSaml\Credential\Criteria\EntityIdCriteria', 'getEntityId', $ownEntityId);
+                TestHelper::assertCriteria($self, $criteriaSet, 'LightSaml\Credential\Criteria\UsageCriteria', 'getUsage', UsageType::SIGNING);
+                TestHelper::assertCriteria($self, $criteriaSet, 'LightSaml\Credential\Criteria\X509CredentialCriteria', null, null);
+                TestHelper::assertCriteria($self, $criteriaSet, 'LightSaml\Credential\Criteria\MetadataCriteria', 'getMetadataType', $expectedMetadataType);
 
                 return array(TestHelper::getX509CredentialMock($self));
             });
@@ -113,7 +113,7 @@ class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
         $context->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor($ownEntityId = 'http://own.id'));
 
         $credentialResolverMock->method('query')->willReturn($query = new CredentialResolverQuery($credentialResolverMock));
-        $credentialResolverMock->method('resolve')->willReturn(array($this->getMock('\LightSaml\Credential\CredentialInterface')));
+        $credentialResolverMock->method('resolve')->willReturn(array($this->getMock('LightSaml\Credential\CredentialInterface')));
 
         $signatureResolver->getSignature($context);
     }

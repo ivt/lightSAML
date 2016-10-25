@@ -80,7 +80,7 @@ class ReceiveMessageActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getBindingMock()
     {
-        return $this->getMockForAbstractClass('\LightSaml\Binding\AbstractBinding');
+        return $this->getMockForAbstractClass('LightSaml\Binding\AbstractBinding');
     }
 
     /**
@@ -88,6 +88,6 @@ class ReceiveMessageActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getBindingFactoryMock()
     {
-        return $this->getMock('\LightSaml\Binding\BindingFactoryInterface');
+        return $this->getMock('LightSaml\Binding\BindingFactoryInterface');
     }
 }

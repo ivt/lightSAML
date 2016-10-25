@@ -45,7 +45,7 @@ class AssertionAction extends AbstractProfileAction implements DebugPrintTreeAct
         foreach ($response->getAllAssertions() as $index => $assertion) {
             $name = sprintf('assertion_%s', $index);
             /** @var AssertionContext $assertionContext */
-            $assertionContext = $context->getSubContext($name, '\LightSaml\Context\Profile\AssertionContext');
+            $assertionContext = $context->getSubContext($name, 'LightSaml\Context\Profile\AssertionContext');
             $assertionContext
                 ->setAssertion($assertion)
                 ->setId($name)

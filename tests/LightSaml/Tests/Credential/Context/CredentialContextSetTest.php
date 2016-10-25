@@ -11,14 +11,14 @@ class CredentialContextSetTest extends \PHPUnit_Framework_TestCase
     {
         $context = new CredentialContextSet();
 
-        $this->assertNull($context->get('\LightSaml\Credential\Context\MetadataCredentialContext'));
+        $this->assertNull($context->get('LightSaml\Credential\Context\MetadataCredentialContext'));
     }
 
     public function test_returns_set_metadata_context()
     {
         $context = new CredentialContextSet(array($metadataContextMock = $this->getMetadataContextMock()));
 
-        $this->assertSame($metadataContextMock, $context->get('\LightSaml\Credential\Context\MetadataCredentialContext'));
+        $this->assertSame($metadataContextMock, $context->get('LightSaml\Credential\Context\MetadataCredentialContext'));
     }
 
     public function test_returns_all_contexts()

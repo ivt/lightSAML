@@ -26,12 +26,12 @@ class DestinationValidatorResponseActionTest extends \PHPUnit_Framework_TestCase
         $endpointResolverMock->expects($this->once())
             ->method('resolve')
             ->willReturnCallback(function (CriteriaSet $criteriaSet, array $endpoints) {
-                \PHPUnit_Framework_Assert::assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria'));
-                $arr = $criteriaSet->get('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria');
+                \PHPUnit_Framework_Assert::assertTrue($criteriaSet->has('LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria'));
+                $arr = $criteriaSet->get('LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria');
                 \PHPUnit_Framework_Assert::assertCount(1, $arr);
                 /** @var ServiceTypeCriteria $criteria */
                 $criteria = $arr[0];
-                \PHPUnit_Framework_Assert::assertEquals('\LightSaml\Model\Metadata\AssertionConsumerService', $criteria->getServiceType());
+                \PHPUnit_Framework_Assert::assertEquals('LightSaml\Model\Metadata\AssertionConsumerService', $criteria->getServiceType());
 
                 return true;
             });
@@ -63,6 +63,6 @@ class DestinationValidatorResponseActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getEndpointResolverMock()
     {
-        return $this->getMock('\LightSaml\Resolver\Endpoint\EndpointResolverInterface');
+        return $this->getMock('LightSaml\Resolver\Endpoint\EndpointResolverInterface');
     }
 }

@@ -46,6 +46,6 @@ class SpSsoStateActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getSessionProcessorMock()
     {
-        return $this->getMock('\LightSaml\Resolver\Session\SessionProcessorInterface');
+        return $this->getMock('LightSaml\Resolver\Session\SessionProcessorInterface');
     }
 }

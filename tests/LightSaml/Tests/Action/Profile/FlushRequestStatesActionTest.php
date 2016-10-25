@@ -83,7 +83,7 @@ class FlushRequestStatesActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getRequestStateStoreMock()
     {
-        return $this->getMock('\LightSaml\Store\Request\RequestStateStoreInterface');
+        return $this->getMock('LightSaml\Store\Request\RequestStateStoreInterface');
     }
 
     /**

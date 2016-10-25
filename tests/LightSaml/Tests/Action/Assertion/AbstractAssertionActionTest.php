@@ -34,7 +34,7 @@ class AbstractAssertionActionTest extends \PHPUnit_Framework_TestCase
     public function test_throws_context_exception_for_non_assertion_context()
     {
         $action = $this->getAbstractAssertionActionMock(array(TestHelper::getLoggerMock($this)));
-        $action->execute($this->getMock('\LightSaml\Context\ContextInterface'));
+        $action->execute($this->getMock('LightSaml\Context\ContextInterface'));
     }
 
     /**
@@ -44,6 +44,6 @@ class AbstractAssertionActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getAbstractAssertionActionMock(array $arguments)
     {
-        return $this->getMockForAbstractClass('\LightSaml\Action\Assertion\AbstractAssertionAction', $arguments);
+        return $this->getMockForAbstractClass('LightSaml\Action\Assertion\AbstractAssertionAction', $arguments);
     }
 }

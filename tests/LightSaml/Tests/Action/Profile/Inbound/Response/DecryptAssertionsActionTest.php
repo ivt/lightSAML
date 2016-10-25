@@ -67,14 +67,14 @@ class DecryptAssertionsActionTest extends \PHPUnit_Framework_TestCase
 
         $action->execute($context);
 
-        $this->assertTrue($query->has('\LightSaml\Credential\Criteria\EntityIdCriteria'));
-        $this->assertEquals($entityId, $query->getSingle('\LightSaml\Credential\Criteria\EntityIdCriteria')->getEntityId());
+        $this->assertTrue($query->has('LightSaml\Credential\Criteria\EntityIdCriteria'));
+        $this->assertEquals($entityId, $query->getSingle('LightSaml\Credential\Criteria\EntityIdCriteria')->getEntityId());
 
-        $this->assertTrue($query->has('\LightSaml\Credential\Criteria\MetadataCriteria'));
-        $this->assertEquals($expectedMetadataCriteria, $query->getSingle('\LightSaml\Credential\Criteria\MetadataCriteria')->getMetadataType());
+        $this->assertTrue($query->has('LightSaml\Credential\Criteria\MetadataCriteria'));
+        $this->assertEquals($expectedMetadataCriteria, $query->getSingle('LightSaml\Credential\Criteria\MetadataCriteria')->getMetadataType());
 
-        $this->assertTrue($query->has('\LightSaml\Credential\Criteria\UsageCriteria'));
-        $this->assertEquals(UsageType::ENCRYPTION, $query->getSingle('\LightSaml\Credential\Criteria\UsageCriteria')->getUsage());
+        $this->assertTrue($query->has('LightSaml\Credential\Criteria\UsageCriteria'));
+        $this->assertEquals(UsageType::ENCRYPTION, $query->getSingle('LightSaml\Credential\Criteria\UsageCriteria')->getUsage());
 
         $this->assertCount(1, $response->getAllAssertions());
         $this->assertSame($decryptedAssertion, $response->getFirstAssertion());
@@ -133,7 +133,7 @@ class DecryptAssertionsActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getCredentialMock()
     {
-        return $this->getMock('\LightSaml\Credential\CredentialInterface');
+        return $this->getMock('LightSaml\Credential\CredentialInterface');
     }
 
     /**
@@ -141,7 +141,7 @@ class DecryptAssertionsActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getEncryptedAssertionReaderMock()
     {
-        return $this->getMock('\LightSaml\Model\Assertion\EncryptedAssertionReader');
+        return $this->getMock('LightSaml\Model\Assertion\EncryptedAssertionReader');
     }
 
     /**
@@ -149,6 +149,6 @@ class DecryptAssertionsActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getCredentialResolverMock()
     {
-        return $this->getMock('\LightSaml\Resolver\Credential\CredentialResolverInterface');
+        return $this->getMock('LightSaml\Resolver\Credential\CredentialResolverInterface');
     }
 }

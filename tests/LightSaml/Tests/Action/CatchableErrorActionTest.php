@@ -54,7 +54,7 @@ class CatchableErrorActionTest extends \PHPUnit_Framework_TestCase
         /** @var ExceptionContext $exceptionContext */
         $exceptionContext = $context->getSubContext(ProfileContexts::EXCEPTION);
         $this->assertNotNull($exceptionContext);
-        $this->assertInstanceOf('\LightSaml\Context\Profile\ExceptionContext', $exceptionContext);
+        $this->assertInstanceOf('LightSaml\Context\Profile\ExceptionContext', $exceptionContext);
         $this->assertSame($exception, $exceptionContext->getException());
     }
 

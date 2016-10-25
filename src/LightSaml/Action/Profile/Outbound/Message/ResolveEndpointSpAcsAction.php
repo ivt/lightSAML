@@ -18,6 +18,6 @@ class ResolveEndpointSpAcsAction extends ResolveEndpointBaseAction
 {
     protected function getServiceType(ProfileContext $context)
     {
-        return '\LightSaml\Model\Metadata\AssertionConsumerService';
+        return 'LightSaml\Model\Metadata\AssertionConsumerService';
     }
 }

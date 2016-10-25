@@ -44,8 +44,8 @@ class ACSUrlAction extends AbstractProfileAction
         $ownEntityDescriptor = $context->getOwnEntityDescriptor();
 
         $criteriaSet = new CriteriaSet(array(
-            new DescriptorTypeCriteria('\LightSaml\Model\Metadata\SpSsoDescriptor'),
-            new ServiceTypeCriteria('\LightSaml\Model\Metadata\AssertionConsumerService'),
+            new DescriptorTypeCriteria('LightSaml\Model\Metadata\SpSsoDescriptor'),
+            new ServiceTypeCriteria('LightSaml\Model\Metadata\AssertionConsumerService'),
             new BindingCriteria(array(SamlConstants::BINDING_SAML2_HTTP_POST)),
         ));
 

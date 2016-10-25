@@ -48,7 +48,7 @@ class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
                 $criteriaSet,
                 array(SamlConstants::BINDING_SAML2_HTTP_POST, SamlConstants::BINDING_SAML2_HTTP_REDIRECT)
             );
-            $self->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\SpSsoDescriptor');
+            $self->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, 'LightSaml\Model\Metadata\SpSsoDescriptor');
             $self->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, null);
 
             return array(TestHelper::getEndpointReferenceMock($self, $endpoint = new SingleSignOnService()));
@@ -117,7 +117,7 @@ class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
     protected function createAction(LoggerInterface $logger, EndpointResolverInterface $endpointResolver)
     {
         return $this->getMockForAbstractClass(
-            '\LightSaml\Action\Profile\Outbound\Message\ResolveEndpointBaseAction',
+            'LightSaml\Action\Profile\Outbound\Message\ResolveEndpointBaseAction',
             array($logger, $endpointResolver)
         );
     }
