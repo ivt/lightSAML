@@ -78,7 +78,7 @@ class CompositeActionBuilderTest extends \PHPUnit_Framework_TestCase
         $action->expects($this->once())
             ->method('execute')
             ->willReturnCallback(function () use ($expectedOrder, &$order) {
-                $this->assertEquals($expectedOrder, $order);
+                \PHPUnit_Framework_Assert::assertEquals($expectedOrder, $order);
                 $order++;
             })
         ;

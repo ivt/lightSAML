@@ -92,13 +92,14 @@ class RecipientValidatorActionTest extends \PHPUnit_Framework_TestCase
         $profileContext->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor());
         $assertionContext->setParent($profileContext);
 
+        $self = $this;
         $endpointResolver->expects($this->once())
             ->method('resolve')
             ->with($this->isInstanceOf('\LightSaml\Criteria\CriteriaSet'), $this->isType('array'))
-            ->willReturnCallback(function (\LightSaml\Criteria\CriteriaSet $criteriaSet) use ($recipient) {
-                TestHelper::assertCriteria($this, $criteriaSet, '\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria', 'getDescriptorType', '\LightSaml\Model\Metadata\SpSsoDescriptor');
-                TestHelper::assertCriteria($this, $criteriaSet, '\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria', 'getServiceType', '\LightSaml\Model\Metadata\AssertionConsumerService');
-                TestHelper::assertCriteria($this, $criteriaSet, '\LightSaml\Resolver\Endpoint\Criteria\LocationCriteria', 'getLocation', $recipient);
+            ->willReturnCallback(function (\LightSaml\Criteria\CriteriaSet $criteriaSet) use ($recipient, $self) {
+                TestHelper::assertCriteria($self, $criteriaSet, '\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria', 'getDescriptorType', '\LightSaml\Model\Metadata\SpSsoDescriptor');
+                TestHelper::assertCriteria($self, $criteriaSet, '\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria', 'getServiceType', '\LightSaml\Model\Metadata\AssertionConsumerService');
+                TestHelper::assertCriteria($self, $criteriaSet, '\LightSaml\Resolver\Endpoint\Criteria\LocationCriteria', 'getLocation', $recipient);
 
                 return array();
             });
@@ -129,10 +130,11 @@ class RecipientValidatorActionTest extends \PHPUnit_Framework_TestCase
         $profileContext->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor());
         $assertionContext->setParent($profileContext);
 
+        $self = $this;
         $endpointResolver->expects($this->once())
             ->method('resolve')
-            ->willReturnCallback(function () use ($recipient) {
-                return array(TestHelper::getEndpointReferenceMock($this, new AssertionConsumerService()));
+            ->willReturnCallback(function () use ($recipient, $self) {
+                return array(TestHelper::getEndpointReferenceMock($self, new AssertionConsumerService()));
             });
 
         $action->execute($assertionContext);

@@ -42,15 +42,16 @@ class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
         $context = $this->createContext(ProfileContext::ROLE_IDP, $message);
 
         $endpoint = null;
-        $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet, array $endpointCandidates) use (&$endpoint) {
-            $this->criteriaSetShouldHaveBindingCriteria(
+        $self = $this;
+        $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet, array $endpointCandidates) use (&$endpoint, $self) {
+            $self->criteriaSetShouldHaveBindingCriteria(
                 $criteriaSet,
                 array(SamlConstants::BINDING_SAML2_HTTP_POST, SamlConstants::BINDING_SAML2_HTTP_REDIRECT)
             );
-            $this->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\SpSsoDescriptor');
-            $this->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, null);
+            $self->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\SpSsoDescriptor');
+            $self->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, null);
 
-            return array(TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleSignOnService()));
+            return array(TestHelper::getEndpointReferenceMock($self, $endpoint = new SingleSignOnService()));
         });
 
         $this->action->execute($context);
@@ -81,10 +82,11 @@ class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
         $message->setAssertionConsumerServiceIndex($index = 2);
         $context = $this->createContext(ProfileContext::ROLE_IDP, $message);
 
-        $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) use ($index) {
-            $this->criteriaSetShouldHaveIndexCriteria($criteriaSet, $index);
+        $self = $this;
+        $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) use ($index, $self) {
+            $self->criteriaSetShouldHaveIndexCriteria($criteriaSet, $index);
 
-            return array(TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleSignOnService()));
+            return array(TestHelper::getEndpointReferenceMock($self, $endpoint = new SingleSignOnService()));
         });
 
         $this->action->execute($context);
@@ -96,10 +98,11 @@ class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
         $message->setAssertionConsumerServiceURL($url = 'http://domain.com/acs');
         $context = $this->createContext(ProfileContext::ROLE_IDP, $message);
 
-        $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) use ($url) {
-            $this->criteriaSetShouldHaveLocationCriteria($criteriaSet, $url);
+        $self = $this;
+        $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) use ($url, $self) {
+            $self->criteriaSetShouldHaveLocationCriteria($criteriaSet, $url);
 
-            return array(TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleSignOnService()));
+            return array(TestHelper::getEndpointReferenceMock($self, $endpoint = new SingleSignOnService()));
         });
 
         $this->action->execute($context);

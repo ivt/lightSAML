@@ -41,14 +41,14 @@ class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
             ->method('resolve')
             ->with($this->isInstanceOf('\LightSaml\Criteria\CriteriaSet'), $this->isType('array'))
             ->willReturnCallback(function (CriteriaSet $criteriaSet, array $candidates) {
-                $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria'));
-                $this->assertEquals('\LightSaml\Model\Metadata\SpSsoDescriptor', $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria')->getDescriptorType());
+                \PHPUnit_Framework_Assert::assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria'));
+                \PHPUnit_Framework_Assert::assertEquals('\LightSaml\Model\Metadata\SpSsoDescriptor', $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria')->getDescriptorType());
 
-                $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria'));
-                $this->assertEquals('\LightSaml\Model\Metadata\AssertionConsumerService', $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria')->getServiceType());
+                \PHPUnit_Framework_Assert::assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria'));
+                \PHPUnit_Framework_Assert::assertEquals('\LightSaml\Model\Metadata\AssertionConsumerService', $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria')->getServiceType());
 
-                $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\BindingCriteria'));
-                $this->assertEquals(array(SamlConstants::BINDING_SAML2_HTTP_POST), $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\BindingCriteria')->getAllBindings());
+                \PHPUnit_Framework_Assert::assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\BindingCriteria'));
+                \PHPUnit_Framework_Assert::assertEquals(array(SamlConstants::BINDING_SAML2_HTTP_POST), $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\BindingCriteria')->getAllBindings());
 
                 return $candidates;
             })

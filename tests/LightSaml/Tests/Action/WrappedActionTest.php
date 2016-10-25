@@ -24,9 +24,9 @@ class WrappedActionTest extends \PHPUnit_Framework_TestCase
             ->method('beforeAction')
             ->with($context)
             ->willReturnCallback(function () use (&$beforeCalled, &$executeCalled, &$afterCalled) {
-                $this->assertFalse($beforeCalled, 'beforeAction already called - should be called only once');
-                $this->assertFalse($executeCalled, 'execute should not been executed before beforeAction');
-                $this->assertFalse($afterCalled, 'afterAction should be executed before beforeAction');
+                \PHPUnit_Framework_Assert::assertFalse($beforeCalled, 'beforeAction already called - should be called only once');
+                \PHPUnit_Framework_Assert::assertFalse($executeCalled, 'execute should not been executed before beforeAction');
+                \PHPUnit_Framework_Assert::assertFalse($afterCalled, 'afterAction should be executed before beforeAction');
                 $beforeCalled = true;
             });
 
@@ -34,9 +34,9 @@ class WrappedActionTest extends \PHPUnit_Framework_TestCase
             ->method('execute')
             ->with($context)
             ->willReturnCallback(function () use (&$beforeCalled, &$executeCalled, &$afterCalled) {
-                $this->assertTrue($beforeCalled, 'beforeAction should have been called');
-                $this->assertFalse($executeCalled, 'execute already called - should be executed only once');
-                $this->assertFalse($afterCalled, 'afterAction should be executed before beforeAction');
+                \PHPUnit_Framework_Assert::assertTrue($beforeCalled, 'beforeAction should have been called');
+                \PHPUnit_Framework_Assert::assertFalse($executeCalled, 'execute already called - should be executed only once');
+                \PHPUnit_Framework_Assert::assertFalse($afterCalled, 'afterAction should be executed before beforeAction');
                 $executeCalled = true;
             });
 
@@ -44,9 +44,9 @@ class WrappedActionTest extends \PHPUnit_Framework_TestCase
             ->method('afterAction')
             ->with($context)
             ->willReturnCallback(function () use (&$beforeCalled, &$executeCalled, &$afterCalled) {
-                $this->assertTrue($beforeCalled, 'beforeAction should have been called');
-                $this->assertTrue($executeCalled, 'execute should be executed before afterAction');
-                $this->assertFalse($afterCalled, 'afterAction already called - should be executed only once');
+                \PHPUnit_Framework_Assert::assertTrue($beforeCalled, 'beforeAction should have been called');
+                \PHPUnit_Framework_Assert::assertTrue($executeCalled, 'execute should be executed before afterAction');
+                \PHPUnit_Framework_Assert::assertFalse($afterCalled, 'afterAction already called - should be executed only once');
                 $afterCalled = true;
             });
 

@@ -39,12 +39,13 @@ class CriteriaSetTest extends \PHPUnit_Framework_TestCase
     {
         $criteriaSet = new CriteriaSet();
 
-        $criteriaSet->addIf(false, function () {
-            return TestHelper::getCriteriaMock($this);
+        $self = $this;
+        $criteriaSet->addIf(false, function () use ($self) {
+            return TestHelper::getCriteriaMock($self);
 
         });
-        $criteriaSet->addIf(true, function () {
-            return TestHelper::getCriteriaMock($this);
+        $criteriaSet->addIf(true, function () use ($self) {
+            return TestHelper::getCriteriaMock($self);
 
         });
 

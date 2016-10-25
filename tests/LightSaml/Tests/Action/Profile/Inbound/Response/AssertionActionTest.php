@@ -39,7 +39,7 @@ class AssertionActionTest extends \PHPUnit_Framework_TestCase
                 } elseif ($assertionContext->getAssertion() === $assertion2) {
                     $assertion2Called = true;
                 } else {
-                    $this->fail('Unknown assertion');
+                    \PHPUnit_Framework_Assert::fail('Unknown assertion');
                 }
             })
         ;

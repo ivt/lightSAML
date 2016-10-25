@@ -38,10 +38,11 @@ class ResolveEndpointSloActionTest extends AbstractResolveEndpointActionTest
         $ssoSessionState = new SsoSessionState();
         $context->getLogoutContext()->setSsoSessionState($ssoSessionState->setIdpEntityId($ownEntityId));
 
-        $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) {
-            $this->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\SingleLogoutService');
+        $self = $this;
+        $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) use ($self) {
+            $self->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\SingleLogoutService');
 
-            return array(TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleLogoutService()));
+            return array(TestHelper::getEndpointReferenceMock($self, $endpoint = new SingleLogoutService()));
         });
 
         $this->action->execute($context);
@@ -56,10 +57,11 @@ class ResolveEndpointSloActionTest extends AbstractResolveEndpointActionTest
         $ssoSessionState = new SsoSessionState();
         $context->getLogoutContext()->setSsoSessionState($ssoSessionState->setIdpEntityId($ownEntityId));
 
-        $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) {
-            $this->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\SpSsoDescriptor');
+        $self = $this;
+        $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) use ($self) {
+            $self->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\SpSsoDescriptor');
 
-            return array(TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleLogoutService()));
+            return array(TestHelper::getEndpointReferenceMock($self, $endpoint = new SingleLogoutService()));
         });
 
         $this->action->execute($context);
@@ -74,10 +76,11 @@ class ResolveEndpointSloActionTest extends AbstractResolveEndpointActionTest
         $ssoSessionState = new SsoSessionState();
         $context->getLogoutContext()->setSsoSessionState($ssoSessionState->setSpEntityId($ownEntityId));
 
-        $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) {
-            $this->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\IdpSsoDescriptor');
+        $self = $this;
+        $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) use ($self) {
+            $self->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\IdpSsoDescriptor');
 
-            return array(TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleLogoutService()));
+            return array(TestHelper::getEndpointReferenceMock($self, $endpoint = new SingleLogoutService()));
         });
 
         $this->action->execute($context);

@@ -57,14 +57,15 @@ class CompositeActionTest extends \PHPUnit_Framework_TestCase
 
         $composite = new CompositeAction(array($action1, $action2));
 
-        $composite->map(function (ActionInterface $action) use ($action1, $action2, &$action1mapped, &$action2mapped, &$action2replacement) {
+        $self = $this;
+        $composite->map(function (ActionInterface $action) use ($self, $action1, $action2, &$action1mapped, &$action2mapped, &$action2replacement) {
             if ($action === $action1) {
                 $action1mapped = true;
 
                 return;
             } elseif ($action === $action2) {
                 $action2mapped = true;
-                $action2replacement = $this->getActionMock();
+                $action2replacement = $self->getActionMock();
 
                 return $action2replacement;
             } else {
@@ -132,7 +133,7 @@ EOT;
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject|\LightSaml\Action\ActionInterface
      */
-    private function getActionMock()
+    public function getActionMock()
     {
         return $this->getMock('LightSaml\Action\ActionInterface');
     }

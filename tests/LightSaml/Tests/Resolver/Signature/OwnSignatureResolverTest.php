@@ -86,15 +86,16 @@ class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
         $context = TestHelper::getProfileContext(Profiles::METADATA, $profileRole);
         $context->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor($ownEntityId = 'http://own.id'));
 
+        $self = $this;
         $credentialResolverMock->method('query')->willReturn($query = new CredentialResolverQuery($credentialResolverMock));
         $credentialResolverMock->method('resolve')
-            ->willReturnCallback(function (CriteriaSet $criteriaSet) use ($ownEntityId, $expectedMetadataType) {
-                TestHelper::assertCriteria($this, $criteriaSet, '\LightSaml\Credential\Criteria\EntityIdCriteria', 'getEntityId', $ownEntityId);
-                TestHelper::assertCriteria($this, $criteriaSet, '\LightSaml\Credential\Criteria\UsageCriteria', 'getUsage', UsageType::SIGNING);
-                TestHelper::assertCriteria($this, $criteriaSet, '\LightSaml\Credential\Criteria\X509CredentialCriteria', null, null);
-                TestHelper::assertCriteria($this, $criteriaSet, '\LightSaml\Credential\Criteria\MetadataCriteria', 'getMetadataType', $expectedMetadataType);
+            ->willReturnCallback(function (CriteriaSet $criteriaSet) use ($self, $ownEntityId, $expectedMetadataType) {
+                TestHelper::assertCriteria($self, $criteriaSet, '\LightSaml\Credential\Criteria\EntityIdCriteria', 'getEntityId', $ownEntityId);
+                TestHelper::assertCriteria($self, $criteriaSet, '\LightSaml\Credential\Criteria\UsageCriteria', 'getUsage', UsageType::SIGNING);
+                TestHelper::assertCriteria($self, $criteriaSet, '\LightSaml\Credential\Criteria\X509CredentialCriteria', null, null);
+                TestHelper::assertCriteria($self, $criteriaSet, '\LightSaml\Credential\Criteria\MetadataCriteria', 'getMetadataType', $expectedMetadataType);
 
-                return array(TestHelper::getX509CredentialMock($this));
+                return array(TestHelper::getX509CredentialMock($self));
             });
 
         $signatureResolver->getSignature($context);

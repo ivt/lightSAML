@@ -26,12 +26,12 @@ class DestinationValidatorResponseActionTest extends \PHPUnit_Framework_TestCase
         $endpointResolverMock->expects($this->once())
             ->method('resolve')
             ->willReturnCallback(function (CriteriaSet $criteriaSet, array $endpoints) {
-                $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria'));
+                \PHPUnit_Framework_Assert::assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria'));
                 $arr = $criteriaSet->get('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria');
-                $this->assertCount(1, $arr);
+                \PHPUnit_Framework_Assert::assertCount(1, $arr);
                 /** @var ServiceTypeCriteria $criteria */
                 $criteria = $arr[0];
-                $this->assertEquals('\LightSaml\Model\Metadata\AssertionConsumerService', $criteria->getServiceType());
+                \PHPUnit_Framework_Assert::assertEquals('\LightSaml\Model\Metadata\AssertionConsumerService', $criteria->getServiceType());
 
                 return true;
             });

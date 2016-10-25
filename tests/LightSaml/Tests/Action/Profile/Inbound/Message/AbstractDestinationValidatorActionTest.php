@@ -83,20 +83,20 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
         $endpointResolverMock->expects($this->once())
             ->method('resolve')
             ->willReturnCallback(function (CriteriaSet $criteriaSet, array $endpoints) use ($descriptorType, $expectedDestination) {
-                $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\LocationCriteria'));
+                \PHPUnit_Framework_Assert::assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\LocationCriteria'));
                 $arr = $criteriaSet->get('\LightSaml\Resolver\Endpoint\Criteria\LocationCriteria');
-                $this->assertCount(1, $arr);
+                \PHPUnit_Framework_Assert::assertCount(1, $arr);
                 /** @var LocationCriteria $criteria */
                 $criteria = $arr[0];
-                $this->assertEquals($expectedDestination, $criteria->getLocation());
+                \PHPUnit_Framework_Assert::assertEquals($expectedDestination, $criteria->getLocation());
 
-                $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria'));
+                \PHPUnit_Framework_Assert::assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria'));
                 $arr = $criteriaSet->get('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria');
-                $this->assertCount(1, $arr);
+                \PHPUnit_Framework_Assert::assertCount(1, $arr);
                 /** @var DescriptorTypeCriteria $criteria */
                 $criteria = $arr[0];
-                $this->assertInstanceOf('DescriptorTypeCriteria', $criteria);
-                $this->assertEquals($descriptorType, $criteria->getDescriptorType());
+                \PHPUnit_Framework_Assert::assertInstanceOf('DescriptorTypeCriteria', $criteria);
+                \PHPUnit_Framework_Assert::assertEquals($descriptorType, $criteria->getDescriptorType());
 
                 return true;
             });

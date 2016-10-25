@@ -29,7 +29,7 @@ class SaveRequestStateActionTest extends \PHPUnit_Framework_TestCase
             ->method('set')
             ->with($this->isInstanceOf('\LightSaml\State\Request\RequestState'))
             ->willReturnCallback(function (RequestState $requestState) use ($id) {
-                $this->assertEquals($id, $requestState->getId());
+                \PHPUnit_Framework_Assert::assertEquals($id, $requestState->getId());
             })
         ;
 

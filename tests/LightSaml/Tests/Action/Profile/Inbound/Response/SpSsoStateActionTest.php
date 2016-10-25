@@ -33,8 +33,8 @@ class SpSsoStateActionTest extends \PHPUnit_Framework_TestCase
             ->method('processAssertions')
             ->with($this->isType('array'), $ownEntityId, $partyEntityId)
             ->willReturnCallback(function (array $assertions, $ownId, $partyId) use ($assertion1, $assertion2) {
-                $this->assertSame($assertion1, $assertions[0]);
-                $this->assertSame($assertion2, $assertions[1]);
+                \PHPUnit_Framework_Assert::assertSame($assertion1, $assertions[0]);
+                \PHPUnit_Framework_Assert::assertSame($assertion2, $assertions[1]);
             })
         ;
 

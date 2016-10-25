@@ -29,11 +29,11 @@ class HttpPostBindingFunctionalTest extends \PHPUnit_Framework_TestCase
         $eventDispatcherMock->expects($this->once())
             ->method('dispatch')
             ->willReturnCallback(function ($name, GenericEvent $event) {
-                $this->assertEquals(Events::BINDING_MESSAGE_SENT, $name);
-                $this->assertNotEmpty($event->getSubject());
+                \PHPUnit_Framework_Assert::assertEquals(Events::BINDING_MESSAGE_SENT, $name);
+                \PHPUnit_Framework_Assert::assertNotEmpty($event->getSubject());
                 $doc = new \DOMDocument();
                 $doc->loadXML($event->getSubject());
-                $this->assertEquals('AuthnRequest', $doc->firstChild->localName);
+                \PHPUnit_Framework_Assert::assertEquals('AuthnRequest', $doc->firstChild->localName);
             });
 
         $biding->setEventDispatcher($eventDispatcherMock);
@@ -99,11 +99,11 @@ class HttpPostBindingFunctionalTest extends \PHPUnit_Framework_TestCase
         $eventDispatcherMock->expects($this->once())
             ->method('dispatch')
             ->willReturnCallback(function ($name, GenericEvent $event) {
-                $this->assertEquals(Events::BINDING_MESSAGE_RECEIVED, $name);
-                $this->assertNotEmpty($event->getSubject());
+                \PHPUnit_Framework_Assert::assertEquals(Events::BINDING_MESSAGE_RECEIVED, $name);
+                \PHPUnit_Framework_Assert::assertNotEmpty($event->getSubject());
                 $doc = new \DOMDocument();
                 $doc->loadXML($event->getSubject());
-                $this->assertEquals('AuthnRequest', $doc->firstChild->localName);
+                \PHPUnit_Framework_Assert::assertEquals('AuthnRequest', $doc->firstChild->localName);
             });
 
         $binding->setEventDispatcher($eventDispatcherMock);

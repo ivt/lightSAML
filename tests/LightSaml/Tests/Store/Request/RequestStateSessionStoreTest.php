@@ -20,8 +20,8 @@ class RequestStateSessionStoreTest extends \PHPUnit_Framework_TestCase
         $sessionMock->method('set')
             ->with('main_saml_request_state_', $this->isType('array'))
             ->willReturnCallback(function ($name, $value) use ($requestState) {
-                $this->assertArrayHasKey('aaa', $value);
-                $this->assertSame($requestState, $value['aaa']);
+                \PHPUnit_Framework_Assert::assertArrayHasKey('aaa', $value);
+                \PHPUnit_Framework_Assert::assertSame($requestState, $value['aaa']);
             });
 
         $store->set($requestState);
