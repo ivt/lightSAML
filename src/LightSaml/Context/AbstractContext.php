@@ -192,7 +192,7 @@ abstract class AbstractContext implements ContextInterface
      */
     public function __toString()
     {
-        return json_encode($this->debugPrintTree(), JSON_PRETTY_PRINT);
+        return json_encode($this->debugPrintTree());
     }
 
     /**

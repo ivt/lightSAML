@@ -63,7 +63,7 @@ class CatchableErrorActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getActionMock()
     {
-        return $this->getMock('ActionInterface');
+        return $this->getMock('LightSaml\Action\ActionInterface');
     }
 
     /**
@@ -71,6 +71,6 @@ class CatchableErrorActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getContextMock()
     {
-        return $this->getMockForAbstractClass('AbstractContext');
+        return $this->getMockForAbstractClass('LightSaml\Context\AbstractContext');
     }
 }
