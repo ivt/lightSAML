@@ -22,7 +22,7 @@ use Pimple\ServiceProviderInterface;
 class StoreContainerProvider implements ServiceProviderInterface
 {
     /** @var SystemContainerInterface */
-    private $systemContainer;
+    public $systemContainer;
 
     public function __construct(SystemContainerInterface $systemContainer)
     {
@@ -34,16 +34,18 @@ class StoreContainerProvider implements ServiceProviderInterface
      */
     public function register(Container $pimple)
     {
-        $pimple[StoreContainer::REQUEST_STATE_STORE] = function () {
-            return new RequestStateSessionStore($this->systemContainer->getSession(), 'main');
+        $self = $this;
+
+        $pimple[StoreContainer::REQUEST_STATE_STORE] = function () use ($self) {
+            return new RequestStateSessionStore($self->systemContainer->getSession(), 'main');
         };
 
         $pimple[StoreContainer::ID_STATE_STORE] = function () {
             return new NullIdStore();
         };
 
-        $pimple[StoreContainer::SSO_STATE_STORE] = function () {
-            return new SsoStateSessionStore($this->systemContainer->getSession(), 'samlsso');
+        $pimple[StoreContainer::SSO_STATE_STORE] = function () use ($self) {
+            return new SsoStateSessionStore($self->systemContainer->getSession(), 'samlsso');
         };
     }
 }

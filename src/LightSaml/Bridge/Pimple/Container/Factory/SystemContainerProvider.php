@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 class SystemContainerProvider implements ServiceProviderInterface
 {
     /** @var bool */
-    private $mockSession;
+    public $mockSession;
 
     public function __construct($mockSession = false)
     {
@@ -40,8 +40,9 @@ class SystemContainerProvider implements ServiceProviderInterface
             return Request::createFromGlobals();
         };
 
-        $pimple[SystemContainer::SESSION] = function () {
-            if ($this->mockSession) {
+        $self = $this;
+        $pimple[SystemContainer::SESSION] = function () use ($self) {
+            if ($self->mockSession) {
                 $session = new Session(new MockArraySessionStorage());
             } else {
                 $session = new Session();

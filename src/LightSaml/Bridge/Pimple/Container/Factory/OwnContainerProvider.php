@@ -21,10 +21,10 @@ use Pimple\ServiceProviderInterface;
 class OwnContainerProvider implements ServiceProviderInterface
 {
     /** @var CredentialInterface[] */
-    private $ownCredentials = array();
+    public $ownCredentials = array();
 
     /** @var EntityDescriptorProviderInterface */
-    private $ownEntityDescriptorProvider;
+    public $ownEntityDescriptorProvider;
 
     /**
      * @param EntityDescriptorProviderInterface $ownEntityDescriptorProvider
@@ -61,12 +61,13 @@ class OwnContainerProvider implements ServiceProviderInterface
      */
     public function register(Container $pimple)
     {
-        $pimple[OwnContainer::OWN_CREDENTIALS] = function () {
-            return $this->ownCredentials;
+        $self = $this;
+        $pimple[OwnContainer::OWN_CREDENTIALS] = function () use ($self) {
+            return $self->ownCredentials;
         };
 
-        $pimple[OwnContainer::OWN_ENTITY_DESCRIPTOR_PROVIDER] = function () {
-            return $this->ownEntityDescriptorProvider;
+        $pimple[OwnContainer::OWN_ENTITY_DESCRIPTOR_PROVIDER] = function () use ($self) {
+            return $self->ownEntityDescriptorProvider;
         };
     }
 }

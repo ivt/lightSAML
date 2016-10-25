@@ -23,13 +23,13 @@ use Pimple\ServiceProviderInterface;
 class CredentialContainerProvider implements ServiceProviderInterface
 {
     /** @var PartyContainerInterface */
-    private $partyContainer;
+    public $partyContainer;
 
     /** @var OwnContainerInterface */
-    private $ownContainer;
+    public $ownContainer;
 
     /** @var CredentialInterface[] */
-    private $extraCredentials = array();
+    public $extraCredentials = array();
 
     /**
      * @param PartyContainerInterface $partyContainer
@@ -67,14 +67,15 @@ class CredentialContainerProvider implements ServiceProviderInterface
             throw new LightSamlBuildException('There are no own credentials');
         }
 
-        $pimple[CredentialContainer::CREDENTIAL_STORE] = function () {
+        $self = $this;
+        $pimple[CredentialContainer::CREDENTIAL_STORE] = function () use ($self) {
             $factory = new CredentialFactory();
 
             return $factory->build(
-                $this->partyContainer->getIdpEntityDescriptorStore(),
-                $this->partyContainer->getSpEntityDescriptorStore(),
-                $this->ownContainer->getOwnCredentials(),
-                $this->extraCredentials
+                $self->partyContainer->getIdpEntityDescriptorStore(),
+                $self->partyContainer->getSpEntityDescriptorStore(),
+                $self->ownContainer->getOwnCredentials(),
+                $self->extraCredentials
             );
         };
     }

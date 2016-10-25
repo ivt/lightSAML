@@ -38,13 +38,13 @@ use Pimple\ServiceProviderInterface;
 class ServiceContainerProvider implements ServiceProviderInterface
 {
     /** @var CredentialContainerInterface */
-    private $credentialContainer;
+    public $credentialContainer;
 
     /** @var SystemContainerInterface */
-    private $systemContainer;
+    public $systemContainer;
 
     /** @var StoreContainerInterface */
-    private $storeContainer;
+    public $storeContainer;
 
     /**
      * @param CredentialContainerInterface $credentialContainer
@@ -94,12 +94,14 @@ class ServiceContainerProvider implements ServiceProviderInterface
             ));
         };
 
-        $pimple[ServiceContainer::BINDING_FACTORY] = function () {
-            return new BindingFactory($this->systemContainer->getEventDispatcher());
+        $self = $this;
+
+        $pimple[ServiceContainer::BINDING_FACTORY] = function () use ($self) {
+            return new BindingFactory($self->systemContainer->getEventDispatcher());
         };
 
-        $pimple[ServiceContainer::CREDENTIAL_RESOLVER] = function () {
-            $factory = new CredentialResolverFactory($this->credentialContainer->getCredentialStore());
+        $pimple[ServiceContainer::CREDENTIAL_RESOLVER] = function () use ($self) {
+            $factory = new CredentialResolverFactory($self->credentialContainer->getCredentialStore());
 
             return $factory->build();
         };
@@ -116,12 +118,12 @@ class ServiceContainerProvider implements ServiceProviderInterface
             return new SignatureValidator($credentialResolver);
         };
 
-        $pimple[ServiceContainer::LOGOUT_SESSION_RESOLVER] = function () {
-            return new LogoutSessionResolver($this->storeContainer->getSsoStateStore());
+        $pimple[ServiceContainer::LOGOUT_SESSION_RESOLVER] = function () use ($self) {
+            return new LogoutSessionResolver($self->storeContainer->getSsoStateStore());
         };
 
-        $pimple[ServiceContainer::SESSION_PROCESSOR] = function () {
-            return new SessionProcessor($this->storeContainer->getSsoStateStore(), $this->systemContainer->getTimeProvider());
+        $pimple[ServiceContainer::SESSION_PROCESSOR] = function () use ($self) {
+            return new SessionProcessor($self->storeContainer->getSsoStateStore(), $self->systemContainer->getTimeProvider());
         };
     }
 }

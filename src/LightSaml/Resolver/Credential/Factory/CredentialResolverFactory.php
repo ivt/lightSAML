@@ -40,7 +40,8 @@ class CredentialResolverFactory
      */
     public function build()
     {
-        $result = (new CompositeFilterResolver())
+        $compositeFilterResolver = new CompositeFilterResolver();
+        $result = $compositeFilterResolver
             ->add(new EntityIdResolver($this->credentialStore))
             ->add(new AlgorithmFilterResolver())
             ->add(new CredentialNameFilterResolver())
