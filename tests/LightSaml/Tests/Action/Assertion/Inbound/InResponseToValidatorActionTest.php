@@ -73,7 +73,7 @@ class InResponseToValidatorActionTest extends \PHPUnit_Framework_TestCase
 
         /** @var RequestStateContext $requestStateContext */
         $requestStateContext = $context->getSubContext(ProfileContexts::REQUEST_STATE);
-        $this->assertInstanceOf(RequestStateContext::class, $requestStateContext);
+        $this->assertInstanceOf('\LightSaml\Context\Profile\RequestStateContext', $requestStateContext);
         $this->assertEquals($inResponseTo, $requestStateContext->getRequestState()->getId());
     }
 }

@@ -11,13 +11,13 @@ class AttributeTest extends \PHPUnit_Framework_TestCase
         $attribute = new Attribute();
         $attribute->setAttributeValue($value = '123');
 
-        $this->assertEquals([$value], $attribute->getAllAttributeValues());
+        $this->assertEquals(array($value), $attribute->getAllAttributeValues());
     }
 
     public function test_set_array_value()
     {
         $attribute = new Attribute();
-        $attribute->setAttributeValue($values = ['111', '222']);
+        $attribute->setAttributeValue($values = array('111', '222'));
 
         $this->assertEquals($values, $attribute->getAllAttributeValues());
     }

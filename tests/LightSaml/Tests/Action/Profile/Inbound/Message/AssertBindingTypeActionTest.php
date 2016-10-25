@@ -14,7 +14,7 @@ class AssertBindingTypeActionTest extends \PHPUnit_Framework_TestCase
     {
         new AssertBindingTypeAction(
             TestHelper::getLoggerMock($this),
-            [SamlConstants::BINDING_SAML2_HTTP_POST]
+            array(SamlConstants::BINDING_SAML2_HTTP_POST)
         );
     }
 
@@ -22,7 +22,7 @@ class AssertBindingTypeActionTest extends \PHPUnit_Framework_TestCase
     {
         $action = new AssertBindingTypeAction(
             TestHelper::getLoggerMock($this),
-            [SamlConstants::BINDING_SAML2_HTTP_POST]
+            array(SamlConstants::BINDING_SAML2_HTTP_POST)
         );
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
@@ -39,7 +39,7 @@ class AssertBindingTypeActionTest extends \PHPUnit_Framework_TestCase
     {
         $action = new AssertBindingTypeAction(
             $logger = TestHelper::getLoggerMock($this),
-            [SamlConstants::BINDING_SAML2_HTTP_POST]
+            array(SamlConstants::BINDING_SAML2_HTTP_POST)
         );
 
         $context = new ProfileContext(Profiles::SSO_IDP_RECEIVE_AUTHN_REQUEST, ProfileContext::ROLE_IDP);

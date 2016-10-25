@@ -17,7 +17,7 @@ class CompositeActionTest extends \PHPUnit_Framework_TestCase
 
     public function test__can_be_constructed_with_array_of_actions()
     {
-        $composite = new CompositeAction([$this->getActionMock(), $this->getActionMock()]);
+        $composite = new CompositeAction(array($this->getActionMock(), $this->getActionMock()));
         $this->assertCount(2, $composite->getChildren());
     }
 
@@ -37,7 +37,7 @@ class CompositeActionTest extends \PHPUnit_Framework_TestCase
             ->method('execute')
             ->with($context);
 
-        $composite = new CompositeAction([$action1]);
+        $composite = new CompositeAction(array($action1));
 
         $action2 = $this->getActionMock();
         $action2->expects($this->once())
@@ -55,7 +55,7 @@ class CompositeActionTest extends \PHPUnit_Framework_TestCase
         $action1mapped = $action2mapped = false;
         $action2replacement = null;
 
-        $composite = new CompositeAction([$action1, $action2]);
+        $composite = new CompositeAction(array($action1, $action2));
 
         $composite->map(function (ActionInterface $action) use ($action1, $action2, &$action1mapped, &$action2mapped, &$action2replacement) {
             if ($action === $action1) {
@@ -83,32 +83,32 @@ class CompositeActionTest extends \PHPUnit_Framework_TestCase
 
     public function test_debug_tree()
     {
-        $innerComposite = new CompositeAction([new FooAction(), new BarAction()]);
+        $innerComposite = new CompositeAction(array(new FooAction(), new BarAction()));
         $this->assertCount(2, $innerComposite->getChildren());
-        $outerComposite = new CompositeAction([new FooAction(), $innerComposite, new BarAction()]);
+        $outerComposite = new CompositeAction(array(new FooAction(), $innerComposite, new BarAction()));
         $this->assertCount(3, $outerComposite->getChildren());
 
         $actualTree = $outerComposite->debugPrintTree();
 
-        $expectedTree = [
-            CompositeAction::class => [
-                FooAction::class => [],
-                CompositeAction::class => [
-                    FooAction::class => [],
-                    BarAction::class => [],
-                ],
-                BarAction::class => [],
-            ],
-        ];
+        $expectedTree = array(
+            '\LightSaml\Action\CompositeAction' => array(
+                '\LightSaml\Tests\Mock\Action\FooAction' => array(),
+                '\LightSaml\Action\CompositeAction' => array(
+                    '\LightSaml\Tests\Mock\Action\FooAction' => array(),
+                    '\LightSaml\Tests\Mock\Action\BarAction' => array(),
+                ),
+                '\LightSaml\Tests\Mock\Action\BarAction' => array(),
+            ),
+        );
 
         $this->assertEquals($expectedTree, $actualTree);
     }
 
     public function test_to_string_returns_json_debug_tree_string()
     {
-        $innerComposite = new CompositeAction([new FooAction(), new BarAction()]);
+        $innerComposite = new CompositeAction(array(new FooAction(), new BarAction()));
         $this->assertCount(2, $innerComposite->getChildren());
-        $outerComposite = new CompositeAction([new FooAction(), $innerComposite, new BarAction()]);
+        $outerComposite = new CompositeAction(array(new FooAction(), $innerComposite, new BarAction()));
         $this->assertCount(3, $outerComposite->getChildren());
 
         $actualValue = (string)$outerComposite;

@@ -42,9 +42,9 @@ class CompositeActionBuilderTest extends \PHPUnit_Framework_TestCase
 
         $compositeAction = $compositeBuilder->build();
 
-        $this->assertInstanceOf(CompositeAction::class, $compositeAction);
+        $this->assertInstanceOf('\LightSaml\Action\CompositeAction', $compositeAction);
 
-        $compositeAction->execute($this->getMock(ContextInterface::class));
+        $compositeAction->execute($this->getMock('\LightSaml\Context\ContextInterface'));
     }
 
     public function test__ranked_as_given_priority_parameter()
@@ -61,9 +61,9 @@ class CompositeActionBuilderTest extends \PHPUnit_Framework_TestCase
 
         $compositeAction = $compositeBuilder->build();
 
-        $this->assertInstanceOf(CompositeAction::class, $compositeAction);
+        $this->assertInstanceOf('\LightSaml\Action\CompositeAction', $compositeAction);
 
-        $compositeAction->execute($this->getMock(ContextInterface::class));
+        $compositeAction->execute($this->getMock('\LightSaml\Context\ContextInterface'));
     }
 
     /**
@@ -74,7 +74,7 @@ class CompositeActionBuilderTest extends \PHPUnit_Framework_TestCase
      */
     private function getActionMock($expectedOrder, &$order)
     {
-        $action = $this->getMock(ActionInterface::class);
+        $action = $this->getMock('\LightSaml\Action\ActionInterface');
         $action->expects($this->once())
             ->method('execute')
             ->willReturnCallback(function () use ($expectedOrder, &$order) {

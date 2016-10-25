@@ -242,12 +242,13 @@ class AssertionValidatorTest extends \PHPUnit_Framework_TestCase
         );
 
         $assertion = new Assertion();
+        $conditions = new Conditions();
         $assertion->setId('1234567890123456')
             ->setIssueInstant(1000)
             ->setIssuer(new Issuer('issuer'))
             ->setSubject(new Subject())
             ->setConditions(
-                (new Conditions())
+                $conditions
                 ->setNotBefore(1000)
                 ->setNotOnOrAfter(999)
             );
@@ -272,12 +273,13 @@ class AssertionValidatorTest extends \PHPUnit_Framework_TestCase
         );
 
         $assertion = new Assertion();
+        $conditions = new Conditions();
         $assertion->setId('1234567890123456')
             ->setIssueInstant(1000)
             ->setIssuer(new Issuer('issuer'))
             ->setSubject(new Subject())
             ->setConditions(
-                (new Conditions())
+                $conditions
                 ->addItem(new OneTimeUse())
                 ->addItem(new OneTimeUse())
             );
@@ -302,12 +304,13 @@ class AssertionValidatorTest extends \PHPUnit_Framework_TestCase
         );
 
         $assertion = new Assertion();
+        $conditions = new Conditions();
         $assertion->setId('1234567890123456')
             ->setIssueInstant(1000)
             ->setIssuer(new Issuer('issuer'))
             ->setSubject(new Subject())
             ->setConditions(
-                (new Conditions())
+                $conditions
                     ->addItem(new ProxyRestriction())
             );
 
@@ -331,14 +334,15 @@ class AssertionValidatorTest extends \PHPUnit_Framework_TestCase
         );
 
         $assertion = new Assertion();
+        $conditions = new Conditions();
         $assertion->setId('1234567890123456')
             ->setIssueInstant(1000)
             ->setIssuer(new Issuer('issuer'))
             ->setSubject(new Subject())
             ->setConditions(
-                (new Conditions())
+                $conditions
                     ->addItem(
-                        new ProxyRestriction(1, ['not valid'])
+                        new ProxyRestriction(1, array('not valid'))
                     )
             );
 
@@ -362,12 +366,13 @@ class AssertionValidatorTest extends \PHPUnit_Framework_TestCase
         );
 
         $assertion = new Assertion();
+        $conditions = new Conditions();
         $assertion->setId('1234567890123456')
             ->setIssueInstant(1000)
             ->setIssuer(new Issuer('issuer'))
             ->setSubject(new Subject())
             ->setConditions(
-                (new Conditions())
+                $conditions
                     ->addItem(new ProxyRestriction(1))
                     ->addItem(new ProxyRestriction(1))
             );
@@ -392,12 +397,13 @@ class AssertionValidatorTest extends \PHPUnit_Framework_TestCase
         );
 
         $assertion = new Assertion();
+        $conditions = new Conditions();
         $assertion->setId('1234567890123456')
             ->setIssueInstant(1000)
             ->setIssuer(new Issuer('issuer'))
             ->setSubject(new Subject())
             ->setConditions(
-                (new Conditions())
+                $conditions
                     ->addItem(new AudienceRestriction('not valid'))
             );
 

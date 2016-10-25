@@ -37,7 +37,7 @@ class RequestStateSessionStoreTest extends \PHPUnit_Framework_TestCase
         $id = 'aaa';
         $sessionMock->method('get')
             ->with('main_saml_request_state_')
-            ->willReturn([$id => $expected = new RequestState($id)]);
+            ->willReturn(array($id => $expected = new RequestState($id)));
 
         $actual = $store->get($id);
 
@@ -54,10 +54,10 @@ class RequestStateSessionStoreTest extends \PHPUnit_Framework_TestCase
         $id = 'aaa';
         $sessionMock->expects($this->once())
             ->method('get')
-            ->willReturn([$id => $expected = new RequestState($id)]);
+            ->willReturn(array($id => $expected = new RequestState($id)));
         $sessionMock->expects($this->once())
             ->method('set')
-            ->with('main_saml_request_state_', []);
+            ->with('main_saml_request_state_', array());
 
         $store->remove($id);
     }
@@ -71,7 +71,7 @@ class RequestStateSessionStoreTest extends \PHPUnit_Framework_TestCase
 
         $sessionMock->expects($this->once())
             ->method('set')
-            ->with('main_saml_request_state_', []);
+            ->with('main_saml_request_state_', array());
 
         $store->clear();
     }

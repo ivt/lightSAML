@@ -100,6 +100,6 @@ class IssuerValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     public function getNameIdValidatorMock()
     {
-        return $this->getMock(NameIdValidatorInterface::class);
+        return $this->getMock('\LightSaml\Validator\Model\NameId\NameIdValidatorInterface');
     }
 }

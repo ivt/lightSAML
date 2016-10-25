@@ -20,11 +20,11 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
     public function test_constructs_with_logger_and_endpoint_resolver()
     {
         $this->getMockForAbstractClass(
-            AbstractDestinationValidatorAction::class,
-            [
+            '\LightSaml\Action\Profile\Inbound\Message\AbstractDestinationValidatorAction',
+            array(
                 TestHelper::getLoggerMock($this),
                 $this->getEndpointResolverMock(),
-            ]
+            )
         );
     }
 
@@ -33,7 +33,7 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
         $loggerMock = TestHelper::getLoggerMock($this);
         $endpointResolverMock = $this->getEndpointResolverMock();
         /** @var AbstractDestinationValidatorAction $action */
-        $action = $this->getMockForAbstractClass(AbstractDestinationValidatorAction::class, [$loggerMock, $endpointResolverMock]);
+        $action = $this->getMockForAbstractClass('\LightSaml\Action\Profile\Inbound\Message\AbstractDestinationValidatorAction', array($loggerMock, $endpointResolverMock));
 
         $context = $this->buildContext(ProfileContext::ROLE_IDP, null);
 
@@ -45,14 +45,14 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
         $loggerMock = TestHelper::getLoggerMock($this);
         $endpointResolverMock = $this->getEndpointResolverMock();
         /** @var AbstractDestinationValidatorAction $action */
-        $action = $this->getMockForAbstractClass(AbstractDestinationValidatorAction::class, [$loggerMock, $endpointResolverMock]);
+        $action = $this->getMockForAbstractClass('AbstractDestinationValidatorAction', array($loggerMock, $endpointResolverMock));
 
         $context = $this->buildContext(ProfileContext::ROLE_IDP, $expectedDestination = 'http://localhost/foo');
 
         $endpointResolverMock->expects($this->once())
             ->method('resolve')
             ->with(
-                $this->isInstanceOf(CriteriaSet::class),
+                $this->isInstanceOf('\LightSaml\Criteria\CriteriaSet'),
                 $this->isType('array')
             )
             ->willReturn(true);
@@ -62,10 +62,10 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
 
     public function makes_descriptor_type_criteria_for_own_role_provider()
     {
-        return [
-           [ProfileContext::ROLE_IDP, IdpSsoDescriptor::class],
-           [ProfileContext::ROLE_SP, SpSsoDescriptor::class],
-        ];
+        return array(
+           array(ProfileContext::ROLE_IDP, '\LightSaml\Model\Metadata\IdpSsoDescriptor'),
+           array(ProfileContext::ROLE_SP, '\LightSaml\Model\Metadata\SpSsoDescriptor'),
+        );
     }
 
     /**
@@ -76,26 +76,26 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
         $loggerMock = TestHelper::getLoggerMock($this);
         $endpointResolverMock = $this->getEndpointResolverMock();
         /** @var AbstractDestinationValidatorAction $action */
-        $action = $this->getMockForAbstractClass(AbstractDestinationValidatorAction::class, [$loggerMock, $endpointResolverMock]);
+        $action = $this->getMockForAbstractClass('AbstractDestinationValidatorAction', array($loggerMock, $endpointResolverMock));
 
         $context = $this->buildContext($ownRole, $expectedDestination = 'http://localhost/foo');
 
         $endpointResolverMock->expects($this->once())
             ->method('resolve')
             ->willReturnCallback(function (CriteriaSet $criteriaSet, array $endpoints) use ($descriptorType, $expectedDestination) {
-                $this->assertTrue($criteriaSet->has(LocationCriteria::class));
-                $arr = $criteriaSet->get(LocationCriteria::class);
+                $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\LocationCriteria'));
+                $arr = $criteriaSet->get('\LightSaml\Resolver\Endpoint\Criteria\LocationCriteria');
                 $this->assertCount(1, $arr);
                 /** @var LocationCriteria $criteria */
                 $criteria = $arr[0];
                 $this->assertEquals($expectedDestination, $criteria->getLocation());
 
-                $this->assertTrue($criteriaSet->has(DescriptorTypeCriteria::class));
-                $arr = $criteriaSet->get(DescriptorTypeCriteria::class);
+                $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria'));
+                $arr = $criteriaSet->get('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria');
                 $this->assertCount(1, $arr);
                 /** @var DescriptorTypeCriteria $criteria */
                 $criteria = $arr[0];
-                $this->assertInstanceOf(DescriptorTypeCriteria::class, $criteria);
+                $this->assertInstanceOf('DescriptorTypeCriteria', $criteria);
                 $this->assertEquals($descriptorType, $criteria->getDescriptorType());
 
                 return true;
@@ -113,7 +113,7 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
         $loggerMock = TestHelper::getLoggerMock($this);
         $endpointResolverMock = $this->getEndpointResolverMock();
         /** @var AbstractDestinationValidatorAction $action */
-        $action = $this->getMockForAbstractClass(AbstractDestinationValidatorAction::class, [$loggerMock, $endpointResolverMock]);
+        $action = $this->getMockForAbstractClass('\LightSaml\Action\Profile\Inbound\Message\AbstractDestinationValidatorAction', array($loggerMock, $endpointResolverMock));
 
         $context = $this->buildContext(ProfileContext::ROLE_IDP, $expectedDestination = 'http://localhost/foo');
 
@@ -148,6 +148,6 @@ class AbstractDestinationValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getEndpointResolverMock()
     {
-        return $this->getMock(EndpointResolverInterface::class);
+        return $this->getMock('\LightSaml\Resolver\Endpoint\EndpointResolverInterface');
     }
 }

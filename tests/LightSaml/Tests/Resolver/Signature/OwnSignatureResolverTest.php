@@ -37,7 +37,7 @@ class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
         $context->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor($ownEntityId = 'http://own.id'));
 
         $credentialResolverMock->method('query')->willReturn($query = new CredentialResolverQuery($credentialResolverMock));
-        $credentialResolverMock->method('resolve')->willReturn([]);
+        $credentialResolverMock->method('resolve')->willReturn(array());
 
         $signatureResolver->getSignature($context);
     }
@@ -50,10 +50,10 @@ class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
         $context->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor($ownEntityId = 'http://own.id'));
 
         $credentialResolverMock->method('query')->willReturn($query = new CredentialResolverQuery($credentialResolverMock));
-        $credentialResolverMock->method('resolve')->willReturn([
+        $credentialResolverMock->method('resolve')->willReturn(array(
             $credential1 = TestHelper::getX509CredentialMock($this),
             $credential2 = TestHelper::getX509CredentialMock($this),
-        ]);
+        ));
 
         $credential1->expects($this->once())
             ->method('getCertificate')
@@ -70,10 +70,10 @@ class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
 
     public function _provider()
     {
-        return [
-            [ProfileContext::ROLE_IDP, MetadataCriteria::TYPE_IDP],
-            [ProfileContext::ROLE_SP, MetadataCriteria::TYPE_SP],
-        ];
+        return array(
+            array(ProfileContext::ROLE_IDP, MetadataCriteria::TYPE_IDP),
+            array(ProfileContext::ROLE_SP, MetadataCriteria::TYPE_SP),
+        );
     }
 
     /**
@@ -89,12 +89,12 @@ class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
         $credentialResolverMock->method('query')->willReturn($query = new CredentialResolverQuery($credentialResolverMock));
         $credentialResolverMock->method('resolve')
             ->willReturnCallback(function (CriteriaSet $criteriaSet) use ($ownEntityId, $expectedMetadataType) {
-                TestHelper::assertCriteria($this, $criteriaSet, EntityIdCriteria::class, 'getEntityId', $ownEntityId);
-                TestHelper::assertCriteria($this, $criteriaSet, UsageCriteria::class, 'getUsage', UsageType::SIGNING);
-                TestHelper::assertCriteria($this, $criteriaSet, X509CredentialCriteria::class, null, null);
-                TestHelper::assertCriteria($this, $criteriaSet, MetadataCriteria::class, 'getMetadataType', $expectedMetadataType);
+                TestHelper::assertCriteria($this, $criteriaSet, '\LightSaml\Credential\Criteria\EntityIdCriteria', 'getEntityId', $ownEntityId);
+                TestHelper::assertCriteria($this, $criteriaSet, '\LightSaml\Credential\Criteria\UsageCriteria', 'getUsage', UsageType::SIGNING);
+                TestHelper::assertCriteria($this, $criteriaSet, '\LightSaml\Credential\Criteria\X509CredentialCriteria', null, null);
+                TestHelper::assertCriteria($this, $criteriaSet, '\LightSaml\Credential\Criteria\MetadataCriteria', 'getMetadataType', $expectedMetadataType);
 
-                return [TestHelper::getX509CredentialMock($this)];
+                return array(TestHelper::getX509CredentialMock($this));
             });
 
         $signatureResolver->getSignature($context);
@@ -112,7 +112,7 @@ class OwnSignatureResolverTest extends \PHPUnit_Framework_TestCase
         $context->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor($ownEntityId = 'http://own.id'));
 
         $credentialResolverMock->method('query')->willReturn($query = new CredentialResolverQuery($credentialResolverMock));
-        $credentialResolverMock->method('resolve')->willReturn([$this->getMock(CredentialInterface::class)]);
+        $credentialResolverMock->method('resolve')->willReturn(array($this->getMock('\LightSaml\Credential\CredentialInterface')));
 
         $signatureResolver->getSignature($context);
     }

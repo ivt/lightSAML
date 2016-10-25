@@ -28,8 +28,9 @@ class EntityDescriptorXsdTest extends AbstractXsdValidationTest
         ;
 
         $entityDescriptor->addItem($idpSsoDescriptor = new IdpSsoDescriptor());
+        $attribute = new Attribute(ClaimTypes::EMAIL_ADDRESS);
         $idpSsoDescriptor
-            ->addAttribute((new Attribute(ClaimTypes::EMAIL_ADDRESS))
+            ->addAttribute($attribute
                 ->setNameFormat('urn:oasis:names:tc:SAML:2.0:attrname-format:uri')
                 ->setFriendlyName('Email address')
             )
@@ -58,12 +59,14 @@ class EntityDescriptorXsdTest extends AbstractXsdValidationTest
             ->addKeyDescriptor(new KeyDescriptor(UsageType::ENCRYPTION, $this->getX509Certificate()))
         ;
 
+        $contactPerson = new ContactPerson();
+        $organization = new Organization();
         $entityDescriptor
-            ->addContactPerson((new ContactPerson())
+            ->addContactPerson($contactPerson
                 ->setContactType(ContactPerson::TYPE_SUPPORT)
                 ->setEmailAddress('support@idp.com')
             )
-            ->addOrganization((new Organization())
+            ->addOrganization($organization
                 ->setOrganizationDisplayName('Org name')
                 ->setOrganizationURL('https://idp.com')
             )

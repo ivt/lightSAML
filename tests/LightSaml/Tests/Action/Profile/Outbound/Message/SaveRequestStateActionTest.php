@@ -27,7 +27,7 @@ class SaveRequestStateActionTest extends \PHPUnit_Framework_TestCase
 
         $requestStateStoreMock->expects($this->once())
             ->method('set')
-            ->with($this->isInstanceOf(RequestState::class))
+            ->with($this->isInstanceOf('\LightSaml\State\Request\RequestState'))
             ->willReturnCallback(function (RequestState $requestState) use ($id) {
                 $this->assertEquals($id, $requestState->getId());
             })

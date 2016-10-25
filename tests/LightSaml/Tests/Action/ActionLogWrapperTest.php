@@ -22,11 +22,11 @@ class ActionLogWrapperTest extends \PHPUnit_Framework_TestCase
             ->method('debug')
             ->willReturnCallback(function ($pMessage, $pContext) use ($action, $context) {
                 $expectedMessage = sprintf('Executing action "%s"', get_class($action));
-                $this->assertEquals($expectedMessage, $pMessage);
-                $this->assertArrayHasKey('context', $pContext);
-                $this->assertArrayHasKey('action', $pContext);
-                $this->assertSame($action, $pContext['action']);
-                $this->assertSame($context, $pContext['context']);
+                \PHPUnit_Framework_Assert::assertEquals($expectedMessage, $pMessage);
+                \PHPUnit_Framework_Assert::assertArrayHasKey('context', $pContext);
+                \PHPUnit_Framework_Assert::assertArrayHasKey('action', $pContext);
+                \PHPUnit_Framework_Assert::assertSame($action, $pContext['action']);
+                \PHPUnit_Framework_Assert::assertSame($context, $pContext['context']);
             });
 
         $wrapper = new ActionLogWrapper($loggerMock);
@@ -41,7 +41,7 @@ class ActionLogWrapperTest extends \PHPUnit_Framework_TestCase
      */
     private function getLoggerMock()
     {
-        return $this->getMock(LoggerInterface::class);
+        return $this->getMock('Psr\Log\LoggerInterface');
     }
 
     /**
@@ -49,7 +49,7 @@ class ActionLogWrapperTest extends \PHPUnit_Framework_TestCase
      */
     private function getActionMock()
     {
-        return $this->getMock(ActionInterface::class);
+        return $this->getMock('LightSaml\Action\ActionInterface');
     }
 
     /**

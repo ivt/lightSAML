@@ -73,14 +73,16 @@ class AuthnRequestTest extends \PHPUnit_Framework_TestCase
     {
         $context = new SerializationContext();
         $request = new AuthnRequest();
+        $issuer = new Issuer();
+        $nameIDPolicy = new NameIDPolicy();
         $request->setID('request-id')
             ->setIssueInstant(new \DateTime('2013-10-10T15:26:20Z'))
             ->setDestination('http://destination.com/authn')
             ->setAssertionConsumerServiceURL('http://sp.com/acs')
             ->setProtocolBinding(SamlConstants::BINDING_SAML2_HTTP_REDIRECT)
-            ->setIssuer((new Issuer())
+            ->setIssuer($issuer
                 ->setValue('the-issuer'))
-            ->setNameIDPolicy((new NameIDPolicy())
+            ->setNameIDPolicy($nameIDPolicy
                 ->setFormat(SamlConstants::NAME_ID_FORMAT_TRANSIENT)
                 ->setAllowCreate(true))
         ;

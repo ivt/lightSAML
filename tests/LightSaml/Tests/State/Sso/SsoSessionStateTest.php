@@ -13,16 +13,16 @@ class SsoSessionStateTest extends \PHPUnit_Framework_TestCase
 
     public function property_getter_setter_provider()
     {
-        return [
-            ['IdpEntityId'],
-            ['SpEntityId'],
-            ['NameId'],
-            ['NameIdFormat'],
-            ['SessionIndex'],
-            ['FirstAuthOn', new \DateTime('2015-10-27 08:00:00')],
-            ['LastAuthOn', new \DateTime('2015-10-27 10:00:00')],
-            ['SessionInstant', new \DateTime('2015-10-27 06:00:00')],
-        ];
+        return array(
+            array('IdpEntityId'),
+            array('SpEntityId'),
+            array('NameId'),
+            array('NameIdFormat'),
+            array('SessionIndex'),
+            array('FirstAuthOn', new \DateTime('2015-10-27 08:00:00')),
+            array('LastAuthOn', new \DateTime('2015-10-27 10:00:00')),
+            array('SessionInstant', new \DateTime('2015-10-27 06:00:00')),
+        );
     }
 
     /**
@@ -72,11 +72,11 @@ class SsoSessionStateTest extends \PHPUnit_Framework_TestCase
     {
         $state = new SsoSessionState();
 
-        $values = [
+        $values = array(
             'a' => 1,
             'bbb' => 'bbbbbbb',
             'ccccccccccc' => new \DateTime('2015-10-22 12:13:14')
-        ];
+        );
         foreach ($values as $k => $v) {
             $state->addOption($k, $v);
         }
@@ -90,10 +90,10 @@ class SsoSessionStateTest extends \PHPUnit_Framework_TestCase
 
         $state->addOption('aaa', 123);
         $state->addOption('b', 'bbbbb');
-        $this->assertEquals(['aaa'=>123, 'b'=>'bbbbb'], $state->getOptions());
+        $this->assertEquals(array('aaa'=>123, 'b'=>'bbbbb'), $state->getOptions());
 
         $state->removeOption('aaa');
-        $this->assertEquals(['b'=>'bbbbb'], $state->getOptions());
+        $this->assertEquals(array('b'=>'bbbbb'), $state->getOptions());
     }
 
     public function test_has_option()

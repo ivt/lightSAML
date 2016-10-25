@@ -22,7 +22,8 @@ class AssertionTimeValidatorTest extends \PHPUnit_Framework_TestCase
 
         $assertion = new Assertion();
 
-        $assertion->setConditions((new Conditions())->setNotBefore(1100));
+        $conditions = new Conditions();
+        $assertion->setConditions($conditions->setNotBefore(1100));
 
         $validator = new AssertionTimeValidator();
 
@@ -39,7 +40,8 @@ class AssertionTimeValidatorTest extends \PHPUnit_Framework_TestCase
 
         $assertion = new Assertion();
 
-        $assertion->setConditions((new Conditions())->setNotOnOrAfter(900));
+        $conditions = new Conditions();
+        $assertion->setConditions($conditions->setNotOnOrAfter(900));
 
         $validator = new AssertionTimeValidator();
 
@@ -56,7 +58,8 @@ class AssertionTimeValidatorTest extends \PHPUnit_Framework_TestCase
 
         $assertion = new Assertion();
 
-        $assertion->addItem((new AuthnStatement())->setSessionNotOnOrAfter(900));
+        $authnStatement = new AuthnStatement();
+        $assertion->addItem($authnStatement->setSessionNotOnOrAfter(900));
 
         $validator = new AssertionTimeValidator();
 
@@ -73,10 +76,13 @@ class AssertionTimeValidatorTest extends \PHPUnit_Framework_TestCase
 
         $assertion = new Assertion();
 
+        $subject = new Subject();
+        $subjectConfirmation = new SubjectConfirmation();
+        $subjectConfirmationData = new SubjectConfirmationData();
         $assertion->setSubject(
-            (new Subject())->addSubjectConfirmation(
-                (new SubjectConfirmation())->setSubjectConfirmationData(
-                    (new SubjectConfirmationData())->setNotBefore(1100)
+            $subject->addSubjectConfirmation(
+                $subjectConfirmation->setSubjectConfirmationData(
+                    $subjectConfirmationData->setNotBefore(1100)
                 )
             )
         );
@@ -96,10 +102,13 @@ class AssertionTimeValidatorTest extends \PHPUnit_Framework_TestCase
 
         $assertion = new Assertion();
 
+        $subject = new Subject();
+        $subjectConfirmation = new SubjectConfirmation();
+        $subjectConfirmationData = new SubjectConfirmationData();
         $assertion->setSubject(
-            (new Subject())->addSubjectConfirmation(
-                (new SubjectConfirmation())->setSubjectConfirmationData(
-                    (new SubjectConfirmationData())->setNotOnOrAfter(900)
+            $subject->addSubjectConfirmation(
+                $subjectConfirmation->setSubjectConfirmationData(
+                    $subjectConfirmationData->setNotOnOrAfter(900)
                 )
             )
         );
@@ -115,17 +124,22 @@ class AssertionTimeValidatorTest extends \PHPUnit_Framework_TestCase
 
         $assertion = new Assertion();
 
+        $subject = new Subject();
+        $subjectConfirmation = new SubjectConfirmation();
+        $subjectConfirmationData = new SubjectConfirmationData();
         $assertion->setSubject(
-            (new Subject())->addSubjectConfirmation(
-                (new SubjectConfirmation())->setSubjectConfirmationData(
-                    (new SubjectConfirmationData())->setNotOnOrAfter(2000)
+            $subject->addSubjectConfirmation(
+                $subjectConfirmation->setSubjectConfirmationData(
+                    $subjectConfirmationData->setNotOnOrAfter(2000)
                 )
             )
         );
 
-        $assertion->addItem((new AuthnStatement())->setSessionNotOnOrAfter(2000));
+        $authnStatement = new AuthnStatement();
+        $assertion->addItem($authnStatement->setSessionNotOnOrAfter(2000));
 
-        $assertion->setConditions((new Conditions())->setNotOnOrAfter(2000)->setNotBefore(900));
+        $conditions = new Conditions();
+        $assertion->setConditions($conditions->setNotOnOrAfter(2000)->setNotBefore(900));
 
         $validator = new AssertionTimeValidator();
 

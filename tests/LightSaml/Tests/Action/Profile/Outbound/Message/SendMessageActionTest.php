@@ -36,7 +36,7 @@ class SendMessageActionTest extends \PHPUnit_Framework_TestCase
 
         $bindingMock->expects($this->once())
             ->method('send')
-            ->with($this->isInstanceOf(MessageContext::class))
+            ->with($this->isInstanceOf('\LightSaml\Context\Profile\MessageContext'))
             ->willReturn($response = new Response());
 
         $loggerMock->expects($this->once())

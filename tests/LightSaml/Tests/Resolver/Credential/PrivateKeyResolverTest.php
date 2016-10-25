@@ -12,13 +12,13 @@ class PrivateKeyResolverTest extends \PHPUnit_Framework_TestCase
 {
     public function test__returns_only_credentials_with_private_keys_when_criteria_given()
     {
-        $criteriaSet = new CriteriaSet([new PrivateKeyCriteria()]);
+        $criteriaSet = new CriteriaSet(array(new PrivateKeyCriteria()));
 
-        $startingCredentials = [
-            $firstCredential = $this->getMock(CredentialInterface::class),
-            $secondCredential = $this->getMock(CredentialInterface::class),
-            $thirdCredential = $this->getMock(CredentialInterface::class),
-        ];
+        $startingCredentials = array(
+            $firstCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+            $secondCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+            $thirdCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+        );
 
         $secondCredential->expects($this->any())
             ->method('getPrivateKey')
@@ -37,6 +37,6 @@ class PrivateKeyResolverTest extends \PHPUnit_Framework_TestCase
      */
     private function getXmlSecurityKeyMock()
     {
-        return $this->getMock(XMLSecurityKey::class, [], [], '', false);
+        return $this->getMock('\RobRichards\XMLSecLibs\XMLSecurityKey', array(), array(), '', false);
     }
 }

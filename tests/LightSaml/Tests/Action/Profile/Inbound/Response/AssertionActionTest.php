@@ -32,7 +32,7 @@ class AssertionActionTest extends \PHPUnit_Framework_TestCase
         $assertion1Called = $assertion2Called = false;
         $assertionActionMock->expects($this->exactly(2))
             ->method('execute')
-            ->with($this->isInstanceOf(AssertionContext::class))
+            ->with($this->isInstanceOf('\LightSaml\Context\Profile\AssertionContext'))
             ->willReturnCallback(function (AssertionContext $assertionContext) use (&$assertion1, &$assertion2, &$assertion1Called, &$assertion2Called) {
                 if ($assertionContext->getAssertion() === $assertion1) {
                     $assertion1Called = true;
@@ -65,11 +65,11 @@ class AssertionActionTest extends \PHPUnit_Framework_TestCase
 
         /** @var AssertionContext $assertionContext */
         $assertionContext = $context->getSubContext('assertion_0');
-        $this->assertInstanceOf(AssertionContext::class, $assertionContext);
+        $this->assertInstanceOf('\LightSaml\Context\Profile\AssertionContext', $assertionContext);
         $this->assertSame($assertion1, $assertionContext->getAssertion());
 
         $assertionContext = $context->getSubContext('assertion_1');
-        $this->assertInstanceOf(AssertionContext::class, $assertionContext);
+        $this->assertInstanceOf('\LightSaml\Context\Profile\AssertionContext', $assertionContext);
         $this->assertSame($assertion2, $assertionContext->getAssertion());
     }
 
@@ -80,13 +80,13 @@ class AssertionActionTest extends \PHPUnit_Framework_TestCase
 
         $actualTree = $outerAction->debugPrintTree();
 
-        $expectedTree = [
-            AssertionAction::class => [
-                AssertionAction::class => [
-                    FooAction::class => [],
-                ],
-            ],
-        ];
+        $expectedTree = array(
+            '\LightSaml\Action\Profile\Inbound\Response\AssertionAction' => array(
+                '\LightSaml\Action\Profile\Inbound\Response\AssertionAction' => array(
+                    '\LightSaml\Tests\Mock\Action\FooAction' => array(),
+                ),
+            ),
+        );
 
         $this->assertEquals($expectedTree, $actualTree);
     }
@@ -96,6 +96,6 @@ class AssertionActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getActionMock()
     {
-        return $this->getMock(\LightSaml\Action\ActionInterface::class);
+        return $this->getMock('\LightSaml\Action\ActionInterface');
     }
 }

@@ -26,12 +26,12 @@ class DestinationValidatorAuthnRequestActionTest extends \PHPUnit_Framework_Test
         $endpointResolverMock->expects($this->once())
             ->method('resolve')
             ->willReturnCallback(function (CriteriaSet $criteriaSet, array $endpoints) {
-                $this->assertTrue($criteriaSet->has(ServiceTypeCriteria::class));
-                $arr = $criteriaSet->get(ServiceTypeCriteria::class);
+                $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria'));
+                $arr = $criteriaSet->get('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria');
                 $this->assertCount(1, $arr);
                 /** @var ServiceTypeCriteria $criteria */
                 $criteria = $arr[0];
-                $this->assertEquals(SingleSignOnService::class, $criteria->getServiceType());
+                $this->assertEquals('\LightSaml\Model\Metadata\SingleSignOnService', $criteria->getServiceType());
 
                 return true;
             });
@@ -63,6 +63,6 @@ class DestinationValidatorAuthnRequestActionTest extends \PHPUnit_Framework_Test
      */
     private function getEndpointResolverMock()
     {
-        return $this->getMock(EndpointResolverInterface::class);
+        return $this->getMock('\LightSaml\Resolver\Endpoint\EndpointResolverInterface');
     }
 }

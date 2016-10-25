@@ -24,7 +24,7 @@ class X509FileCredentialStoreTest extends \PHPUnit_Framework_TestCase
         $arr = $store->getByEntityId($entityId);
 
         $this->assertCount(1, $arr);
-        $this->assertInstanceOf(CredentialInterface::class, $arr[0]);
+        $this->assertInstanceOf('\LightSaml\Credential\CredentialInterface', $arr[0]);
         $this->assertEquals($entityId, $arr[0]->getEntityId());
         $this->assertNotNull($arr[0]->getPrivateKey());
         $this->assertNotNull($arr[0]->getPublicKey());

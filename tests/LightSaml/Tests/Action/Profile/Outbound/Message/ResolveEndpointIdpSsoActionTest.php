@@ -20,9 +20,9 @@ class ResolveEndpointIdpSsoActionTest extends AbstractResolveEndpointActionTest
         $context = $this->createContext(ProfileContext::ROLE_IDP, $message);
 
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) {
-            $this->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, SingleSignOnService::class);
+            $this->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\SingleSignOnService');
 
-            return [TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleSignOnService())];
+            return array(TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleSignOnService()));
         });
 
         $this->action->execute($context);

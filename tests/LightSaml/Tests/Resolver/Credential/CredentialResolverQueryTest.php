@@ -12,24 +12,24 @@ class CredentialResolverQueryTest extends \PHPUnit_Framework_TestCase
 {
     public function test__extends_criteria_set()
     {
-        $reflectionClass = new \ReflectionClass(CredentialResolverQuery::class);
-        $this->assertEquals(CriteriaSet::class, $reflectionClass->getParentClass()->name);
+        $reflectionClass = new \ReflectionClass('\LightSaml\Resolver\Credential\CredentialResolverQuery');
+        $this->assertEquals('\LightSaml\Criteria\CriteriaSet', $reflectionClass->getParentClass()->name);
     }
 
     public function test__instantiates_with_credential_resolver()
     {
-        new CredentialResolverQuery($this->getMock(CredentialResolverInterface::class));
+        new CredentialResolverQuery($this->getMock('\LightSaml\Resolver\Credential\CredentialResolverInterface'));
     }
 
     public function test__resolve_calls_credential_resolver_and_stores_returned_credentials()
     {
-        $credentialResolverMock = $this->getMock(CredentialResolverInterface::class);
+        $credentialResolverMock = $this->getMock('\LightSaml\Resolver\Credential\CredentialResolverInterface');
         $query = new CredentialResolverQuery($credentialResolverMock);
         $credentialResolverMock
             ->expects($this->once())
             ->method('resolve')
             ->with($query)
-            ->willReturn($expectedCredentials = [1, 2, 3])
+            ->willReturn($expectedCredentials = array(1, 2, 3))
         ;
         $query->resolve();
 
@@ -38,17 +38,17 @@ class CredentialResolverQueryTest extends \PHPUnit_Framework_TestCase
 
     public function test__first_credential()
     {
-        $credentialResolverMock = $this->getMock(CredentialResolverInterface::class);
+        $credentialResolverMock = $this->getMock('\LightSaml\Resolver\Credential\CredentialResolverInterface');
         $query = new CredentialResolverQuery($credentialResolverMock);
         $credentialResolverMock
             ->expects($this->once())
             ->method('resolve')
             ->with($query)
-            ->willReturn($expectedCredentials = [
-                $firstCredential = $this->getMock(CredentialInterface::class),
-                $secondCredential = $this->getMock(CredentialInterface::class),
-                $thirdCredential = $this->getMock(CredentialInterface::class),
-            ])
+            ->willReturn($expectedCredentials = array(
+                $firstCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+                $secondCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+                $thirdCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+            ))
         ;
         $query->resolve();
 
@@ -57,17 +57,17 @@ class CredentialResolverQueryTest extends \PHPUnit_Framework_TestCase
 
     public function test__public_keys()
     {
-        $credentialResolverMock = $this->getMock(CredentialResolverInterface::class);
+        $credentialResolverMock = $this->getMock('\LightSaml\Resolver\Credential\CredentialResolverInterface');
         $query = new CredentialResolverQuery($credentialResolverMock);
         $credentialResolverMock
             ->expects($this->once())
             ->method('resolve')
             ->with($query)
-            ->willReturn($expectedCredentials = [
-                $firstCredential = $this->getMock(CredentialInterface::class),
-                $secondCredential = $this->getMock(CredentialInterface::class),
-                $thirdCredential = $this->getMock(CredentialInterface::class),
-            ])
+            ->willReturn($expectedCredentials = array(
+                $firstCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+                $secondCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+                $thirdCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+            ))
         ;
 
         $firstCredential->expects($this->any())
@@ -89,17 +89,17 @@ class CredentialResolverQueryTest extends \PHPUnit_Framework_TestCase
 
     public function test__private_keys()
     {
-        $credentialResolverMock = $this->getMock(CredentialResolverInterface::class);
+        $credentialResolverMock = $this->getMock('\LightSaml\Resolver\Credential\CredentialResolverInterface');
         $query = new CredentialResolverQuery($credentialResolverMock);
         $credentialResolverMock
             ->expects($this->once())
             ->method('resolve')
             ->with($query)
-            ->willReturn($expectedCredentials = [
-                $firstCredential = $this->getMock(CredentialInterface::class),
-                $secondCredential = $this->getMock(CredentialInterface::class),
-                $thirdCredential = $this->getMock(CredentialInterface::class),
-            ])
+            ->willReturn($expectedCredentials = array(
+                $firstCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+                $secondCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+                $thirdCredential = $this->getMock('\LightSaml\Credential\CredentialInterface'),
+            ))
         ;
 
         $secondCredential->expects($this->any())
@@ -124,6 +124,6 @@ class CredentialResolverQueryTest extends \PHPUnit_Framework_TestCase
      */
     private function getXmlSecurityKeyMock()
     {
-        return $this->getMock(XMLSecurityKey::class, [], [], '', false);
+        return $this->getMock('\RobRichards\XMLSecLibs\XMLSecurityKey', array(), array(), '', false);
     }
 }

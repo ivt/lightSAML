@@ -19,7 +19,7 @@ class EntitiesDescriptorEntityProviderTest extends \PHPUnit_Framework_TestCase
             $expectedEntityId = 'https://idp.testshib.org/idp/shibboleth'
         );
         $entityDescriptor = $provider->get();
-        $this->assertInstanceOf(EntityDescriptor::class, $entityDescriptor);
+        $this->assertInstanceOf('\LightSaml\Model\Metadata\EntityDescriptor', $entityDescriptor);
         $this->assertEquals($expectedEntityId, $entityDescriptor->getEntityID());
 
         $provider = new EntitiesDescriptorEntityProvider(
@@ -27,7 +27,7 @@ class EntitiesDescriptorEntityProviderTest extends \PHPUnit_Framework_TestCase
             $expectedEntityId = 'https://sp.testshib.org/shibboleth-sp'
         );
         $entityDescriptor = $provider->get();
-        $this->assertInstanceOf(EntityDescriptor::class, $entityDescriptor);
+        $this->assertInstanceOf('\LightSaml\Model\Metadata\EntityDescriptor', $entityDescriptor);
         $this->assertEquals($expectedEntityId, $entityDescriptor->getEntityID());
     }
 }

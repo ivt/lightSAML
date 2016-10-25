@@ -19,10 +19,10 @@ class SignMessageActionTest extends \PHPUnit_Framework_TestCase
 
     public function supports_message_provider()
     {
-        return [
-            ['setSignAuthnRequest', new AuthnRequest()],
-            ['setSignResponse', new Response()],
-        ];
+        return array(
+            array('setSignAuthnRequest', new AuthnRequest()),
+            array('setSignResponse', new Response()),
+        );
     }
 
     /**
@@ -42,9 +42,9 @@ class SignMessageActionTest extends \PHPUnit_Framework_TestCase
 
     public function does_not_support_message_provider()
     {
-        return [
-            [$this->getMockForAbstractClass(SamlMessage::class)],
-        ];
+        return array(
+            array($this->getMockForAbstractClass('\LightSaml\Model\Protocol\SamlMessage')),
+        );
     }
 
     /**
@@ -119,7 +119,7 @@ class SignMessageActionTest extends \PHPUnit_Framework_TestCase
         $signature = new SignatureWriter($certificateMock = TestHelper::getX509CertificateMock($this));
         $certificateMock->expects($this->any())
             ->method('getInfo')
-            ->willReturn($expectedInfo = ['a'=>1]);
+            ->willReturn($expectedInfo = array('a'=>1));
         $certificateMock->expects($this->any())
             ->method('getFingerprint')
             ->willReturn($expectedFingerprint = '123123123');

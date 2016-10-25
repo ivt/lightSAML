@@ -29,7 +29,7 @@ class SerializeOwnEntityActionTest extends \PHPUnit_Framework_TestCase
         $context->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor($myEntityId = 'http://localhost/myself'));
         $context->getHttpRequestContext()->setRequest($httpRequest = new Request());
 
-        $httpRequest->headers->add(['Accept' => $contextType = 'application/samlmetadata+xml']);
+        $httpRequest->headers->add(array('Accept' => $contextType = 'application/samlmetadata+xml'));
 
         $action->execute($context);
 

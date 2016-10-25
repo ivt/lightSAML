@@ -11,12 +11,12 @@ class AbstractAssertionActionTest extends \PHPUnit_Framework_TestCase
 {
     public function test_constructs_with_logger()
     {
-        $this->getAbstractAssertionActionMock([TestHelper::getLoggerMock($this)]);
+        $this->getAbstractAssertionActionMock(array(TestHelper::getLoggerMock($this)));
     }
 
     public function test_do_execute_called_with_assertion_context()
     {
-        $action = $this->getAbstractAssertionActionMock([TestHelper::getLoggerMock($this)]);
+        $action = $this->getAbstractAssertionActionMock(array(TestHelper::getLoggerMock($this)));
 
         $context = new AssertionContext();
 
@@ -33,8 +33,8 @@ class AbstractAssertionActionTest extends \PHPUnit_Framework_TestCase
      */
     public function test_throws_context_exception_for_non_assertion_context()
     {
-        $action = $this->getAbstractAssertionActionMock([TestHelper::getLoggerMock($this)]);
-        $action->execute($this->getMock(ContextInterface::class));
+        $action = $this->getAbstractAssertionActionMock(array(TestHelper::getLoggerMock($this)));
+        $action->execute($this->getMock('\LightSaml\Context\ContextInterface'));
     }
 
     /**
@@ -44,6 +44,6 @@ class AbstractAssertionActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getAbstractAssertionActionMock(array $arguments)
     {
-        return $this->getMockForAbstractClass(AbstractAssertionAction::class, $arguments);
+        return $this->getMockForAbstractClass('\LightSaml\Action\Assertion\AbstractAssertionAction', $arguments);
     }
 }

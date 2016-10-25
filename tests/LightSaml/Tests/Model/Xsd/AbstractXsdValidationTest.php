@@ -73,13 +73,13 @@ abstract class AbstractXsdValidationTest extends \PHPUnit_Framework_TestCase
             return;
         }
 
-        $levels = [
+        $levels = array(
             LIBXML_ERR_WARNING => 'Warning',
             LIBXML_ERR_ERROR => 'Error',
             LIBXML_ERR_FATAL => 'Fatal',
-        ];
+        );
 
-        $arr = [];
+        $arr = array();
         /** @var \LibXMLError[] $errors */
         $errors = libxml_get_errors();
         foreach ($errors as $error) {

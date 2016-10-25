@@ -12,14 +12,23 @@ class AssertionTest extends \PHPUnit_Framework_TestCase
 {
     public function equals_provider()
     {
-        return [
-            ['nameId', 'format', false, new Assertion()],
-            ['nameId', 'format', false, (new Assertion())->setSubject(new Subject())],
-            ['nameId', 'format', false, (new Assertion())->setSubject((new Subject())->setNameID(new NameID('nameId')))],
-            ['nameId', 'format', true, (new Assertion())->setSubject((new Subject())->setNameID(new NameID('nameId', 'format')))],
-            ['nameId', 'format', false, (new Assertion())->setSubject((new Subject())->setNameID(new NameID('other', 'format')))],
-            ['nameId', 'format', false, (new Assertion())->setSubject((new Subject())->setNameID(new NameID('nameId', 'other')))],
-        ];
+        $assertion = new Assertion();
+        $assertion1 = new Assertion();
+        $assertion2 = new Assertion();
+        $assertion3 = new Assertion();
+        $assertion4 = new Assertion();
+        $subject = new Subject();
+        $subject1 = new Subject();
+        $subject2 = new Subject();
+        $subject3 = new Subject();
+        return array(
+            array('nameId', 'format', false, new Assertion()),
+            array('nameId', 'format', false, $assertion->setSubject(new Subject())),
+            array('nameId', 'format', false, $assertion1->setSubject($subject->setNameID(new NameID('nameId')))),
+            array('nameId', 'format', true, $assertion2->setSubject($subject1->setNameID(new NameID('nameId', 'format')))),
+            array('nameId', 'format', false, $assertion3->setSubject($subject2->setNameID(new NameID('other', 'format')))),
+            array('nameId', 'format', false, $assertion4->setSubject($subject3->setNameID(new NameID('nameId', 'other')))),
+        );
     }
 
     /**
@@ -32,15 +41,21 @@ class AssertionTest extends \PHPUnit_Framework_TestCase
 
     public function has_session_index_provider()
     {
-        return [
-            ['1111', false, new Assertion()],
-            ['1111', false, (new Assertion())->addItem(new AuthnStatement())],
-            ['1111', false, (new Assertion())->addItem((new AuthnStatement())->setSessionIndex('222'))],
-            ['1111', true, (new Assertion())
-                ->addItem((new AuthnStatement())->setSessionIndex('222'))
-                ->addItem((new AuthnStatement())->setSessionIndex('1111'))
-            ],
-        ];
+        $assertion = new Assertion();
+        $assertion1 = new Assertion();
+        $authnStatement = new AuthnStatement();
+        $authnStatement1 = new AuthnStatement();
+        $authnStatement2 = new AuthnStatement();
+        $assertion2 = new Assertion();
+        return array(
+            array('1111', false, new Assertion()),
+            array('1111', false, $assertion->addItem(new AuthnStatement())),
+            array('1111', false, $assertion1->addItem($authnStatement->setSessionIndex('222'))),
+            array('1111', true, $assertion2
+                ->addItem($authnStatement1->setSessionIndex('222'))
+                ->addItem($authnStatement2->setSessionIndex('1111'))
+            ),
+        );
     }
 
     /**
@@ -53,15 +68,21 @@ class AssertionTest extends \PHPUnit_Framework_TestCase
 
     public function has_any_session_index_provider()
     {
-        return [
-            [false, new Assertion()],
-            [false, (new Assertion())->addItem(new AuthnStatement())],
-            [true, (new Assertion())->addItem((new AuthnStatement())->setSessionIndex('123'))],
-            [true, (new Assertion())
-                ->addItem((new AuthnStatement())->setSessionIndex('111'))
-                ->addItem((new AuthnStatement())->setSessionIndex('222'))
-            ],
-        ];
+        $assertion = new Assertion();
+        $assertion1 = new Assertion();
+        $authnStatement = new AuthnStatement();
+        $authnStatement1 = new AuthnStatement();
+        $authnStatement2 = new AuthnStatement();
+        $assertion2 = new Assertion();
+        return array(
+            array(false, new Assertion()),
+            array(false, $assertion->addItem(new AuthnStatement())),
+            array(true, $assertion1->addItem($authnStatement2->setSessionIndex('123'))),
+            array(true, $assertion2
+                ->addItem($authnStatement->setSessionIndex('111'))
+                ->addItem($authnStatement1->setSessionIndex('222'))
+            ),
+        );
     }
 
     /**

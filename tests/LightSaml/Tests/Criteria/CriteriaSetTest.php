@@ -11,10 +11,10 @@ class CriteriaSetTest extends \PHPUnit_Framework_TestCase
     public function test_add_all()
     {
         $criteriaSet = new CriteriaSet();
-        $criteriaSet->addAll(new CriteriaSet([
+        $criteriaSet->addAll(new CriteriaSet(array(
             $criteria1 = TestHelper::getCriteriaMock($this),
             $criteria2 = TestHelper::getCriteriaMock($this),
-        ]));
+        )));
 
         $all = $criteriaSet->all();
 

@@ -13,19 +13,19 @@ class MessageContextTest extends \PHPUnit_Framework_TestCase
 {
     public function message_as_concrete_type_provider()
     {
-        return [
-            ['asAuthnRequest', true, new AuthnRequest()],
-            ['asAuthnRequest', false, new Response()],
+        return array(
+            array('asAuthnRequest', true, new AuthnRequest()),
+            array('asAuthnRequest', false, new Response()),
 
-            ['asLogoutRequest', true, new LogoutRequest()],
-            ['asLogoutRequest', false, new Response()],
+            array('asLogoutRequest', true, new LogoutRequest()),
+            array('asLogoutRequest', false, new Response()),
 
-            ['asResponse', true, new Response()],
-            ['asResponse', false, new LogoutRequest()],
+            array('asResponse', true, new Response()),
+            array('asResponse', false, new LogoutRequest()),
 
-            ['asLogoutResponse', true, new LogoutResponse()],
-            ['asLogoutResponse', false, new LogoutRequest()],
-        ];
+            array('asLogoutResponse', true, new LogoutResponse()),
+            array('asLogoutResponse', false, new LogoutRequest()),
+        );
     }
 
     /**

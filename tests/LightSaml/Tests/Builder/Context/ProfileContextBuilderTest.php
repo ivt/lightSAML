@@ -18,12 +18,12 @@ class ProfileContextBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function getters_setters_provider()
     {
-        return [
-            [new Request(), 'setRequest', 'getRequest'],
-            [new FixedEntityDescriptorProvider(new EntityDescriptor()), 'setOwnEntityDescriptorProvider', 'getOwnEntityDescriptorProvider'],
-            [Profiles::METADATA, 'setProfileId', 'getProfileId'],
-            [ProfileContext::ROLE_IDP, 'setProfileRole', 'getProfileRole'],
-        ];
+        return array(
+            array(new Request(), 'setRequest', 'getRequest'),
+            array(new FixedEntityDescriptorProvider(new EntityDescriptor()), 'setOwnEntityDescriptorProvider', 'getOwnEntityDescriptorProvider'),
+            array(Profiles::METADATA, 'setProfileId', 'getProfileId'),
+            array(ProfileContext::ROLE_IDP, 'setProfileRole', 'getProfileRole'),
+        );
     }
 
     /**

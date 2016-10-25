@@ -35,12 +35,13 @@ class ResolveEndpointSloActionTest extends AbstractResolveEndpointActionTest
 
         $context = $this->createContext(ProfileContext::ROLE_IDP, $message);
         $context->getOwnEntityContext()->setEntityDescriptor(new EntityDescriptor($ownEntityId = 'http://own.id'));
-        $context->getLogoutContext()->setSsoSessionState((new SsoSessionState())->setIdpEntityId($ownEntityId));
+        $ssoSessionState = new SsoSessionState();
+        $context->getLogoutContext()->setSsoSessionState($ssoSessionState->setIdpEntityId($ownEntityId));
 
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) {
-            $this->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, SingleLogoutService::class);
+            $this->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\SingleLogoutService');
 
-            return [TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleLogoutService())];
+            return array(TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleLogoutService()));
         });
 
         $this->action->execute($context);
@@ -52,12 +53,13 @@ class ResolveEndpointSloActionTest extends AbstractResolveEndpointActionTest
 
         $context = $this->createContext(ProfileContext::ROLE_IDP, $message);
         $context->getOwnEntityContext()->setEntityDescriptor(new EntityDescriptor($ownEntityId = 'http://own.id'));
-        $context->getLogoutContext()->setSsoSessionState((new SsoSessionState())->setIdpEntityId($ownEntityId));
+        $ssoSessionState = new SsoSessionState();
+        $context->getLogoutContext()->setSsoSessionState($ssoSessionState->setIdpEntityId($ownEntityId));
 
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) {
-            $this->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, SpSsoDescriptor::class);
+            $this->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\SpSsoDescriptor');
 
-            return [TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleLogoutService())];
+            return array(TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleLogoutService()));
         });
 
         $this->action->execute($context);
@@ -69,12 +71,13 @@ class ResolveEndpointSloActionTest extends AbstractResolveEndpointActionTest
 
         $context = $this->createContext(ProfileContext::ROLE_IDP, $message);
         $context->getOwnEntityContext()->setEntityDescriptor(new EntityDescriptor($ownEntityId = 'http://own.id'));
-        $context->getLogoutContext()->setSsoSessionState((new SsoSessionState())->setSpEntityId($ownEntityId));
+        $ssoSessionState = new SsoSessionState();
+        $context->getLogoutContext()->setSsoSessionState($ssoSessionState->setSpEntityId($ownEntityId));
 
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) {
-            $this->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, IdpSsoDescriptor::class);
+            $this->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\IdpSsoDescriptor');
 
-            return [TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleLogoutService())];
+            return array(TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleLogoutService()));
         });
 
         $this->action->execute($context);
@@ -90,7 +93,8 @@ class ResolveEndpointSloActionTest extends AbstractResolveEndpointActionTest
 
         $context = $this->createContext(ProfileContext::ROLE_IDP, $message);
         $context->getOwnEntityContext()->setEntityDescriptor(new EntityDescriptor($ownEntityId = 'http://own.id'));
-        $context->getLogoutContext()->setSsoSessionState((new SsoSessionState())->setSpEntityId('http://other.com'));
+        $ssoSessionState = new SsoSessionState();
+        $context->getLogoutContext()->setSsoSessionState($ssoSessionState->setSpEntityId('http://other.com'));
 
         $this->setEndpointResolver(false, null);
 

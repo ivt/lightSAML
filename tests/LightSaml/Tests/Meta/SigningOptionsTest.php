@@ -62,6 +62,6 @@ class SigningOptionsTest extends \PHPUnit_Framework_TestCase
     {
         $options = new SigningOptions();
         $this->assertNotNull($options->getCertificateOptions());
-        $this->assertInstanceOf(ParameterBag::class, $options->getCertificateOptions());
+        $this->assertInstanceOf('\LightSaml\Meta\ParameterBag', $options->getCertificateOptions());
     }
 }

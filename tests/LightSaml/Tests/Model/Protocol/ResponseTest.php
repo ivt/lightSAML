@@ -208,45 +208,59 @@ EOT;
     private function getResponseObject()
     {
         $response = new Response();
+        $assertion = new Assertion();
+        $issuer = new Issuer();
+        $subject = new Subject();
+        $nameID = new NameID();
+        $subjectConfirmation = new SubjectConfirmation();
+        $conditions = new Conditions();
+        $audienceRestriction = new AudienceRestriction();
+        $attributeStatement = new AttributeStatement();
+        $attribute = new Attribute();
+        $attribute1 = new Attribute();
+        $authnStatement = new AuthnStatement();
+        $authnContext = new AuthnContext();
+        $issuer1 = new Issuer();
+        $subjectConfirmationData = new SubjectConfirmationData();
         $response->setId('response-id')
             ->setIssueInstant('2013-10-27T11:55:37Z')
             ->setDestination('http://destination.com')
             ->setConsent(SamlConstants::CONSENT_UNSPECIFIED)
             ->setInResponseTo('in-reponse-to')
-            ->addAssertion((new Assertion())
+            ->addAssertion($assertion
                 ->setId('assertion-id')
                 ->setIssueInstant('2013-10-27T11:55:37Z')
-                ->setIssuer((new Issuer())
+                ->setIssuer($issuer
                     ->setValue('assertion-issuer'))
-                ->setSubject((new Subject())
-                    ->setNameID((new NameID())
+                ->setSubject($subject
+                    ->setNameID($nameID
                         ->setValue('assertion-name-id')
                         ->setFormat(SamlConstants::NAME_ID_FORMAT_PERSISTENT))
-                    ->addSubjectConfirmation((new SubjectConfirmation())
+                    ->addSubjectConfirmation($subjectConfirmation
                         ->setMethod(SamlConstants::CONFIRMATION_METHOD_BEARER)
-                        ->setSubjectConfirmationData((new SubjectConfirmationData())
+                        ->setSubjectConfirmationData($subjectConfirmationData
                             ->setInResponseTo('assertion-in-response-to')
                             ->setNotOnOrAfter('2013-10-27T12:00:37Z')
                             ->setRecipient('http://recipient.com'))))
-                ->setConditions((new Conditions())
+                ->setConditions($conditions
                     ->setNotBefore('2013-10-27T11:55:37Z')
                     ->setNotOnOrAfter('2013-10-27T12:55:37Z')
-                    ->addItem((new AudienceRestriction())
+                    ->addItem($audienceRestriction
                         ->addAudience('http://audience.com')))
-                ->addItem((new AttributeStatement())
-                    ->addAttribute((new Attribute())
+                ->addItem($attributeStatement
+                    ->addAttribute($attribute
                         ->setName(ClaimTypes::COMMON_NAME)
                         ->setFriendlyName('Common Name')
                         ->addAttributeValue('cn value'))
-                    ->addAttribute((new Attribute())
+                    ->addAttribute($attribute1
                         ->setName(ClaimTypes::GROUP)
                         ->setFriendlyName('Group')
                         ->addAttributeValue('group one')
                         ->addAttributeValue('group two')))
-                ->addItem((new AuthnStatement())
+                ->addItem($authnStatement
                     ->setAuthnInstant('2013-10-27T11:55:36Z')
                     ->setSessionIndex('session-index')
-                    ->setAuthnContext((new AuthnContext())
+                    ->setAuthnContext($authnContext
                         ->setAuthnContextClassRef('authn-context-class-ref')))
                 ->setSignature(new SignatureWriter(
                     X509Certificate::fromFile(__DIR__.'/../../../../../resources/sample/Certificate/saml.crt'),
@@ -257,7 +271,7 @@ EOT;
                     )
                 ))
             )
-            ->setIssuer((new Issuer())
+            ->setIssuer($issuer1
                 ->setValue('the-issuer'))
         ;
 

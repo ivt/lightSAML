@@ -24,7 +24,8 @@ class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
     {
         $resolver = $this->getResolver();
 
-        $set = (new CriteriaSet())
+        $criteriaSet = new CriteriaSet();
+        $set = $criteriaSet
             ->add(new EntityIdCriteria($entityId = 'https://B1.bead.loc/adfs/services/trust'))
             ->add(new MetadataCriteria(MetadataCriteria::TYPE_IDP, SamlConstants::PROTOCOL_SAML2))
             ->add(new UsageCriteria(UsageType::SIGNING))
@@ -56,7 +57,8 @@ class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
     {
         $resolver = $this->getResolver();
 
-        $set = (new CriteriaSet())
+        $criteriaSet = new CriteriaSet();
+        $set = $criteriaSet
             ->add(new EntityIdCriteria($entityId = 'https://sts.windows.net/554fadfe-f04f-4975-90cb-ddc8b147aaa2/'))
             ->add(new MetadataCriteria(MetadataCriteria::TYPE_IDP, SamlConstants::PROTOCOL_SAML2))
             ->add(new UsageCriteria(UsageType::SIGNING))
@@ -88,7 +90,8 @@ class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
     {
         $resolver = $this->getResolver();
 
-        $set = (new CriteriaSet())
+        $criteriaSet = new CriteriaSet();
+        $set = $criteriaSet
             ->add(new EntityIdCriteria($entityId = 'https://mt.evo.team/simplesaml/module.php/saml/sp/metadata.php/default-sp'))
             ->add(new MetadataCriteria(MetadataCriteria::TYPE_SP, SamlConstants::PROTOCOL_SAML2))
             ->add(new UsageCriteria(UsageType::SIGNING))
@@ -120,7 +123,8 @@ class ResolverFunctionalTest extends \PHPUnit_Framework_TestCase
     {
         $resolver = $this->getResolver();
 
-        $set = (new CriteriaSet())
+        $criteriaSet = new CriteriaSet();
+        $set = $criteriaSet
             ->add(new EntityIdCriteria($entityId = 'https://mt.evo.loc/sp'))
             ->add(new MetadataCriteria(MetadataCriteria::TYPE_SP, SamlConstants::PROTOCOL_SAML2))
             ->add(new UsageCriteria(UsageType::ENCRYPTION))

@@ -81,7 +81,8 @@ class ResponseFunctionalTest extends \PHPUnit_Framework_TestCase
         $arrCertificates = $sig->getAllCertificates();
         $this->assertCount(1, $arrCertificates);
 
-        $certificate = (new X509Certificate())->setData($arrCertificates[0]);
+        $x509Certificate = new X509Certificate();
+        $certificate = $x509Certificate->setData($arrCertificates[0]);
 
         $sig->validate(
             KeyHelper::createPublicKey($certificate)

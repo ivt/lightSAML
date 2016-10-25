@@ -47,8 +47,9 @@ class AuthnRequestFunctionalTest extends \PHPUnit_Framework_TestCase
         $authnRequest->setID('_894da3368874d2dd637983b6812f66c444f100f205');
         $authnRequest->setIssueInstant('2015-09-13T11:47:33Z');
         $authnRequest->setDestination('https://idp.testshib.org/idp/profile/SAML2/POST/SSO');
+        $issuer = new Issuer();
         $authnRequest->setIssuer(
-            (new Issuer())
+            $issuer
                 ->setValue('https://mt.evo.loc/sp')
                 ->setFormat('urn:oasis:names:tc:SAML:2.0:nameid-format:entity')
         );

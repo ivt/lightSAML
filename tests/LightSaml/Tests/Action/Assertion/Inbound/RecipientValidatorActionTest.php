@@ -31,7 +31,8 @@ class RecipientValidatorActionTest extends \PHPUnit_Framework_TestCase
 
         $assertionContext = TestHelper::getAssertionContext($assertion = new Assertion());
         $assertion->setSubject(new Subject());
-        $assertion->getSubject()->addSubjectConfirmation((new SubjectConfirmation())->setMethod(SamlConstants::CONFIRMATION_METHOD_BEARER));
+        $subjectConfirmation = new SubjectConfirmation();
+        $assertion->getSubject()->addSubjectConfirmation($subjectConfirmation->setMethod(SamlConstants::CONFIRMATION_METHOD_BEARER));
 
         $action->execute($assertionContext);
     }
@@ -57,7 +58,8 @@ class RecipientValidatorActionTest extends \PHPUnit_Framework_TestCase
         $assertionContext = TestHelper::getAssertionContext($assertion = new Assertion());
         $assertion->addItem(new AuthnStatement());
         $assertion->setSubject(new Subject());
-        $assertion->getSubject()->addSubjectConfirmation($subjectConfirmation = (new SubjectConfirmation())->setMethod(SamlConstants::CONFIRMATION_METHOD_BEARER));
+        $subjectConfirmation1 = new SubjectConfirmation();
+        $assertion->getSubject()->addSubjectConfirmation($subjectConfirmation = $subjectConfirmation1->setMethod(SamlConstants::CONFIRMATION_METHOD_BEARER));
         $subjectConfirmation->setSubjectConfirmationData(new SubjectConfirmationData());
 
         $loggerMock->expects($this->once())
@@ -81,8 +83,10 @@ class RecipientValidatorActionTest extends \PHPUnit_Framework_TestCase
         $assertionContext = TestHelper::getAssertionContext($assertion = new Assertion());
         $assertion->addItem(new AuthnStatement());
         $assertion->setSubject(new Subject());
-        $assertion->getSubject()->addSubjectConfirmation($subjectConfirmation = (new SubjectConfirmation())->setMethod(SamlConstants::CONFIRMATION_METHOD_BEARER));
-        $subjectConfirmation->setSubjectConfirmationData((new SubjectConfirmationData())->setRecipient($recipient = 'http://recipient.com'));
+        $subjectConfirmation1 = new SubjectConfirmation();
+        $assertion->getSubject()->addSubjectConfirmation($subjectConfirmation = $subjectConfirmation1->setMethod(SamlConstants::CONFIRMATION_METHOD_BEARER));
+        $subjectConfirmationData = new SubjectConfirmationData();
+        $subjectConfirmation->setSubjectConfirmationData($subjectConfirmationData->setRecipient($recipient = 'http://recipient.com'));
 
         $profileContext = TestHelper::getProfileContext();
         $profileContext->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor());
@@ -90,13 +94,13 @@ class RecipientValidatorActionTest extends \PHPUnit_Framework_TestCase
 
         $endpointResolver->expects($this->once())
             ->method('resolve')
-            ->with($this->isInstanceOf(CriteriaSet::class), $this->isType('array'))
-            ->willReturnCallback(function (CriteriaSet $criteriaSet) use ($recipient) {
-                TestHelper::assertCriteria($this, $criteriaSet, DescriptorTypeCriteria::class, 'getDescriptorType', SpSsoDescriptor::class);
-                TestHelper::assertCriteria($this, $criteriaSet, ServiceTypeCriteria::class, 'getServiceType', AssertionConsumerService::class);
-                TestHelper::assertCriteria($this, $criteriaSet, LocationCriteria::class, 'getLocation', $recipient);
+            ->with($this->isInstanceOf('\LightSaml\Criteria\CriteriaSet'), $this->isType('array'))
+            ->willReturnCallback(function (\LightSaml\Criteria\CriteriaSet $criteriaSet) use ($recipient) {
+                TestHelper::assertCriteria($this, $criteriaSet, '\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria', 'getDescriptorType', '\LightSaml\Model\Metadata\SpSsoDescriptor');
+                TestHelper::assertCriteria($this, $criteriaSet, '\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria', 'getServiceType', '\LightSaml\Model\Metadata\AssertionConsumerService');
+                TestHelper::assertCriteria($this, $criteriaSet, '\LightSaml\Resolver\Endpoint\Criteria\LocationCriteria', 'getLocation', $recipient);
 
-                return [];
+                return array();
             });
 
         $loggerMock->expects($this->once())
@@ -116,8 +120,10 @@ class RecipientValidatorActionTest extends \PHPUnit_Framework_TestCase
         $assertionContext = TestHelper::getAssertionContext($assertion = new Assertion());
         $assertion->addItem(new AuthnStatement());
         $assertion->setSubject(new Subject());
-        $assertion->getSubject()->addSubjectConfirmation($subjectConfirmation = (new SubjectConfirmation())->setMethod(SamlConstants::CONFIRMATION_METHOD_BEARER));
-        $subjectConfirmation->setSubjectConfirmationData((new SubjectConfirmationData())->setRecipient($recipient = 'http://recipient.com'));
+        $subjectConfirmation1 = new SubjectConfirmation();
+        $assertion->getSubject()->addSubjectConfirmation($subjectConfirmation = $subjectConfirmation1->setMethod(SamlConstants::CONFIRMATION_METHOD_BEARER));
+        $subjectConfirmationData = new SubjectConfirmationData();
+        $subjectConfirmation->setSubjectConfirmationData($subjectConfirmationData->setRecipient($recipient = 'http://recipient.com'));
 
         $profileContext = TestHelper::getProfileContext();
         $profileContext->getOwnEntityContext()->setEntityDescriptor($ownEntityDescriptor = new EntityDescriptor());
@@ -126,7 +132,7 @@ class RecipientValidatorActionTest extends \PHPUnit_Framework_TestCase
         $endpointResolver->expects($this->once())
             ->method('resolve')
             ->willReturnCallback(function () use ($recipient) {
-                return [TestHelper::getEndpointReferenceMock($this, new AssertionConsumerService())];
+                return array(TestHelper::getEndpointReferenceMock($this, new AssertionConsumerService()));
             });
 
         $action->execute($assertionContext);

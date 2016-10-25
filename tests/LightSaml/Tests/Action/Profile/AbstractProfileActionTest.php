@@ -13,7 +13,7 @@ class AbstractProfileActionTest extends \PHPUnit_Framework_TestCase
     public function test_calls_do_execute_with_profile_context()
     {
         /** @var LoggerInterface $loggerMock */
-        $loggerMock = $this->getMock(LoggerInterface::class);
+        $loggerMock = $this->getMock('\Psr\Log\LoggerInterface');
         $action = $this->getAbstractProfileActionMock($loggerMock);
         $profileContext = new ProfileContext(Profiles::METADATA, ProfileContext::ROLE_IDP);
         $action->expects($this->once())
@@ -30,7 +30,7 @@ class AbstractProfileActionTest extends \PHPUnit_Framework_TestCase
     public function test_throws_exception_on_non_profile_context()
     {
         /** @var LoggerInterface|\PHPUnit_Framework_MockObject_MockObject $loggerMock */
-        $loggerMock = $this->getMock(LoggerInterface::class);
+        $loggerMock = $this->getMock('\Psr\Log\LoggerInterface');
         $loggerMock->expects($this->once())
             ->method('emergency');
 
@@ -46,7 +46,7 @@ class AbstractProfileActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getAbstractProfileActionMock($loggerMock)
     {
-        return $this->getMockForAbstractClass(AbstractProfileAction::class, [$loggerMock]);
+        return $this->getMockForAbstractClass('\LightSaml\Action\Profile\AbstractProfileAction', array($loggerMock));
     }
 
     /**
@@ -54,6 +54,6 @@ class AbstractProfileActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getContextMock()
     {
-        return $this->getMock(ContextInterface::class);
+        return $this->getMock('\LightSaml\Context\ContextInterface');
     }
 }

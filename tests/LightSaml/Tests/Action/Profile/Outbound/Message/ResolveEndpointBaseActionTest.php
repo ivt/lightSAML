@@ -45,12 +45,12 @@ class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet, array $endpointCandidates) use (&$endpoint) {
             $this->criteriaSetShouldHaveBindingCriteria(
                 $criteriaSet,
-                [SamlConstants::BINDING_SAML2_HTTP_POST, SamlConstants::BINDING_SAML2_HTTP_REDIRECT]
+                array(SamlConstants::BINDING_SAML2_HTTP_POST, SamlConstants::BINDING_SAML2_HTTP_REDIRECT)
             );
-            $this->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, SpSsoDescriptor::class);
+            $this->criteriaSetShouldHaveDescriptorTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\SpSsoDescriptor');
             $this->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, null);
 
-            return [TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleSignOnService())];
+            return array(TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleSignOnService()));
         });
 
         $this->action->execute($context);
@@ -69,7 +69,7 @@ class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
 
         $endpoint = null;
         $this->setEndpointResolver(true, function () {
-            return [];
+            return array();
         });
 
         $this->action->execute($context);
@@ -84,7 +84,7 @@ class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) use ($index) {
             $this->criteriaSetShouldHaveIndexCriteria($criteriaSet, $index);
 
-            return [TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleSignOnService())];
+            return array(TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleSignOnService()));
         });
 
         $this->action->execute($context);
@@ -99,7 +99,7 @@ class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) use ($url) {
             $this->criteriaSetShouldHaveLocationCriteria($criteriaSet, $url);
 
-            return [TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleSignOnService())];
+            return array(TestHelper::getEndpointReferenceMock($this, $endpoint = new SingleSignOnService()));
         });
 
         $this->action->execute($context);
@@ -114,8 +114,8 @@ class ResolveEndpointBaseActionTest extends AbstractResolveEndpointActionTest
     protected function createAction(LoggerInterface $logger, EndpointResolverInterface $endpointResolver)
     {
         return $this->getMockForAbstractClass(
-            ResolveEndpointBaseAction::class,
-            [$logger, $endpointResolver]
+            '\LightSaml\Action\Profile\Outbound\Message\ResolveEndpointBaseAction',
+            array($logger, $endpointResolver)
         );
     }
 }

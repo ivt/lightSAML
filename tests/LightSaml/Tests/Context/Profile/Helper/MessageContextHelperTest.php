@@ -17,41 +17,41 @@ class MessageContextHelperTest extends \PHPUnit_Framework_TestCase
 {
     public function helperProvider()
     {
-        return [
-            ['asSamlMessage', null, LightSamlContextException::class, 'Missing SamlMessage'],
-            ['asSamlMessage', $this->getMockForAbstractClass(SamlMessage::class), null, null],
+        return array(
+            array('asSamlMessage', null, '\LightSaml\Error\LightSamlContextException', 'Missing SamlMessage'),
+            array('asSamlMessage', $this->getMockForAbstractClass('\LightSaml\Model\Protocol\SamlMessage'), null, null),
 
-            ['asAuthnRequest', null, LightSamlContextException::class, 'Expected AuthnRequest'],
-            ['asAuthnRequest', $this->getMockForAbstractClass(SamlMessage::class), LightSamlContextException::class, 'Expected AuthnRequest'],
-            ['asAuthnRequest', new Response(), LightSamlContextException::class, 'Expected AuthnRequest'],
-            ['asAuthnRequest', new AuthnRequest(), null, null],
+            array('asAuthnRequest', null, '\LightSaml\Error\LightSamlContextException', 'Expected AuthnRequest'),
+            array('asAuthnRequest', $this->getMockForAbstractClass('\LightSaml\Model\Protocol\SamlMessage'), '\LightSaml\Error\LightSamlContextException', 'Expected AuthnRequest'),
+            array('asAuthnRequest', new Response(), '\LightSaml\Error\LightSamlContextException', 'Expected AuthnRequest'),
+            array('asAuthnRequest', new AuthnRequest(), null, null),
 
-            ['asAbstractRequest', null, LightSamlContextException::class, 'Expected AbstractRequest'],
-            ['asAbstractRequest', new Response(), LightSamlContextException::class, 'Expected AbstractRequest'],
-            ['asAbstractRequest', $this->getMockForAbstractClass(AbstractRequest::class), null, null],
-            ['asAbstractRequest', new AuthnRequest(), null, null],
-            ['asAbstractRequest', new LogoutRequest(), null, null],
+            array('asAbstractRequest', null, '\LightSaml\Error\LightSamlContextException', 'Expected AbstractRequest'),
+            array('asAbstractRequest', new Response(), '\LightSaml\Error\LightSamlContextException', 'Expected AbstractRequest'),
+            array('asAbstractRequest', $this->getMockForAbstractClass('\LightSaml\Model\Protocol\AbstractRequest'), null, null),
+            array('asAbstractRequest', new AuthnRequest(), null, null),
+            array('asAbstractRequest', new LogoutRequest(), null, null),
 
-            ['asResponse', null, LightSamlContextException::class, 'Expected Response'],
-            ['asResponse', new AuthnRequest(), LightSamlContextException::class, 'Expected Response'],
-            ['asResponse', new LogoutResponse(), LightSamlContextException::class, 'Expected Response'],
-            ['asResponse', new Response(), null, null],
+            array('asResponse', null, '\LightSaml\Error\LightSamlContextException', 'Expected Response'),
+            array('asResponse', new AuthnRequest(), '\LightSaml\Error\LightSamlContextException', 'Expected Response'),
+            array('asResponse', new LogoutResponse(), '\LightSaml\Error\LightSamlContextException', 'Expected Response'),
+            array('asResponse', new Response(), null, null),
 
-            ['asStatusResponse', null, LightSamlContextException::class, 'Expected StatusResponse'],
-            ['asStatusResponse', new AuthnRequest(), LightSamlContextException::class, 'Expected StatusResponse'],
-            ['asStatusResponse', new Response(), null, null],
-            ['asStatusResponse', new LogoutResponse(), null, null],
-            ['asStatusResponse', $this->getMockForAbstractClass(StatusResponse::class), null, null],
+            array('asStatusResponse', null, '\LightSaml\Error\LightSamlContextException', 'Expected StatusResponse'),
+            array('asStatusResponse', new AuthnRequest(), '\LightSaml\Error\LightSamlContextException', 'Expected StatusResponse'),
+            array('asStatusResponse', new Response(), null, null),
+            array('asStatusResponse', new LogoutResponse(), null, null),
+            array('asStatusResponse', $this->getMockForAbstractClass('\LightSaml\Model\Protocol\StatusResponse'), null, null),
 
-            ['asLogoutRequest', null, LightSamlContextException::class, 'Expected LogoutRequest'],
-            ['asLogoutRequest', new AuthnRequest(), LightSamlContextException::class, 'Expected LogoutRequest'],
-            ['asLogoutRequest', new LogoutRequest(), null, null],
+            array('asLogoutRequest', null, '\LightSaml\Error\LightSamlContextException', 'Expected LogoutRequest'),
+            array('asLogoutRequest', new AuthnRequest(), '\LightSaml\Error\LightSamlContextException', 'Expected LogoutRequest'),
+            array('asLogoutRequest', new LogoutRequest(), null, null),
 
-            ['asLogoutResponse', null, LightSamlContextException::class, 'Expected LogoutResponse'],
-            ['asLogoutResponse', new AuthnRequest(), LightSamlContextException::class, 'Expected LogoutResponse'],
-            ['asLogoutResponse', new LogoutRequest(), LightSamlContextException::class, 'Expected LogoutResponse'],
-            ['asLogoutResponse', new LogoutResponse(), null, null],
-        ];
+            array('asLogoutResponse', null, '\LightSaml\Error\LightSamlContextException', 'Expected LogoutResponse'),
+            array('asLogoutResponse', new AuthnRequest(), '\LightSaml\Error\LightSamlContextException', 'Expected LogoutResponse'),
+            array('asLogoutResponse', new LogoutRequest(), '\LightSaml\Error\LightSamlContextException', 'Expected LogoutResponse'),
+            array('asLogoutResponse', new LogoutResponse(), null, null),
+        );
     }
 
     /**
@@ -66,7 +66,7 @@ class MessageContextHelperTest extends \PHPUnit_Framework_TestCase
 
         if ($expectedException) {
             try {
-                call_user_func(['LightSaml\Context\Profile\Helper\MessageContextHelper', $method], $context);
+                call_user_func(array('LightSaml\Context\Profile\Helper\MessageContextHelper', $method), $context);
             } catch (\Exception $ex) {
                 $this->assertInstanceOf($expectedException, $ex);
                 if ($expectedMessage) {
@@ -74,7 +74,7 @@ class MessageContextHelperTest extends \PHPUnit_Framework_TestCase
                 }
             }
         } else {
-            $actualMessage = call_user_func(['LightSaml\Context\Profile\Helper\MessageContextHelper', $method], $context);
+            $actualMessage = call_user_func(array('LightSaml\Context\Profile\Helper\MessageContextHelper', $method), $context);
             $this->assertSame($message, $actualMessage);
         }
     }
@@ -92,6 +92,6 @@ class MessageContextHelperTest extends \PHPUnit_Framework_TestCase
      */
     private function getMessageMock()
     {
-        return $this->getMockForAbstractClass(SamlMessage::class);
+        return $this->getMockForAbstractClass('\LightSaml\Model\Protocol\SamlMessage');
     }
 }

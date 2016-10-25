@@ -20,9 +20,9 @@ class ResolveEndpointSpAcsActionTest extends AbstractResolveEndpointActionTest
         $context = $this->createContext(ProfileContext::ROLE_IDP, $message);
 
         $this->setEndpointResolver(true, function (CriteriaSet $criteriaSet) {
-            $this->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, AssertionConsumerService::class);
+            $this->criteriaSetShouldHaveServiceTypeCriteria($criteriaSet, '\LightSaml\Model\Metadata\AssertionConsumerService');
 
-            return [TestHelper::getEndpointReferenceMock($this, $endpoint = new AssertionConsumerService())];
+            return array(TestHelper::getEndpointReferenceMock($this, $endpoint = new AssertionConsumerService()));
         });
 
         $this->action->execute($context);

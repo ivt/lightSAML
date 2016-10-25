@@ -13,16 +13,16 @@ class SamlMessageDeserializationTest extends \PHPUnit_Framework_TestCase
 {
     public function deserialize_provider()
     {
-        return [
-            ['<samlp:AuthnRequest xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:AuthnRequest>', AuthnRequest::class],
-            ['<!--comment--><samlp:AuthnRequest xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:AuthnRequest>', AuthnRequest::class],
-            ['<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:Response>', Response::class],
-            ['<!--comment--><samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:Response>', Response::class],
-            ['<samlp:LogoutRequest xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:LogoutRequest>', LogoutRequest::class],
-            ['<!--comment--><samlp:LogoutRequest xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:LogoutRequest>', LogoutRequest::class],
-            ['<samlp:LogoutResponse xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:LogoutResponse>', LogoutResponse::class],
-            ['<!--comment--><samlp:LogoutResponse xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:LogoutResponse>', LogoutResponse::class],
-        ];
+        return array(
+            array('<samlp:AuthnRequest xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:AuthnRequest>', '\LightSaml\Model\Protocol\AuthnRequest'),
+            array('<!--comment--><samlp:AuthnRequest xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:AuthnRequest>', '\LightSaml\Model\Protocol\AuthnRequest'),
+            array('<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:Response>', '\LightSaml\Model\Protocol\Response'),
+            array('<!--comment--><samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:Response>', '\LightSaml\Model\Protocol\Response'),
+            array('<samlp:LogoutRequest xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:LogoutRequest>', '\LightSaml\Model\Protocol\LogoutRequest'),
+            array('<!--comment--><samlp:LogoutRequest xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:LogoutRequest>', '\LightSaml\Model\Protocol\LogoutRequest'),
+            array('<samlp:LogoutResponse xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:LogoutResponse>', '\LightSaml\Model\Protocol\LogoutResponse'),
+            array('<!--comment--><samlp:LogoutResponse xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"></samlp:LogoutResponse>', '\LightSaml\Model\Protocol\LogoutResponse'),
+        );
     }
 
     /**

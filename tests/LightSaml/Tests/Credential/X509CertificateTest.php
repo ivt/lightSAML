@@ -38,15 +38,15 @@ class X509CertificateTest extends \PHPUnit_Framework_TestCase
 
     public function throws_exception_when_data_not_set_provider()
     {
-        return [
-            ['getFingerprint'],
-            ['getInfo'],
-            ['getValidToTimestamp'],
-            ['getValidFromTimestamp'],
-            ['getIssuer'],
-            ['getSubject'],
-            ['getName'],
-        ];
+        return array(
+            array('getFingerprint'),
+            array('getInfo'),
+            array('getValidToTimestamp'),
+            array('getValidFromTimestamp'),
+            array('getIssuer'),
+            array('getSubject'),
+            array('getName'),
+        );
     }
 
     /**

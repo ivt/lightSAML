@@ -15,10 +15,10 @@ class CompositeEntityDescriptorStoreTest extends \PHPUnit_Framework_TestCase
 
     public function test_constructs_with_array_of_entity_descriptor_stores()
     {
-        new CompositeEntityDescriptorStore([
+        new CompositeEntityDescriptorStore(array(
             TestHelper::getEntityDescriptorStoreMock($this),
             TestHelper::getEntityDescriptorStoreMock($this),
-        ]);
+        ));
     }
 
     public function test_entity_descriptor_store_can_be_added()
@@ -29,11 +29,11 @@ class CompositeEntityDescriptorStoreTest extends \PHPUnit_Framework_TestCase
 
     public function test_get_returns_value_given_by_child_store()
     {
-        $composite = new CompositeEntityDescriptorStore([
+        $composite = new CompositeEntityDescriptorStore(array(
             $child1 = TestHelper::getEntityDescriptorStoreMock($this),
             $child2 = TestHelper::getEntityDescriptorStoreMock($this),
             $child3 = TestHelper::getEntityDescriptorStoreMock($this),
-        ]);
+        ));
 
         $entityId = 'http://entity.id';
         $child1->expects($this->once())->method('get')->with($entityId)->willReturn(null);
@@ -46,11 +46,11 @@ class CompositeEntityDescriptorStoreTest extends \PHPUnit_Framework_TestCase
 
     public function test_has_return_true_if_any_child_returns_true()
     {
-        $composite = new CompositeEntityDescriptorStore([
+        $composite = new CompositeEntityDescriptorStore(array(
             $child1 = TestHelper::getEntityDescriptorStoreMock($this),
             $child2 = TestHelper::getEntityDescriptorStoreMock($this),
             $child3 = TestHelper::getEntityDescriptorStoreMock($this),
-        ]);
+        ));
 
         $entityId = 'http://entity.id';
         $child1->expects($this->once())->method('has')->with($entityId)->willReturn(false);
@@ -62,15 +62,15 @@ class CompositeEntityDescriptorStoreTest extends \PHPUnit_Framework_TestCase
 
     public function test_all_returns_union_of_all_children_results()
     {
-        $composite = new CompositeEntityDescriptorStore([
+        $composite = new CompositeEntityDescriptorStore(array(
             $child1 = TestHelper::getEntityDescriptorStoreMock($this),
             $child2 = TestHelper::getEntityDescriptorStoreMock($this),
             $child3 = TestHelper::getEntityDescriptorStoreMock($this),
-        ]);
+        ));
 
-        $child1->expects($this->once())->method('all')->willReturn([$ed1 = new EntityDescriptor()]);
-        $child2->expects($this->once())->method('all')->willReturn([$ed2 = new EntityDescriptor(), $ed3 = new EntityDescriptor()]);
-        $child3->expects($this->once())->method('all')->willReturn([]);
+        $child1->expects($this->once())->method('all')->willReturn(array($ed1 = new EntityDescriptor()));
+        $child2->expects($this->once())->method('all')->willReturn(array($ed2 = new EntityDescriptor(), $ed3 = new EntityDescriptor()));
+        $child3->expects($this->once())->method('all')->willReturn(array());
 
         $all = $composite->all();
 

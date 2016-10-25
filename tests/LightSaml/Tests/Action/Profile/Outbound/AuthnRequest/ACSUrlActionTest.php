@@ -35,20 +35,20 @@ class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
 
         $entityDescriptorMock->expects($this->once())
             ->method('getAllEndpoints')
-            ->willReturn([TestHelper::getEndpointReferenceMock($this, $endpoint = new AssertionConsumerService('http://localhost/acs'))]);
+            ->willReturn(array(TestHelper::getEndpointReferenceMock($this, $endpoint = new AssertionConsumerService('http://localhost/acs'))));
 
         $endpointResolverMock->expects($this->once())
             ->method('resolve')
-            ->with($this->isInstanceOf(CriteriaSet::class), $this->isType('array'))
+            ->with($this->isInstanceOf('\LightSaml\Criteria\CriteriaSet'), $this->isType('array'))
             ->willReturnCallback(function (CriteriaSet $criteriaSet, array $candidates) {
-                $this->assertTrue($criteriaSet->has(DescriptorTypeCriteria::class));
-                $this->assertEquals(SpSsoDescriptor::class, $criteriaSet->getSingle(DescriptorTypeCriteria::class)->getDescriptorType());
+                $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria'));
+                $this->assertEquals('\LightSaml\Model\Metadata\SpSsoDescriptor', $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria')->getDescriptorType());
 
-                $this->assertTrue($criteriaSet->has(ServiceTypeCriteria::class));
-                $this->assertEquals(AssertionConsumerService::class, $criteriaSet->getSingle(ServiceTypeCriteria::class)->getServiceType());
+                $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria'));
+                $this->assertEquals('\LightSaml\Model\Metadata\AssertionConsumerService', $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria')->getServiceType());
 
-                $this->assertTrue($criteriaSet->has(BindingCriteria::class));
-                $this->assertEquals([SamlConstants::BINDING_SAML2_HTTP_POST], $criteriaSet->getSingle(BindingCriteria::class)->getAllBindings());
+                $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\BindingCriteria'));
+                $this->assertEquals(array(SamlConstants::BINDING_SAML2_HTTP_POST), $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\BindingCriteria')->getAllBindings());
 
                 return $candidates;
             })
@@ -76,11 +76,11 @@ class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
 
         $entityDescriptorMock->expects($this->once())
             ->method('getAllEndpoints')
-            ->willReturn([]);
+            ->willReturn(array());
 
         $endpointResolverMock->expects($this->once())
             ->method('resolve')
-            ->willReturn([]);
+            ->willReturn(array());
 
         $loggerMock->expects($this->once())
             ->method('error');
@@ -93,7 +93,7 @@ class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getEntityDescriptorMock()
     {
-        return $this->getMock(EntityDescriptor::class);
+        return $this->getMock('\LightSaml\Model\Metadata\EntityDescriptor');
     }
 
     /**
@@ -101,6 +101,6 @@ class ACSUrlActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getEndpointResolverMock()
     {
-        return $this->getMock(\LightSaml\Resolver\Endpoint\EndpointResolverInterface::class);
+        return $this->getMock('\LightSaml\Resolver\Endpoint\EndpointResolverInterface');
     }
 }

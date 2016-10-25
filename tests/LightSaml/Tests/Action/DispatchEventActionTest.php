@@ -32,7 +32,7 @@ class DispatchEventActionTest extends \PHPUnit_Framework_TestCase
             ->method('dispatch')
             ->with(
                 $this->equalTo($expectedEventName),
-                $this->isInstanceOf(GenericEvent::class)
+                $this->isInstanceOf('\Symfony\Component\EventDispatcher\GenericEvent')
             );
 
         $action->execute($context);
@@ -43,7 +43,7 @@ class DispatchEventActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getContextMock()
     {
-        return $this->getMock(ContextInterface::class);
+        return $this->getMock('\LightSaml\Context\ContextInterface');
     }
 
     /**
@@ -51,6 +51,6 @@ class DispatchEventActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getEventDispatcherMock()
     {
-        return $this->getMock(EventDispatcherInterface::class);
+        return $this->getMock('\Symfony\Component\EventDispatcher\EventDispatcherInterface');
     }
 }

@@ -11,19 +11,19 @@ class CredentialContextSetTest extends \PHPUnit_Framework_TestCase
     {
         $context = new CredentialContextSet();
 
-        $this->assertNull($context->get(MetadataCredentialContext::class));
+        $this->assertNull($context->get('\LightSaml\Credential\Context\MetadataCredentialContext'));
     }
 
     public function test_returns_set_metadata_context()
     {
-        $context = new CredentialContextSet([$metadataContextMock = $this->getMetadataContextMock()]);
+        $context = new CredentialContextSet(array($metadataContextMock = $this->getMetadataContextMock()));
 
-        $this->assertSame($metadataContextMock, $context->get(MetadataCredentialContext::class));
+        $this->assertSame($metadataContextMock, $context->get('\LightSaml\Credential\Context\MetadataCredentialContext'));
     }
 
     public function test_returns_all_contexts()
     {
-        $context = new CredentialContextSet($expected = [$this->getMetadataContextMock(), $this->getMetadataContextMock()]);
+        $context = new CredentialContextSet($expected = array($this->getMetadataContextMock(), $this->getMetadataContextMock()));
 
         $all = $context->all();
         $this->assertCount(2, $all);
@@ -38,7 +38,7 @@ class CredentialContextSetTest extends \PHPUnit_Framework_TestCase
      */
     public function test_throws_invalid_argument_exception_if_constructed_with_non_credential_context_array()
     {
-        new CredentialContextSet([new \stdClass()]);
+        new CredentialContextSet(array(new \stdClass()));
     }
 
     /**

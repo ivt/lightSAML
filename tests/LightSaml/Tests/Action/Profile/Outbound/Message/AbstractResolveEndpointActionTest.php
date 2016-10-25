@@ -35,7 +35,7 @@ abstract class AbstractResolveEndpointActionTest extends \PHPUnit_Framework_Test
     protected function setUp()
     {
         $this->logger = TestHelper::getLoggerMock($this);
-        $this->endpointResolver = $this->getMock(EndpointResolverInterface::class);
+        $this->endpointResolver = $this->getMock('\LightSaml\Resolver\Endpoint\EndpointResolverInterface');
         $this->action = $this->createAction($this->logger, $this->endpointResolver);
     }
 
@@ -104,11 +104,11 @@ abstract class AbstractResolveEndpointActionTest extends \PHPUnit_Framework_Test
     protected function criteriaSetShouldHaveBindingCriteria(CriteriaSet $criteriaSet, array $bindings)
     {
         if (empty($bindings)) {
-            $this->assertFalse($criteriaSet->has(BindingCriteria::class));
+            $this->assertFalse($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\BindingCriteria'));
         } else {
-            $this->assertTrue($criteriaSet->has(BindingCriteria::class));
+            $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\BindingCriteria'));
             /** @var BindingCriteria $criteria */
-            $criteria = $criteriaSet->getSingle(BindingCriteria::class);
+            $criteria = $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\BindingCriteria');
             $this->assertEquals($bindings, $criteria->getAllBindings());
         }
     }
@@ -120,12 +120,12 @@ abstract class AbstractResolveEndpointActionTest extends \PHPUnit_Framework_Test
     protected function criteriaSetShouldHaveDescriptorTypeCriteria(CriteriaSet $criteriaSet, $value)
     {
         if ($value) {
-            $this->assertTrue($criteriaSet->has(DescriptorTypeCriteria::class));
+            $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria'));
             /** @var DescriptorTypeCriteria $criteria */
-            $criteria = $criteriaSet->getSingle(DescriptorTypeCriteria::class);
+            $criteria = $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria');
             $this->assertEquals($value, $criteria->getDescriptorType());
         } else {
-            $this->assertFalse($criteriaSet->has(DescriptorTypeCriteria::class));
+            $this->assertFalse($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\DescriptorTypeCriteria'));
         }
     }
 
@@ -136,12 +136,12 @@ abstract class AbstractResolveEndpointActionTest extends \PHPUnit_Framework_Test
     protected function criteriaSetShouldHaveServiceTypeCriteria(CriteriaSet $criteriaSet, $value)
     {
         if ($value) {
-            $this->assertTrue($criteriaSet->has(ServiceTypeCriteria::class));
+            $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria'));
             /** @var ServiceTypeCriteria $criteria */
-            $criteria = $criteriaSet->getSingle(ServiceTypeCriteria::class);
+            $criteria = $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria');
             $this->assertEquals($value, $criteria->getServiceType());
         } else {
-            $this->assertFalse($criteriaSet->has(ServiceTypeCriteria::class));
+            $this->assertFalse($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\ServiceTypeCriteria'));
         }
     }
 
@@ -152,12 +152,12 @@ abstract class AbstractResolveEndpointActionTest extends \PHPUnit_Framework_Test
     protected function criteriaSetShouldHaveIndexCriteria(CriteriaSet $criteriaSet, $value)
     {
         if ($value) {
-            $this->assertTrue($criteriaSet->has(IndexCriteria::class));
+            $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\IndexCriteria'));
             /** @var IndexCriteria $criteria */
-            $criteria = $criteriaSet->getSingle(IndexCriteria::class);
+            $criteria = $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\IndexCriteria');
             $this->assertEquals($value, $criteria->getIndex());
         } else {
-            $this->assertFalse($criteriaSet->has(IndexCriteria::class));
+            $this->assertFalse($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\IndexCriteria'));
         }
     }
 
@@ -168,12 +168,12 @@ abstract class AbstractResolveEndpointActionTest extends \PHPUnit_Framework_Test
     protected function criteriaSetShouldHaveLocationCriteria(CriteriaSet $criteriaSet, $value)
     {
         if ($value) {
-            $this->assertTrue($criteriaSet->has(LocationCriteria::class));
+            $this->assertTrue($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\LocationCriteria'));
             /** @var LocationCriteria $criteria */
-            $criteria = $criteriaSet->getSingle(LocationCriteria::class);
+            $criteria = $criteriaSet->getSingle('\LightSaml\Resolver\Endpoint\Criteria\LocationCriteria');
             $this->assertEquals($value, $criteria->getLocation());
         } else {
-            $this->assertFalse($criteriaSet->has(LocationCriteria::class));
+            $this->assertFalse($criteriaSet->has('\LightSaml\Resolver\Endpoint\Criteria\LocationCriteria'));
         }
     }
 }

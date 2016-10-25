@@ -37,15 +37,15 @@ class CredentialFactoryTest extends \PHPUnit_Framework_TestCase
         $store = $factory->build(
             $idpStore,
             $spStore,
-            [$ownCredential],
-            [$extraCredential]
+            array($ownCredential),
+            array($extraCredential)
         );
 
         /** @var X509Credential[] $credentials */
         $credentials = $store->getByEntityId('https://sts.windows.net/554fadfe-f04f-4975-90cb-ddc8b147aaa2/');
         $this->assertCount(1, $credentials);
         $this->assertEquals('https://sts.windows.net/554fadfe-f04f-4975-90cb-ddc8b147aaa2/', $credentials[0]->getEntityId());
-        $this->assertEquals(['CN'=>'accounts.accesscontrol.windows.net'], $credentials[0]->getCertificate()->getSubject());
+        $this->assertEquals(array('CN'=>'accounts.accesscontrol.windows.net'), $credentials[0]->getCertificate()->getSubject());
         $this->assertEquals(UsageType::SIGNING, $credentials[0]->getUsageType());
 
         $credentials = $store->getByEntityId('https://mt.evo.team/simplesaml/module.php/saml/sp/metadata.php/default-sp');

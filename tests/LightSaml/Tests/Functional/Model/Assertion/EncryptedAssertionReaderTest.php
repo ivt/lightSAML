@@ -47,7 +47,7 @@ EOT;
 
         /** @var EncryptedAssertionReader $reader */
         $reader = $response->getFirstEncryptedAssertion();
-        $assertion = $reader->decryptMultiAssertion([$credential], $decryptDeserializeContext);
+        $assertion = $reader->decryptMultiAssertion(array($credential), $decryptDeserializeContext);
 
         $this->assertEquals('_c9cbe081e1b1294c9ea31d98f4a473a081466502a0', $assertion->getId());
         $this->assertEquals('https://lightsaml.local/idp', $assertion->getIssuer()->getValue());

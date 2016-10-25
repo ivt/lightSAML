@@ -12,9 +12,9 @@ class WrappedActionTest extends \PHPUnit_Framework_TestCase
         $context = $this->getContextMock();
 
         /** @var ActionInterface|\PHPUnit_Framework_MockObject_MockObject $action */
-        $action = $this->getMock(ActionInterface::class);
+        $action = $this->getMock('\LightSaml\Action\ActionInterface');
         /** @var WrappedAction|\PHPUnit_Framework_MockObject_MockObject $wrapper */
-        $wrapper = $this->getMockForAbstractClass(WrappedAction::class, array($action));
+        $wrapper = $this->getMockForAbstractClass('\LightSaml\Action\WrappedAction', array($action));
 
         $beforeCalled = false;
         $executeCalled = false;

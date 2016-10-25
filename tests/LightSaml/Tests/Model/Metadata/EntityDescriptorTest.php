@@ -22,47 +22,60 @@ class EntityDescriptorTest extends \PHPUnit_Framework_TestCase
     public function test_serialization()
     {
         $ed = new EntityDescriptor();
+        $idpSsoDescriptor = new IdpSsoDescriptor();
+        $singleSignOnService = new SingleSignOnService();
+        $singleSignOnService1 = new SingleSignOnService();
+        $singleLogoutService = new SingleLogoutService();
+        $attribute = new Attribute();
+        $keyDescriptor = new KeyDescriptor();
+        $x509Certificate = new X509Certificate();
+        $organization = new Organization();
+        $contactPerson = new ContactPerson();
+        $spSsoDescriptor = new SpSsoDescriptor();
+        $singleLogoutService1 = new SingleLogoutService();
+        $assertionConsumerService = new AssertionConsumerService();
+        $assertionConsumerService1 = new AssertionConsumerService();
         $ed
             ->setEntityID($entityID = 'http://vendor.com/id')
             ->setID($edID = '_127800fe-39ac-46ad-b073-6fb6106797a0')
-            ->addItem((new IdpSsoDescriptor())
-                ->addSingleSignOnService((new SingleSignOnService())
+            ->addItem($idpSsoDescriptor
+                ->addSingleSignOnService($singleSignOnService
                     ->setBinding(SamlConstants::BINDING_SAML2_HTTP_POST)
                     ->setLocation('http://idp.example.com/sso/post'))
-                ->addSingleSignOnService((new SingleSignOnService())
+                ->addSingleSignOnService($singleSignOnService1
                     ->setBinding(SamlConstants::BINDING_SAML2_HTTP_REDIRECT)
                     ->setLocation('http://idp.example.com/slo/get'))
-                ->addSingleLogoutService((new SingleLogoutService())
+                ->addSingleLogoutService($singleLogoutService
                     ->setBinding(SamlConstants::BINDING_SAML2_HTTP_REDIRECT)
                     ->setLocation('http://idp.example.com/slo/redirect'))
-                ->addAttribute((new Attribute())
+                ->addAttribute($attribute
                     ->setName(ClaimTypes::COMMON_NAME)
                     ->setFriendlyName('Common Name')
                     ->addAttributeValue('common name value'))
                 ->addNameIDFormat(SamlConstants::NAME_ID_FORMAT_EMAIL)
                 ->addNameIDFormat(SamlConstants::NAME_ID_FORMAT_PERSISTENT)
-                ->addKeyDescriptor((new KeyDescriptor())
-                    ->setCertificate((new X509Certificate())
+                ->addKeyDescriptor($keyDescriptor
+                    ->setCertificate($x509Certificate
                         ->loadFromFile(__DIR__.'/../../../../../resources/sample/Certificate/saml.crt')))
-                ->addOrganization((new Organization())
+                ->addOrganization($organization
                     ->setOrganizationName('Organization Name')
                     ->setOrganizationDisplayName('Display Name')
                     ->setOrganizationURL('http://organization.org'))
-                ->addContactPerson((new ContactPerson())
+                ->addContactPerson($contactPerson
                     ->setContactType(ContactPerson::TYPE_SUPPORT)
                     ->setGivenName('Support')
                     ->setSurName('Smith')
                     ->setEmailAddress('support@idp.com')))
-            ->addItem((new SpSsoDescriptor())
-                ->addSingleLogoutService((new SingleLogoutService())
+            ->addItem($spSsoDescriptor
+                ->addSingleLogoutService($singleLogoutService1
                     ->setBinding(SamlConstants::BINDING_SAML2_HTTP_POST)
                     ->setLocation('http://sp.example.com/slo/post'))
-                ->addAssertionConsumerService((new AssertionConsumerService())
+                ->addAssertionConsumerService($assertionConsumerService
                     ->setBinding(SamlConstants::BINDING_SAML2_HTTP_POST)
                     ->setLocation('http://sp.example.com/acs/post')
                     ->setIndex(0)
                     ->setIsDefault(true))
-                ->addAssertionConsumerService((new AssertionConsumerService())
+                ->addAssertionConsumerService($assertionConsumerService1
                     ->setBinding(SamlConstants::BINDING_SAML2_HTTP_REDIRECT)
                     ->setLocation('http://sp.example.com/acs/redirect')
                     ->setIndex(1)

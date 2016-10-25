@@ -33,8 +33,9 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
         );
 
         $context = new ProfileContext(Profiles::SSO_SP_SEND_AUTHN_REQUEST, ProfileContext::ROLE_SP);
+        $entityDescriptor = new EntityDescriptor();
         $context->getPartyEntityContext()->setEntityDescriptor(
-            (new EntityDescriptor())->setEntityID($entityId = 'http://localhost/id')
+            $entityDescriptor->setEntityID($entityId = 'http://localhost/id')
         );
         $context->getPartyEntityContext()->setTrustOptions(new TrustOptions());
 
@@ -83,10 +84,11 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
             ->setEntityId($entityId = 'http://localhost/id')
             ->setTrustOptions(new TrustOptions());
 
+        $entityDescriptor1 = new EntityDescriptor();
         $idpEntityStore->expects($this->once())
             ->method('get')
             ->with($entityId)
-            ->willReturn($entityDescriptor = (new EntityDescriptor())->setEntityID($entityId))
+            ->willReturn($entityDescriptor = $entityDescriptor1->setEntityID($entityId))
         ;
         $spEntityStore->expects($this->never())
             ->method('get')
@@ -115,10 +117,11 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
             ->setEntityId($entityId = 'http://localhost/id')
             ->setTrustOptions(new TrustOptions());
 
+        $entityDescriptor1 = new EntityDescriptor();
         $spEntityStore->expects($this->once())
             ->method('get')
             ->with($entityId)
-            ->willReturn($entityDescriptor = (new EntityDescriptor())->setEntityID($entityId))
+            ->willReturn($entityDescriptor = $entityDescriptor1->setEntityID($entityId))
         ;
         $idpEntityStore->expects($this->never())
             ->method('get')
@@ -144,8 +147,9 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
         );
 
         $context = new ProfileContext(Profiles::SSO_SP_SEND_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
+        $entityDescriptor1 = new EntityDescriptor();
         $context->getPartyEntityContext()
-            ->setEntityDescriptor($entityDescriptor = (new EntityDescriptor())->setEntityID($entityId = 'http://localhost/id'));
+            ->setEntityDescriptor($entityDescriptor = $entityDescriptor1->setEntityID($entityId = 'http://localhost/id'));
 
         $spEntityStore->expects($this->never())->method('get');
 
@@ -173,8 +177,9 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
         );
 
         $context = new ProfileContext(Profiles::SSO_SP_SEND_AUTHN_REQUEST, ProfileContext::ROLE_IDP);
+        $entityDescriptor1 = new EntityDescriptor();
         $context->getPartyEntityContext()
-            ->setEntityDescriptor($entityDescriptor = (new EntityDescriptor())->setEntityID($entityId = 'http://localhost/id'));
+            ->setEntityDescriptor($entityDescriptor = $entityDescriptor1->setEntityID($entityId = 'http://localhost/id'));
 
         $spEntityStore->expects($this->never())->method('get');
 
@@ -197,7 +202,7 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getEntityDescriptorStoreMock()
     {
-        return $this->getMock(EntityDescriptorStoreInterface::class);
+        return $this->getMock('\LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface');
     }
 
     /**
@@ -205,6 +210,6 @@ class ResolvePartyEntityIdActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getTrustOptionsStore()
     {
-        return $this->getMock(TrustOptionsStoreInterface::class);
+        return $this->getMock('\LightSaml\Store\TrustOptions\TrustOptionsStoreInterface');
     }
 }

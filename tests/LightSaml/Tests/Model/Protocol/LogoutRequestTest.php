@@ -14,13 +14,15 @@ class LogoutRequestTest extends \PHPUnit_Framework_TestCase
     {
         $context = new SerializationContext();
         $request = new LogoutRequest();
+        $issuer = new Issuer();
+        $nameID = new NameID();
         $request->setID('request-id')
             ->setIssueInstant(new \DateTime('2013-12-08T17:08:35Z'))
             ->setDestination('http://idp.com/saml/logout')
             ->setNotOnOrAfter(new \DateTime('2013-12-08T17:10:00Z'))
-            ->setIssuer((new Issuer())
+            ->setIssuer($issuer
                 ->setValue('the-issuer'))
-            ->setNameID((new NameID())
+            ->setNameID($nameID
                 ->setValue('name-id')
                 ->setFormat(SamlConstants::NAME_ID_FORMAT_PERSISTENT))
             ->setSessionIndex('123123123')

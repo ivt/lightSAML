@@ -65,10 +65,10 @@ class MessageSignatureValidatorActionTest extends \PHPUnit_Framework_TestCase
 
     public function success_on_validator_returns_credential_provider()
     {
-        return [
-            [ProfileContext::ROLE_IDP, MetadataCriteria::TYPE_SP],
-            [ProfileContext::ROLE_SP, MetadataCriteria::TYPE_IDP],
-        ];
+        return array(
+            array(ProfileContext::ROLE_IDP, MetadataCriteria::TYPE_SP),
+            array(ProfileContext::ROLE_SP, MetadataCriteria::TYPE_IDP),
+        );
     }
 
     /**
@@ -90,7 +90,7 @@ class MessageSignatureValidatorActionTest extends \PHPUnit_Framework_TestCase
         $credential = $this->getCredentialMock();
         $credential->expects($this->once())
             ->method('getKeyNames')
-            ->willReturn(['key A'])
+            ->willReturn(array('key A'))
         ;
         $signatureValidator->expects($this->once())
             ->method('validate')
@@ -141,7 +141,7 @@ class MessageSignatureValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getSignatureValidatorMock()
     {
-        return $this->getMock(SignatureValidatorInterface::class);
+        return $this->getMock('\LightSaml\Validator\Model\Signature\SignatureValidatorInterface');
     }
 
     /**
@@ -149,6 +149,6 @@ class MessageSignatureValidatorActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getCredentialMock()
     {
-        return $this->getMock(CredentialInterface::class);
+        return $this->getMock('\LightSaml\Credential\CredentialInterface');
     }
 }

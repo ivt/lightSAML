@@ -18,7 +18,7 @@ abstract class TestHelper
      */
     public static function getLoggerMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\Psr\Log\LoggerInterface::class);
+        return $test->getMock('\Psr\Log\LoggerInterface');
     }
 
     /**
@@ -28,7 +28,7 @@ abstract class TestHelper
      */
     public static function getTimeProviderMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\LightSaml\Provider\TimeProvider\TimeProviderInterface::class);
+        return $test->getMock('\LightSaml\Provider\TimeProvider\TimeProviderInterface');
     }
 
     /**
@@ -36,7 +36,7 @@ abstract class TestHelper
      */
     public static function getEndpointReferenceMock(\PHPUnit_Framework_TestCase $test, Endpoint $endpoint)
     {
-        $endpointReferenceMock = $test->getMockBuilder(\LightSaml\Model\Metadata\EndpointReference::class)->disableOriginalConstructor()->getMock();
+        $endpointReferenceMock = $test->getMockBuilder('\LightSaml\Model\Metadata\EndpointReference')->disableOriginalConstructor()->getMock();
 
         $endpointReferenceMock->expects($test->any())
             ->method('getEndpoint')
@@ -52,7 +52,7 @@ abstract class TestHelper
      */
     public static function getEndpointResolverMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\LightSaml\Resolver\Endpoint\EndpointResolverInterface::class);
+        return $test->getMock('\LightSaml\Resolver\Endpoint\EndpointResolverInterface');
     }
 
     /**
@@ -91,7 +91,7 @@ abstract class TestHelper
      */
     public static function getRequestStateStoreMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\LightSaml\Store\Request\RequestStateStoreInterface::class);
+        return $test->getMock('\LightSaml\Store\Request\RequestStateStoreInterface');
     }
 
     /**
@@ -101,7 +101,7 @@ abstract class TestHelper
      */
     public static function getBindingFactoryMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\LightSaml\Binding\BindingFactoryInterface::class);
+        return $test->getMock('\LightSaml\Binding\BindingFactoryInterface');
     }
 
     /**
@@ -111,7 +111,7 @@ abstract class TestHelper
      */
     public static function getBindingMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMockForAbstractClass(\LightSaml\Binding\AbstractBinding::class);
+        return $test->getMockForAbstractClass('\LightSaml\Binding\AbstractBinding');
     }
 
     /**
@@ -121,7 +121,7 @@ abstract class TestHelper
      */
     public static function getSignatureResolverMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\LightSaml\Resolver\Signature\SignatureResolverInterface::class);
+        return $test->getMock('\LightSaml\Resolver\Signature\SignatureResolverInterface');
     }
 
     /**
@@ -131,7 +131,7 @@ abstract class TestHelper
      */
     public static function getX509CertificateMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\LightSaml\Credential\X509Certificate::class);
+        return $test->getMock('\LightSaml\Credential\X509Certificate');
     }
 
     /**
@@ -141,7 +141,7 @@ abstract class TestHelper
      */
     public static function getAssertionValidatorMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\LightSaml\Validator\Model\Assertion\AssertionValidatorInterface::class);
+        return $test->getMock('\LightSaml\Validator\Model\Assertion\AssertionValidatorInterface');
     }
 
     /**
@@ -151,7 +151,7 @@ abstract class TestHelper
      */
     public static function getEntityDescriptorStoreMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface::class);
+        return $test->getMock('\LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface');
     }
 
     /**
@@ -177,7 +177,7 @@ abstract class TestHelper
      */
     public static function getIdStoreMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\LightSaml\Store\Id\IdStoreInterface::class);
+        return $test->getMock('\LightSaml\Store\Id\IdStoreInterface');
     }
 
     /**
@@ -187,7 +187,7 @@ abstract class TestHelper
      */
     public static function getAssertionTimeValidatorMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\LightSaml\Validator\Model\Assertion\AssertionTimeValidatorInterface::class);
+        return $test->getMock('\LightSaml\Validator\Model\Assertion\AssertionTimeValidatorInterface');
     }
 
     /**
@@ -197,7 +197,7 @@ abstract class TestHelper
      */
     public static function getCriteriaMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\LightSaml\Criteria\CriteriaInterface::class);
+        return $test->getMock('\LightSaml\Criteria\CriteriaInterface');
     }
 
     /**
@@ -207,7 +207,7 @@ abstract class TestHelper
      */
     public static function getCredentialResolverMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\LightSaml\Resolver\Credential\CredentialResolverInterface::class);
+        return $test->getMock('\LightSaml\Resolver\Credential\CredentialResolverInterface');
     }
 
     /**
@@ -217,7 +217,7 @@ abstract class TestHelper
      */
     public static function getX509CredentialMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\LightSaml\Credential\X509CredentialInterface::class);
+        return $test->getMock('\LightSaml\Credential\X509CredentialInterface');
     }
 
     /**
@@ -227,7 +227,7 @@ abstract class TestHelper
      */
     public static function getSessionMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMock(\Symfony\Component\HttpFoundation\Session\SessionInterface::class);
+        return $test->getMock('\Symfony\Component\HttpFoundation\Session\SessionInterface');
     }
 
     /**
@@ -237,7 +237,7 @@ abstract class TestHelper
      */
     public static function getXmlSecurityKeyMock(\PHPUnit_Framework_TestCase $test)
     {
-        return $test->getMockBuilder(\RobRichards\XMLSecLibs\XMLSecurityKey::class)
+        return $test->getMockBuilder('\RobRichards\XMLSecLibs\XMLSecurityKey')
             ->disableOriginalConstructor()
             ->getMock()
         ;

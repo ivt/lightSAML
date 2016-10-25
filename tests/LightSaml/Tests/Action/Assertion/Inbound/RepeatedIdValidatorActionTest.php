@@ -195,7 +195,7 @@ class RepeatedIdValidatorActionTest extends \PHPUnit_Framework_TestCase
 
         $idStoreMock->expects($this->once())
             ->method('set')
-            ->with($issuer, $assertionId, $this->isInstanceOf(\DateTime::class));
+            ->with($issuer, $assertionId, $this->isInstanceOf('\DateTime'));
 
         $action->execute($assertionContext);
     }

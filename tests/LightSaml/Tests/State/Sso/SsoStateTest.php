@@ -14,9 +14,9 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
 
     public function property_getter_setter_provider()
     {
-        return [
-            ['LocalSessionId']
-        ];
+        return array(
+            array('LocalSessionId')
+        );
     }
 
     /**
@@ -56,16 +56,16 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
 
     public function test_filter_by_idp()
     {
-        $arrIdp = [
+        $arrIdp = array(
             'http://idp-1.com',
             'http://idp-2.com',
             'http://idp-3.com'
-        ];
-        $arrSp = [
+        );
+        $arrSp = array(
             'http://sp-1.com',
             'http://sp-2.com',
             'http://sp-3.com'
-        ];
+        );
 
         $state = $this->buildAllStateCombinations($arrIdp, $arrSp);
         $allSessions = $state->getSsoSessions();
@@ -100,16 +100,16 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
 
     public function test_filter_by_sp()
     {
-        $arrIdp = [
+        $arrIdp = array(
             'http://idp-1.com',
             'http://idp-2.com',
             'http://idp-3.com'
-        ];
-        $arrSp = [
+        );
+        $arrSp = array(
             'http://sp-1.com',
             'http://sp-2.com',
             'http://sp-3.com'
-        ];
+        );
 
         $state = $this->buildAllStateCombinations($arrIdp, $arrSp);
         $allSessions = $state->getSsoSessions();
@@ -139,16 +139,16 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
 
     public function test_serialize_deserialize()
     {
-        $arrIdp = [
+        $arrIdp = array(
             'http://idp-1.com',
             'http://idp-2.com',
             'http://idp-3.com'
-        ];
-        $arrSp = [
+        );
+        $arrSp = array(
             'http://sp-1.com',
             'http://sp-2.com',
             'http://sp-3.com'
-        ];
+        );
 
         $state = $this->buildAllStateCombinations($arrIdp, $arrSp);
         $state->addOption('a', 1);
@@ -173,21 +173,21 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
     {
         $state = new SsoState();
         $this->assertFalse($state->hasOption('a'));
-        $this->assertEquals([], $state->getOptions());
+        $this->assertEquals(array(), $state->getOptions());
 
         $state->addOption('a', 1);
         $this->assertTrue($state->hasOption('a'));
-        $this->assertEquals(['a'=>1], $state->getOptions());
+        $this->assertEquals(array('a'=>1), $state->getOptions());
 
         $state->removeOption('a');
         $this->assertFalse($state->hasOption('a'));
-        $this->assertEquals([], $state->getOptions());
+        $this->assertEquals(array(), $state->getOptions());
     }
 
     public function test_set_sso_state_sessions()
     {
         $state = new SsoState();
-        $state->setSsoSessions([$session1 = new SsoSessionState(), $session2 = new SsoSessionState()]);
+        $state->setSsoSessions(array($session1 = new SsoSessionState(), $session2 = new SsoSessionState()));
 
         $sessions = $state->getSsoSessions();
         $this->assertCount(2, $sessions);
@@ -207,7 +207,8 @@ class SsoStateTest extends \PHPUnit_Framework_TestCase
 
         foreach ($arrIdp as $idp) {
             foreach ($arrSp as $sp) {
-                $state->addSsoSession($session1 = (new SsoSessionState())
+                $ssoSessionState = new SsoSessionState();
+                $state->addSsoSession($session1 = $ssoSessionState
                     ->setIdpEntityId($idp)
                     ->setSpEntityId($sp));
             }

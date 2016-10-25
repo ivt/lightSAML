@@ -29,45 +29,50 @@ class FlushRequestStatesActionTest extends \PHPUnit_Framework_TestCase
 
         $action = new FlushRequestStatesAction($loggerMock, $requestStoreMock);
 
-        $expectedIds = ['1111', '2222', '3333'];
+        $expectedIds = array('1111', '2222', '3333');
         $context = new ProfileContext(Profiles::METADATA, ProfileContext::ROLE_IDP);
+        $requestStateContext = new RequestStateContext();
         $context->getInboundContext()
             ->addSubContext(
                 ProfileContexts::REQUEST_STATE,
-                (new RequestStateContext())->setRequestState(new RequestState($expectedIds[0]))
+                $requestStateContext->setRequestState(new RequestState($expectedIds[0]))
             );
+        $requestStateContext1 = new RequestStateContext();
+        $assertionContext = new AssertionContext();
         $context->addSubContext(
             'assertion_1',
-            (new AssertionContext())
+            $assertionContext
                 ->addSubContext(
                     ProfileContexts::REQUEST_STATE,
-                    (new RequestStateContext())->setRequestState(new RequestState($expectedIds[1]))
+                    $requestStateContext1->setRequestState(new RequestState($expectedIds[1]))
                 )
         );
+        $requestStateContext2 = new RequestStateContext();
+        $assertionContext1 = new AssertionContext();
         $context->addSubContext(
             'assertion_2',
-            (new AssertionContext())
+            $assertionContext1
                 ->addSubContext(
                     ProfileContexts::REQUEST_STATE,
-                    (new RequestStateContext())->setRequestState(new RequestState($expectedIds[2]))
+                    $requestStateContext2->setRequestState(new RequestState($expectedIds[2]))
                 )
         );
 
         $requestStoreMock->expects($this->exactly(3))
             ->method('remove')
             ->withConsecutive(
-                [$this->equalTo($expectedIds[0])],
-                [$this->equalTo($expectedIds[1])],
-                [$this->equalTo($expectedIds[2])]
+                array($this->equalTo($expectedIds[0])),
+                array($this->equalTo($expectedIds[1])),
+                array($this->equalTo($expectedIds[2]))
             )
             ->willReturnOnConsecutiveCalls(true, true, false)
         ;
         $loggerMock->expects($this->exactly(3))
             ->method('debug')
             ->withConsecutive(
-                [$this->equalTo(sprintf('Removed request state "%s"', $expectedIds[0]))],
-                [$this->equalTo(sprintf('Removed request state "%s"', $expectedIds[1]))],
-                [$this->equalTo(sprintf('Request state "%s" does not exist', $expectedIds[2]))]
+                array($this->equalTo(sprintf('Removed request state "%s"', $expectedIds[0]))),
+                array($this->equalTo(sprintf('Removed request state "%s"', $expectedIds[1]))),
+                array($this->equalTo(sprintf('Request state "%s" does not exist', $expectedIds[2])))
             );
 
         $action->execute($context);
@@ -78,7 +83,7 @@ class FlushRequestStatesActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getRequestStateStoreMock()
     {
-        return $this->getMock(RequestStateStoreInterface::class);
+        return $this->getMock('\LightSaml\Store\Request\RequestStateStoreInterface');
     }
 
     /**
@@ -86,6 +91,6 @@ class FlushRequestStatesActionTest extends \PHPUnit_Framework_TestCase
      */
     private function getLoggerMock()
     {
-        return $this->getMock(LoggerInterface::class);
+        return $this->getMock('\Psr\Log\LoggerInterface');
     }
 }

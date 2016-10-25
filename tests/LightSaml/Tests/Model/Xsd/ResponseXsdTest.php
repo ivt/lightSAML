@@ -26,9 +26,10 @@ class ResponseXsdTest extends AbstractXsdValidationTest
     public function test_fail_response_with_xsd()
     {
         $response = new Response();
+        $statusCode = new StatusCode(SamlConstants::STATUS_REQUESTER);
         $response
             ->setStatus(new Status(
-                (new StatusCode(SamlConstants::STATUS_REQUESTER))->setStatusCode(new StatusCode(SamlConstants::STATUS_UNSUPPORTED_BINDING)),
+                $statusCode->setStatusCode(new StatusCode(SamlConstants::STATUS_UNSUPPORTED_BINDING)),
                 'ACS75006: An error occurred while processing a SAML2 Authentication request. ACS75003: SAML protocol response cannot be sent via bindings other than HTTP POST. Requested binding: urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect'
             ))
             ->setInResponseTo(Helper::generateID())
@@ -55,33 +56,40 @@ class ResponseXsdTest extends AbstractXsdValidationTest
         ;
 
         $response->addAssertion($assertion = new Assertion());
+        $subject = new Subject();
+        $subjectConfirmation = new SubjectConfirmation();
+        $subjectConfirmationData = new SubjectConfirmationData();
+        $conditions = new Conditions();
+        $attributeStatement = new AttributeStatement();
+        $authnContext = new AuthnContext();
+        $authnStatement = new AuthnStatement();
         $assertion
             ->setId(Helper::generateID())
             ->setIssueInstant(new \DateTime())
             ->setIssuer(new Issuer('https://idp.com'))
-            ->setSubject((new Subject())
+            ->setSubject($subject
                 ->setNameID(new NameID('foo@idp.com', SamlConstants::NAME_ID_FORMAT_EMAIL))
-                ->addSubjectConfirmation((new SubjectConfirmation())
+                ->addSubjectConfirmation($subjectConfirmation
                     ->setMethod(SamlConstants::CONFIRMATION_METHOD_BEARER)
-                    ->setSubjectConfirmationData((new SubjectConfirmationData())
+                    ->setSubjectConfirmationData($subjectConfirmationData
                         ->setInResponseTo(Helper::generateID())
                         ->setNotOnOrAfter(new \DateTime('+1 hour'))
                         ->setRecipient('https://sp.com/acs')
                     )
                 )
             )
-            ->setConditions((new Conditions())
+            ->setConditions($conditions
                 ->setNotBefore(new \DateTime())
                 ->setNotOnOrAfter(new \DateTime('+1 hour'))
-                ->addItem((new AudienceRestriction(['https://sp.com/acs'])))
+                ->addItem((new AudienceRestriction(array('https://sp.com/acs'))))
             )
-            ->addItem((new AttributeStatement())
+            ->addItem($attributeStatement
                 ->addAttribute(new Attribute(ClaimTypes::EMAIL_ADDRESS, 'foo@idp.com'))
             )
-            ->addItem((new AuthnStatement())
+            ->addItem($authnStatement
                 ->setAuthnInstant(new \DateTime('-1 hour'))
                 ->setSessionIndex(Helper::generateID())
-                ->setAuthnContext((new AuthnContext())
+                ->setAuthnContext($authnContext
                     ->setAuthnContextClassRef(SamlConstants::AUTHN_CONTEXT_PASSWORD_PROTECTED_TRANSPORT)
                 )
             )

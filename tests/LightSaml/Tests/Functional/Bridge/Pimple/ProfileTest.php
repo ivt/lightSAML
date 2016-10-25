@@ -95,14 +95,14 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $context = $builder->buildContext();
         $action = $builder->buildAction();
 
-        $request = Request::create('https://localhost/lightsaml/lightSAML/web/sp/acs.php', 'POST', ['SAMLResponse' => $this->getSamlResponseCode()]);
+        $request = Request::create('https://localhost/lightsaml/lightSAML/web/sp/acs.php', 'POST', array('SAMLResponse' => $this->getSamlResponseCode()));
         $context->getHttpRequestContext()->setRequest($request);
 
         $action->execute($context);
 
         /** @var Response $response */
         $response = $context->getInboundMessage();
-        $this->assertInstanceOf(Response::class, $response);
+        $this->assertInstanceOf('\LightSaml\Model\Protocol\Response', $response);
         $this->assertCount(1, $response->getAllAssertions());
         $this->assertEquals('somebody@example.com', $response->getFirstAssertion()->getFirstAttributeStatement()
             ->getFirstAttributeByName(ClaimTypes::EMAIL_ADDRESS)->getFirstAttributeValue());
@@ -141,7 +141,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
     public function test_session()
     {
         $buildContainer = $this->getBuildContainer();
-        $this->assertInstanceOf(\Symfony\Component\HttpFoundation\Session\Session::class, $buildContainer->getSystemContainer()->getSession());
+        $this->assertInstanceOf('\Symfony\Component\HttpFoundation\Session\Session', $buildContainer->getSystemContainer()->getSession());
     }
 
     public function test_idp_entity_descriptor()
@@ -150,7 +150,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $pimple->register(new \LightSaml\Bridge\Pimple\Container\Factory\PartyContainerProvider());
         $buildContainer = new BuildContainer($pimple);
 
-        $this->assertInstanceOf(\LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface::class, $buildContainer->getPartyContainer()->getIdpEntityDescriptorStore());
+        $this->assertInstanceOf('\LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface', $buildContainer->getPartyContainer()->getIdpEntityDescriptorStore());
     }
 
     public function test_sp_entity_descriptor()
@@ -159,7 +159,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
         $pimple->register(new \LightSaml\Bridge\Pimple\Container\Factory\PartyContainerProvider());
         $buildContainer = new BuildContainer($pimple);
 
-        $this->assertInstanceOf(\LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface::class, $buildContainer->getPartyContainer()->getSpEntityDescriptorStore());
+        $this->assertInstanceOf('\LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface', $buildContainer->getPartyContainer()->getSpEntityDescriptorStore());
     }
 
     private function getBuildContainer($inResponseTo = null, TimeProviderInterface $timeProvider = null)
@@ -182,7 +182,7 @@ class ProfileTest extends \PHPUnit_Framework_TestCase
 
         $buildContainer->getPimple()->register(new \LightSaml\Bridge\Pimple\Container\Factory\OwnContainerProvider(
             $ownEntityDescriptor,
-            [$ownCredential]
+            array($ownCredential)
         ));
 
         // SYSTEM
