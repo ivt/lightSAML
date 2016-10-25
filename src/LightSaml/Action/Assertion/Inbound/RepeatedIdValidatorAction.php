@@ -77,10 +77,10 @@ class RepeatedIdValidatorAction extends AbstractAssertionAction
                 $context->getAssertion()->getId(),
                 $context->getAssertion()->getIssuer()->getValue()
             );
-            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, [
+            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, array(
                 'id' => $context->getAssertion()->getId(),
                 'issuer' => $context->getAssertion()->getIssuer()->getValue(),
-            ]));
+            )));
             throw new LightSamlContextException($context, $message);
         }
 

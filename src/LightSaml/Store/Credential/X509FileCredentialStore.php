@@ -55,7 +55,7 @@ class X509FileCredentialStore implements CredentialStoreInterface
     public function getByEntityId($entityId)
     {
         if ($entityId != $this->entityId) {
-            return [];
+            return array();
         }
 
         if (null == $this->credential) {
@@ -67,6 +67,6 @@ class X509FileCredentialStore implements CredentialStoreInterface
             $this->credential->setEntityId($this->entityId);
         }
 
-        return [$this->credential];
+        return array($this->credential);
     }
 }

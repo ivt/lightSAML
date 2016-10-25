@@ -44,7 +44,7 @@ class StatusAction extends AbstractProfileAction
         }
 
         $message = 'Unsuccessful SAML response: '.$status;
-        $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, ['status' => $status]));
+        $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, array('status' => $status)));
         throw new LightSamlAuthenticationException($statusResponse, $message);
     }
 }

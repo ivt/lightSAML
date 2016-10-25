@@ -72,7 +72,7 @@ class FileEntityDescriptorStore implements EntityDescriptorStoreInterface
         }
 
         if ($this->object instanceof EntityDescriptor) {
-            return [$this->object];
+            return array($this->object);
         } else {
             return $this->object->getAllEntityDescriptors();
         }

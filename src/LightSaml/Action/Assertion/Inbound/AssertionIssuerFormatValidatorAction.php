@@ -53,10 +53,10 @@ class AssertionIssuerFormatValidatorAction extends AbstractAssertionAction
                 $this->expectedIssuerFormat,
                 $context->getAssertion()->getIssuer()->getFormat()
             );
-            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, [
+            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, array(
                 'actualFormat' => $context->getAssertion()->getIssuer()->getFormat(),
                 'expectedFormat' => $this->expectedIssuerFormat,
-            ]));
+            )));
             throw new LightSamlContextException($context, $message);
         }
     }

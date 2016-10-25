@@ -16,7 +16,7 @@ use LightSaml\Meta\TrustOptions\TrustOptions;
 class CompositeTrustOptionsStore implements TrustOptionsStoreInterface
 {
     /** @var TrustOptionsStoreInterface[] */
-    private $children = [];
+    private $children = array();
 
     /**
      * @param TrustOptionsStoreInterface[] $stores

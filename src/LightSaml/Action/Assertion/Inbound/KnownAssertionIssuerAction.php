@@ -49,9 +49,9 @@ class KnownAssertionIssuerAction extends AbstractAssertionAction
 
         if (false == $this->idpEntityDescriptorProvider->has($context->getAssertion()->getIssuer()->getValue())) {
             $message = sprintf("Unknown issuer '%s'", $context->getAssertion()->getIssuer()->getValue());
-            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, [
+            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, array(
                 'messageIssuer' => $context->getAssertion()->getIssuer()->getValue(),
-            ]));
+            )));
             throw new LightSamlContextException($context, $message);
         }
 

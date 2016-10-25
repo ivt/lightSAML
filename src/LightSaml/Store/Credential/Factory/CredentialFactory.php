@@ -22,7 +22,7 @@ use LightSaml\Store\EntityDescriptor\EntityDescriptorStoreInterface;
 class CredentialFactory
 {
     /** @var CredentialInterface[] */
-    private $extraCredentials = [];
+    private $extraCredentials = array();
 
     /**
      * @param CredentialInterface $credential

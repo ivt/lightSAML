@@ -40,7 +40,7 @@ class SsoSessionState implements \Serializable
     protected $lastAuthOn;
 
     /** @var array */
-    protected $options = [];
+    protected $options = array();
 
     /**
      * @return string

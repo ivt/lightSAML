@@ -76,19 +76,19 @@ class RecipientValidatorAction extends AbstractAssertionAction
             throw new LightSamlContextException($context, $message);
         }
 
-        $criteriaSet = new CriteriaSet([
+        $criteriaSet = new CriteriaSet(array(
             new DescriptorTypeCriteria('\LightSaml\Model\Metadata\SpSsoDescriptor'),
             new ServiceTypeCriteria('\LightSaml\Model\Metadata\AssertionConsumerService'),
             new LocationCriteria($recipient),
-        ]);
+        ));
         $ownEntityDescriptor = $context->getProfileContext()->getOwnEntityDescriptor();
         $arrEndpoints = $this->endpointResolver->resolve($criteriaSet, $ownEntityDescriptor->getAllEndpoints());
 
         if (empty($arrEndpoints)) {
             $message = sprintf("Recipient '%s' does not match SP descriptor", $recipient);
-            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, [
+            $this->logger->error($message, LogHelper::getActionErrorContext($context, $this, array(
                 'recipient' => $recipient,
-            ]));
+            )));
             throw new LightSamlContextException($context, $message);
         }
     }

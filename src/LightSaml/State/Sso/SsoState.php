@@ -17,7 +17,7 @@ class SsoState implements \Serializable
     protected $localSessionId;
 
     /** @var array */
-    protected $options = [];
+    protected $options = array();
 
     /** @var SsoSessionState[] */
     protected $ssoSessions = array();

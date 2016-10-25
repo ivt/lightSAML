@@ -16,7 +16,7 @@ use LightSaml\Model\Metadata\EntityDescriptor;
 class CompositeEntityDescriptorStore implements EntityDescriptorStoreInterface
 {
     /** @var EntityDescriptorStoreInterface[] */
-    private $children = [];
+    private $children = array();
 
     /**
      * @param EntityDescriptorStoreInterface[] $stores
