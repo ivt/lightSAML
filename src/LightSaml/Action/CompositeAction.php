@@ -90,7 +90,7 @@ class CompositeAction implements ActionInterface, DebugPrintTreeActionInterface,
         }
 
         $result = array(
-            static::class => $arr,
+            get_class($this) => $arr,
         );
 
         return $result;
