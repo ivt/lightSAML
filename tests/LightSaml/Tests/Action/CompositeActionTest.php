@@ -115,16 +115,7 @@ class CompositeActionTest extends \PHPUnit_Framework_TestCase
         $actualValue = (string)$outerComposite;
 
         $expectedValue = <<<EOT
-{
-    "LightSaml\\\\Action\\\\CompositeAction": {
-        "LightSaml\\\\Tests\\\\Mock\\\\Action\\\\FooAction": [],
-        "LightSaml\\\\Action\\\\CompositeAction": {
-            "LightSaml\\\\Tests\\\\Mock\\\\Action\\\\FooAction": [],
-            "LightSaml\\\\Tests\\\\Mock\\\\Action\\\\BarAction": []
-        },
-        "LightSaml\\\\Tests\\\\Mock\\\\Action\\\\BarAction": []
-    }
-}
+{"LightSaml\\\\Action\\\\CompositeAction":{"LightSaml\\\\Tests\\\\Mock\\\\Action\\\\FooAction":[],"LightSaml\\\\Action\\\\CompositeAction":{"LightSaml\\\\Tests\\\\Mock\\\\Action\\\\FooAction":[],"LightSaml\\\\Tests\\\\Mock\\\\Action\\\\BarAction":[]},"LightSaml\\\\Tests\\\\Mock\\\\Action\\\\BarAction":[]}}
 EOT;
 
         $this->assertEquals($expectedValue, $actualValue);

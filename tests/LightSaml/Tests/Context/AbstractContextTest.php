@@ -225,17 +225,7 @@ class AbstractContextTest extends \PHPUnit_Framework_TestCase
         $actual = (string)$profileContext;
 
         $expected = <<<EOT
-{
-    "root": "LightSaml\\\\Context\\\\Profile\\\\ProfileContext",
-    "root__children": {
-        "own_entity": "LightSaml\\\\Context\\\\Profile\\\\EntityContext",
-        "party_entity": "LightSaml\\\\Context\\\\Profile\\\\EntityContext",
-        "assertion_01": "LightSaml\\\\Context\\\\Profile\\\\AssertionContext",
-        "assertion_01__children": {
-            "rs": "LightSaml\\\\Context\\\\Profile\\\\RequestStateContext"
-        }
-    }
-}
+{"root":"LightSaml\\\\Context\\\\Profile\\\\ProfileContext","root__children":{"own_entity":"LightSaml\\\\Context\\\\Profile\\\\EntityContext","party_entity":"LightSaml\\\\Context\\\\Profile\\\\EntityContext","assertion_01":"LightSaml\\\\Context\\\\Profile\\\\AssertionContext","assertion_01__children":{"rs":"LightSaml\\\\Context\\\\Profile\\\\RequestStateContext"}}}
 EOT;
 
         $this->assertEquals($expected, $actual);
