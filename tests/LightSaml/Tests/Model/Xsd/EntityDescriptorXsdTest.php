@@ -67,7 +67,8 @@ class EntityDescriptorXsdTest extends AbstractXsdValidationTest
                 ->setEmailAddress('support@idp.com')
             )
             ->addOrganization($organization
-                ->setOrganizationDisplayName('Org name')
+                ->setOrganizationName('Org name')
+                ->setOrganizationDisplayName('Org display name')
                 ->setOrganizationURL('https://idp.com')
             )
         ;
