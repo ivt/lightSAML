@@ -38,7 +38,7 @@ class FixedAttributeValueProvider implements AttributeValueProviderInterface
      */
     public function setAttributes(array $attributes)
     {
-        $this->attributes = [];
+        $this->attributes = array();
         foreach ($attributes as $attribute) {
             $this->add($attribute);
         }

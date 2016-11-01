@@ -16,12 +16,12 @@ use RobRichards\XMLSecLibs\XMLSecurityKey;
 
 class KeyHelper
 {
-    private static $typeMap = [
+    private static $typeMap = array(
         'RSA-SHA1' => XMLSecurityKey::RSA_SHA1,
         'RSA-SHA256' => XMLSecurityKey::RSA_SHA256,
         'RSA-SHA384' => XMLSecurityKey::RSA_SHA384,
         'RSA-SHA512' => XMLSecurityKey::RSA_SHA512,
-    ];
+    );
 
     /**
      * @param string $key        Key content or key filename

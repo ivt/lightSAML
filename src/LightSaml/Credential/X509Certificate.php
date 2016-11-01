@@ -115,7 +115,13 @@ class X509Certificate
         }
 
         $res = openssl_x509_read($this->toPem());
+
+        // I don't want to suppress warnings here, but PHP 5.3 contains a bug (https://bugs.php.net/bug.php?id=66636)
+        // which was fixed in 5.4.24. It causes a warning to get triggered here (when running the test suite).
+        $oldErrorLevel = error_reporting(E_ALL & ~E_WARNING);
         $this->info = openssl_x509_parse($res);
+        error_reporting($oldErrorLevel);
+
         openssl_x509_export($res, $out, false);
         $this->signatureAlgorithm = null;
         if (preg_match('/^\s+Signature Algorithm:\s*(.*)\s*$/m', $out, $match)) {
