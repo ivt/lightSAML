@@ -1,8 +1,8 @@
 {
-    "name": "lightsaml/lightsaml",
+    "name": "ivt/lightsaml",
     "license": "MIT",
     "type": "library",
-    "description": "Light SAML 2.0 PHP library",
+    "description": "Light SAML 2.0 PHP library (Backported to PHP 5.3 by IVT)",
     "keywords": ["SAML 2.0", "PHP", "library", "lightSAML", "Single SignOn", "Single Logout"],
     "homepage": "https://www.lightsaml.com/",
     "authors": [
@@ -14,8 +14,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/lightsaml/lightsaml/issues",
-        "source": "https://github.com/lightSAML/lightSAML",
+        "issues": "https://github.com/ivt/lightsaml/issues",
+        "source": "https://github.com/ivt/lightSAML",
         "docs": "http://www.lightsaml.com/LightSAML-Core/"
     },
     "autoload": {
